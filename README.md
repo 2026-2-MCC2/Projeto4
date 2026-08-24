@@ -14,9 +14,9 @@ Vide tutoriais do PI.
 
 ## InterLink
 
-## Integrantes: <a href="https://www.linkedin.com/in/alanas-rocha/">Alana Silva Rocha</a>, <a href="https://www.linkedin.com/in/victorbarq/">Saitama One</a>, <a href="https://www.linkedin.com/in/victorbarq/">Ikki de Fenix</a>, <a href="https://www.linkedin.com/in/victorbarq/">Yusuke Urameshi</a>, <a href="https://www.linkedin.com/in/victorbarq/">Roronoa Zoro</a>
+## Integrantes: <a href="https://www.linkedin.com/in/alanas-rocha/">Alana Silva Rocha</a>, <a href="https://www.linkedin.com/in/victorbarq/">Saitama One</a>, <a href="www.linkedin.com/in/geovanna-tamagusko-aa899b3b4">Geovanna V. M. R. Tamagusko</a>, <a href="https://github.com/juliaandmed">Julia de Andrade Medeiros</a>
 
-## Professores Orientadores: <a href="https://www.linkedin.com/in/victorbarq/">Dr. Victor Von Doom</a>, <a href="https://www.linkedin.com/in/victorbarq/">Me. Saitama</a>, <a href="https://www.linkedin.com/in/victorbarq/"></a>, <a href="https://www.linkedin.com/in/victorbarq/">Me. Yoda</a>, <a href="https://github.com/juliaandmed">Julia de Andrade Medeiros</a>
+## Professores Orientadores: <a href="https://www.linkedin.com/in/victorbarq/">Dr. Victor Von Doom</a>, <a href="https://www.linkedin.com/in/victorbarq/">Me. Saitama</a>, <a href="https://www.linkedin.com/in/victorbarq/"></a>, <a href="https://www.linkedin.com/in/victorbarq/">Me. Yoda</a>, 
 
 ## Descrição
 
