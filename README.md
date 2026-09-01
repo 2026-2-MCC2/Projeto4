@@ -16,8 +16,7 @@ Vide tutoriais do PI.
 
 ## Integrantes: <a href="https://www.linkedin.com/in/alanas-rocha/">Alana Silva Rocha</a>, <a href="https://github.com/BrunaClara">Bruna Clara da Silva Morais</a>, <a href="www.linkedin.com/in/geovanna-tamagusko-aa899b3b4">Geovanna V. M. R. Tamagusko</a>, <a href="https://github.com/juliaandmed">Julia de Andrade Medeiros</a>
 
-## Professores Orientadores: <a href="https://www.linkedin.com/in/victorbarq/">Cristina Machado Correa Leite
-</a>, <a href="https://www.linkedin.com/in/victorbarq/">David De Oliveira Lemes</a>, <a href="https://www.linkedin.com/in/victorbarq/">Francisco de Souza Escobar</a>, <a href="https://www.linkedin.com/in/victorbarq/">Jesus De Lisboa Gomes</a>, <a href="https://www.linkedin.com/in/victorbarq/">Katia Milani Lara Bossi</a>
+## Professores Orientadores: <a href="https://www.linkedin.com/in/cristina-machado-corr%C3%AAa-leite-630309160/">Cristina Machado Correa Leite</a>, <a href="https://www.linkedin.com/in/dolemes/">David De Oliveira Lemes</a>, <a href="https://www.linkedin.com/in/victorbarq/">Francisco de Souza Escobar</a>, <a href="https://www.linkedin.com/in/j%C3%A9sus-de-lisboa-gomes-8b527a282/">Jesus De Lisboa Gomes</a>, <a href="https://www.linkedin.com/in/victorbarq/">Katia Milani Lara Bossi</a>
 
 ## Descrição
 
