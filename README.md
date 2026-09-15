@@ -22,7 +22,7 @@ Vide tutoriais do PI.
 
 <p align="center">
 <img src="images/logo-nome.png" alt="InterLink" border="0">
-  Game by <a href="https://github.com/2026-2-MCC2/Projeto4.git/">InterLink</a> <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+  Site by <a href="https://github.com/2026-2-MCC2/Projeto4.git/">InterLink</a> <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
 </p>
 
 
