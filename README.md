@@ -41,18 +41,35 @@ May the force be with you!
 |-->index.html<br>
 |<br>
 |-->pages/<br>
-  &emsp;|-->login.html<br>
+  &emsp;|--> login.html<br>
   &emsp;|--> cadastro.html<br>
   &emsp;|--> eventos.html<br>
   &emsp;|--> comprar-ingesso.html<br>
   &emsp;|--> meus-ingressos.html<br>
   &emsp;|--> revender-ingresso.html<br>
   &emsp;|--> perfil.html<br>
-        &emsp;|-->organizador/<br>
-                &emsp;|-->painel.html<br>
-                &emsp;|-->cadastras-evento.html<br>
-                &emsp;|-->meus-eventos.html<br>
-                &emsp;|-->propostas.html<br>
+&emsp;|----------> organizador/<br>
+                &emsp;|------------------>painel.html<br>
+                &emsp;|------------------>cadastras-evento.html<br>
+                &emsp;|------------------>meus-eventos.html<br>
+                &emsp;|------------------>propostas.html<br>
+&emsp;|----------> fornecedor/<br>
+                &emsp;|------------------>painel.html<br>
+                &emsp;|------------------>cadastras-evento.html<br>
+                &emsp;|------------------>eventos.html<br>
+                &emsp;|------------------>propostas.html<br>
+                &emsp;|------------------>minhas-propostas.html<br>
+                &emsp;|----------> administrador/<br>
+                &emsp;|------------------>painel.html<br>
+                &emsp;|------------------>usuários.html<br>
+                &emsp;|------------------>eventos.html<br>
+                &emsp;|------------------>aprovacoes.html<br>
+|CSS/ <br>
+&emsp;|--> styles.css <br>
+|JS/ <br>
+&emsp;|-->script.js<br>
+|images/<br>
+&emsp; |-->logo-nome.png                
 
 A pasta raiz contem dois arquivos que devem ser alterados:
 
