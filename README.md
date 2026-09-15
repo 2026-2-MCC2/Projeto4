@@ -38,18 +38,21 @@ May the force be with you!
 
 -Raiz<br>
 |<br>
-|-->documentos<br>
-  &emsp;|-->antigos<br>
-  &emsp;|Documentação.docx<br>
-|-->executáveis<br>
-  &emsp;|-->windows<br>
-  &emsp;|-->android<br>
-  &emsp;|-->HTML<br>
-|-->imagens<br>
-|-->src<br>
-  &emsp;|-->Backend<br>
-  &emsp;|-->Frontend<br>
-|readme.md<br>
+|-->index.html<br>
+|<br>
+|-->pages/<br>
+  &emsp;|-->login.html<br>
+  &emsp;|--> cadastro.html<br>
+  &emsp;|--> eventos.html<br>
+  &emsp;|--> comprar-ingesso.html<br>
+  &emsp;|--> meus-ingressos.html<br>
+  &emsp;|--> revender-ingresso.html<br>
+  &emsp;|--> perfil.html<br>
+        |-->organizador/br
+                &emsp;|-->painel.html<br>
+                &emsp;|-->cadastras-evento.html<br>
+                &emsp;|-->meus-eventos.html<br>
+                &emsp;|-->propostas.html<br>
 
 A pasta raiz contem dois arquivos que devem ser alterados:
 
