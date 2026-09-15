@@ -19,11 +19,12 @@ Vide tutoriais do PI.
 ## Professores Orientadores: <a href="https://www.linkedin.com/in/cristina-machado-corr%C3%AAa-leite-630309160/">Cristina Machado Correa Leite</a>, <a href="https://www.linkedin.com/in/dolemes/">David De Oliveira Lemes</a>, <a href="https://www.linkedin.com/in/francisco-escobar/">Francisco de Souza Escobar</a>, <a href="https://www.linkedin.com/in/j%C3%A9sus-de-lisboa-gomes-8b527a282/">Jesus De Lisboa Gomes</a>, <a href="https://www.linkedin.com/in/katia-bossi/">Katia Milani Lara Bossi</a>
 
 ## Descrição
-
-<p align="center">
-<img src="images/logo-nome.png" alt="InterLink" border="0">
+<div style="text-align: center;">
+<p style="text-align: center;">
+<img src="images/logo-nome.png" alt="InterLink" style="border: none;">
   Site by <a href="https://github.com/2026-2-MCC2/Projeto4.git/">InterLink</a> <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
 </p>
+</div>
 
 
 De um a dois parágrafos sobre o que é seu projeto e o que ele faz.
