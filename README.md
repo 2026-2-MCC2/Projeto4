@@ -48,7 +48,7 @@ May the force be with you!
   &emsp;|--> meus-ingressos.html<br>
   &emsp;|--> revender-ingresso.html<br>
   &emsp;|--> perfil.html<br>
-        |-->organizador/br
+        &emsp;|-->organizador/<br>
                 &emsp;|-->painel.html<br>
                 &emsp;|-->cadastras-evento.html<br>
                 &emsp;|-->meus-eventos.html<br>
