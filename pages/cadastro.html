@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criar conta - TrocaTicket</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html">
+            <img src="../images/logo-nome.png" alt="TrocaTicket">
+        </a>
+    </header>
+    <main>
+        <section>
+            <h1>Criar sua conta</h1>
+            <p>Escolha como você deseja utilizar o TrocaTicket.</p>
+            <form>
+                <fieldset>
+                    <legend>Tipo de conta</legend>
+                    <div>
+                        <input
+                            type="radio"
+                            id="cliente"
+                            name="tipo_usuario"
+                            value="cliente"
+                            required
+                        >
+                        <label for="cliente"> Cliente </label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="organizador"
+                            name="tipo_usuario"
+                            value="organizador"
+                        >
+                        <label for="organizador">Organizador</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="fornecedor"
+                            name="tipo_usuario"
+                            value="fornecedor"
+                        >
+                        <label for="fornecedor"> Fornecedor</label>
+                    </div>
+                </fieldset>
+                <div>
+                    <label for="nome">Nome completo</label>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        required
+                    >
+                </div>
+                <div>
+                    <label for="email"> E-mail </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                    >
+                </div>
+                <div>
+                    <label for="senha">Senha</label>
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        required
+                    >
+                </div>
+                <div>
+                    <label for="confirmar-senha">Confirmar senha</label>
+                    <input
+                        type="password"
+                        id="confirmar-senha"
+                        name="confirmar-senha"
+                        required
+                    >
+                </div>
+                <button type="submit">Criar conta</button>
+            </form>
+
+        </section>
+    </main>
+
+    <footer>
+        <p> &copy; 2026 TrocaTicket. Todos os direitos reservados.</p>
+        <p> Site desenvolvido por <a href="https://www.linkedin.com/in/alanas-rocha/">Alana</a>, <a href="https://github.com/BrunaClara">Bruna</a>, <a href="www.linkedin.com/in/geovanna-tamagusko">Geovanna</a> e <a href="https://github.com/juliaandmed">Julia</a>.</p>
+
+    </footer>
+</body>
+</html>
