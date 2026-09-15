@@ -21,7 +21,7 @@ Vide tutoriais do PI.
 ## Descrição
 
 <p align="center">
-<img src="https://pix4free.org/assets/library/2021-01-20/originals/game.jpg" alt="InterLink" border="0">
+<img src="images/logo-nome.png" alt="InterLink" border="0">
   Game by <a href="https://github.com/2026-2-MCC2/Projeto4.git/">InterLink</a> <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
 </p>
 
