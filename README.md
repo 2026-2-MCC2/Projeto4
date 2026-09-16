@@ -36,42 +36,54 @@ May the force be with you!
 
 ## 🛠 Estrutura de pastas
 
--Raiz<br>
+<b>-Raiz</b><br>
 |<br>
-|-->index.html<br>
+|--> <b>documentos</b><br>
 |<br>
-|-->pages/<br>
-  &emsp;|--> login.html<br>
-  &emsp;|--> cadastro.html<br>
-  &emsp;|--> eventos.html<br>
-  &emsp;|--> comprar-ingesso.html<br>
-  &emsp;|--> meus-ingressos.html<br>
-  &emsp;|--> revender-ingresso.html<br>
-  &emsp;|--> perfil.html<br>
-&emsp;|----------> organizador/<br>
-                &emsp;|------------------>painel.html<br>
-                &emsp;|------------------>cadastras-evento.html<br>
-                &emsp;|------------------>meus-eventos.html<br>
-                &emsp;|------------------>propostas.html<br>
-&emsp;|----------> fornecedor/<br>
-                &emsp;|------------------>painel.html<br>
-                &emsp;|------------------>cadastras-evento.html<br>
-                &emsp;|------------------>eventos.html<br>
-                &emsp;|------------------>propostas.html<br>
-                &emsp;|------------------>minhas-propostas.html<br>
-                &emsp;|----------> administrador/<br>
-                &emsp;|------------------>painel.html<br>
-                &emsp;|------------------>usuários.html<br>
-                &emsp;|------------------>eventos.html<br>
-                &emsp;|------------------>aprovacoes.html<br>
-|CSS/ <br>
-&emsp;|--> styles.css <br>
-|JS/ <br>
-&emsp;|-->script.js<br>
-|images/<br>
-&emsp; |-->logo-nome.png        
-
-
+|--> <b>imagens</b><br>
+|<br>
+|--> <b>src</b><br>
+&emsp;|--> Frontend<br>
+&emsp;&emsp;|--> index.html<br>
+&emsp;&emsp;|<br>
+&emsp;&emsp;|--> pages<br>
+&emsp;&emsp;&emsp;|--> login.html<br>
+&emsp;&emsp;&emsp;|--> cadastro.html<br>
+&emsp;&emsp;&emsp;|--> eventos.html<br>
+&emsp;&emsp;&emsp;|--> evento.html<br>
+&emsp;&emsp;&emsp;|--> comprar-ingresso.html<br>
+&emsp;&emsp;&emsp;|--> meus-ingressos.html<br>
+&emsp;&emsp;&emsp;|--> revender-ingresso.html<br>
+&emsp;&emsp;&emsp;|--> ingressos-revenda.html<br>
+&emsp;&emsp;&emsp;|--> perfil.html<br>
+&emsp;&emsp;&emsp;|<br>
+&emsp;&emsp;&emsp;|--> <b>organizador</b><br>
+&emsp;&emsp;&emsp;&emsp;|--> painel.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> cadastrar-evento.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> meus-eventos.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> propostas.html<br>
+&emsp;&emsp;&emsp;|<br>
+&emsp;&emsp;&emsp;|--> <b>fornecedor</b><br>
+&emsp;&emsp;&emsp;&emsp;|--> painel.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> eventos.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> proposta.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> minhas-propostas.html<br>
+&emsp;&emsp;&emsp;|<br>
+&emsp;&emsp;&emsp;|--> <b>administrador</b><br>
+&emsp;&emsp;&emsp;&emsp;|--> painel.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> usuarios.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> eventos.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> aprovacoes.html<br>
+&emsp;&emsp;|<br>
+&emsp;&emsp;|--> <b>css</b><br>
+&emsp;&emsp;&emsp;|--> style.css<br>
+&emsp;&emsp;|<br>
+&emsp;&emsp;|--> <b>js</b><br>
+&emsp;&emsp;&emsp;|--> script.js<br>
+&emsp;|--> Backend<br>
+&emsp;|<br>
+|<br>
+|--> <b>README.md</b><br>     
 
 A pasta raiz contem dois arquivos que devem ser alterados:
 
@@ -81,9 +93,7 @@ Há também 4 pastas que seguem da seguinte forma:
 
 <b>documentos</b>: Toda a documentação estará nesta pasta.
 
-<b>executáveis</b>: Binários e executáveis do projeto devem estar nesta pasta.
-
-<b>imagens</b>: Imagens do sistema
+<b>imagens</b>: Imagens e  icones do site
 
 <b>src</b>: Pasta que contém o código fonte.
 
@@ -94,9 +104,8 @@ https://creativecommons.org/licenses/by-sa/4.0/
 
 Aqui estão as referências usadas no projeto.
 
-1. <https://github.com/iuricode/readme-template>
-2. <https://github.com/gabrieldejesus/readme-model>
-3. <https://chooser-beta.creativecommons.org/>
-4. <https://freesound.org/>
-5. <https://www.toptal.com/developers/gitignore>
-6. Músicas por: <a href="https://freesound.org/people/DaveJf/sounds/616544/"> DaveJf </a> e <a href="https://freesound.org/people/DRFX/sounds/338986/"> DRFX </a> ambas com Licença CC 0.
+1. <https://github.com/TCTK1/TrocaTicket-Assets>
+2. 
+3. 
+4. 
+5. 
