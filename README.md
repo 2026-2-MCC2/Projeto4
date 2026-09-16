@@ -21,7 +21,7 @@ Vide tutoriais do PI.
 ## Descrição
 <div style="text-align: center;">
 <p style="text-align: center;">
-<img src="images/logo-nome.png" alt="InterLink" style="border: none;"> <br>
+<img src="images/logotipo_troca_ticket.png" alt="InterLink" style="border: none;"> <br>
   Site by <a href="https://github.com/2026-2-MCC2/Projeto4.git/">InterLink</a> <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
 </p>
 </div>
@@ -69,7 +69,9 @@ May the force be with you!
 |JS/ <br>
 &emsp;|-->script.js<br>
 |images/<br>
-&emsp; |-->logo-nome.png                
+&emsp; |-->logo-nome.png        
+
+
 
 A pasta raiz contem dois arquivos que devem ser alterados:
 
