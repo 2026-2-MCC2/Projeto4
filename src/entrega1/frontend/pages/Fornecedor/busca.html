@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Oportunidades - Fornecedor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Troca<span>Ticket</span></div>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="busca.html">Buscar Oportunidades</a>
+            <a href="propostas.html">Minhas Propostas</a>
+            <a href="eventos.html">Meus Eventos</a>
+            <a href="fornecedores.html">Meu Perfil</a>
+            <a href="../login.html">Sair</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="page-head">
+            <div>
+                <h1>Buscar Oportunidades</h1>
+                <p>Eventos na plataforma que ainda estão procurando fornecedores para o seu tipo de serviço.</p>
+            </div>
+        </div>
+
+        <form class="search-bar">
+            <input type="text" id="pesquisa" name="pesquisa" placeholder="Nome do evento ou local">
+            <select id="tipo-servico" name="tipo-servico">
+                <option value="">Tipo de serviço buscado: Todos</option>
+                <option value="buffet">Buffet</option>
+                <option value="seguranca">Segurança</option>
+                <option value="som">Som e Iluminação</option>
+                <option value="palco">Palco</option>
+                <option value="limpeza">Limpeza</option>
+            </select>
+            <button type="submit" class="btn-primary">Buscar</button>
+        </form>
+
+        <ul class="list event-list">
+            <li class="event-card">
+                <div>
+                    <strong>Noite de Comédia Especial</strong>
+                    <small>05 de dezembro, 20:00 · Teatro Bradesco, São Paulo, SP</small>
+                    <small>Organizador: Teatro Bradesco Produções · Precisa de: Buffet / Coffee break</small>
+                </div>
+                <div class="event-card__right">
+                    <span class="valor">R$ 3.000 – 5.000</span>
+                    <a href="propostas.html" class="btn-primary">Enviar Proposta</a>
+                </div>
+            </li>
+            <li class="event-card">
+                <div>
+                    <strong>Rock The Mountain 2025</strong>
+                    <small>18 de março · Petrópolis, RJ</small>
+                    <small>Organizador: Mountain Live Eventos · Precisa de: Segurança</small>
+                </div>
+                <div class="event-card__right">
+                    <span class="valor">R$ 15.000 – 20.000</span>
+                    <a href="propostas.html" class="btn-primary">Enviar Proposta</a>
+                </div>
+            </li>
+            <li class="event-card">
+                <div>
+                    <strong>Coldplay World Tour Brasil</strong>
+                    <small>05 de abril · Allianz Parque, São Paulo, SP</small>
+                    <small>Organizador: LiveNation Brasil · Precisa de: Som e Iluminação</small>
+                </div>
+                <div class="event-card__right">
+                    <span class="valor">A partir de R$ 80.000</span>
+                    <a href="propostas.html" class="btn-primary">Enviar Proposta</a>
+                </div>
+            </li>
+        </ul>
+
+    </main>
+
+</body>
+</html>
