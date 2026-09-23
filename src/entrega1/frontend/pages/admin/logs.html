@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Logs e Auditoria - Admin TrocaTicket</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar__brand">
+                <img src="../../../../../images/logo_navbar_web.png" alt="TrocaTicket">
+                <span>Intercâmbio Seguro</span>
+            </div>
+
+            <div class="admin-sidebar__user">
+                <span class="admin-avatar">RC</span>
+                <div>
+                    <strong>Renata Castro</strong>
+                    <small>Super Admin</small>
+                </div>
+            </div>
+
+            <div class="admin-nav">
+                <a href="dashboard.html">Visão Geral</a>
+                <a href="usuarios.html">Usuários e Acesso</a>
+                <a href="papeis.html">Papéis e Permissões</a>
+                <a href="configuracoes.html">Configurações do Sistema</a>
+                <a href="logs.html" class="is-active">Logs e Auditoria</a>
+                <a href="monitoramento.html">Monitoramento</a>
+                <a href="tickets.html">Suporte e Tickets</a>
+            </div>
+
+            <div class="admin-sidebar__footer">
+                <div class="admin-safe-box">
+                    <strong>Ambiente Seguro</strong>
+                    <p>SSL Ativo / 2FA obrigatório para transações de custódia e emissão de permissões.</p>
+                </div>
+                <a href="login.html" class="admin-logout">Sair da Conta</a>
+            </div>
+        </aside>
+
+        <div class="admin-content">
+
+            <div class="admin-topbar">
+                <input type="search" placeholder="Buscar usuários, logs, permissões ou eventos...">
+                <div class="admin-topbar__status">
+                    <span class="admin-status-dot"></span>
+                    Sistemas Operacionais 99.9%
+                </div>
+                <div class="admin-topbar__user">
+                    <strong>Renata Castro</strong>
+                    <small>admin@trocaticket.com.br</small>
+                </div>
+            </div>
+
+            <main class="admin-main">
+
+                <div class="admin-page-head">
+                    <div>
+                        <span class="admin-eyebrow">Imutabilidade Ledger v2.4 · Audit Node Synced</span>
+                        <h1>Logs e Auditoria</h1>
+                        <p>Rastreamento imutável de ações administrativas, eventos de custódia e acessos ao sistema, com validação criptográfica em tempo real.</p>
+                    </div>
+                    <button type="button" class="admin-btn-ghost">⭳ Exportar Logs (CSV/JSON)</button>
+                </div>
+
+                <div class="admin-stats admin-stats--3">
+                    <div class="admin-stat-card">
+                        <span>Eventos Registrados (24h)</span>
+                        <strong>1.842</strong>
+                        <small>+12% vs. ontem</small>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span>Liberações de Custódia</span>
+                        <strong>R$ 412.300</strong>
+                        <small>18 liquidações</small>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span>Tentativas Bloqueadas</span>
+                        <strong>14</strong>
+                        <small>Zero incidentes de vazamento</small>
+                    </div>
+                </div>
+
+                <div class="admin-panel admin-filterbar">
+                    <div class="admin-severity-pills">
+                        <span class="is-active">Todos (1.842)</span>
+                        <span>Info (1.620)</span>
+                        <span>Alerta (208)</span>
+                        <span>Crítico (14)</span>
+                    </div>
+                    <span class="admin-hint">18/10 – 25/10 · 6 filtros aplicados</span>
+                    <a href="#" class="admin-filterbar__new">Limpar filtros</a>
+                </div>
+
+                <section class="admin-panel admin-panel--flush">
+                    <ul class="admin-log-list">
+                        <li>
+                            <span class="admin-avatar">RC</span>
+                            <div class="admin-log-item__body">
+                                <strong>Liberação de Repasse de Custódia — Escrow</strong>
+                                <p>Recurso: Festival de Verão 2025 · Transação #TRX-84920 · R$ 38.500,00 liquidados via FIDO2 Token Físico.</p>
+                                <small>Renata Castro (#ADM-001, Super Admin) · São Paulo, SP · Chrome / macOS</small>
+                            </div>
+                            <div class="admin-log-item__meta">
+                                <span class="admin-status-pill admin-status-pill--ok">Concluído</span>
+                                <small>Hoje, 14:35 · há 8 min</small>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="admin-avatar admin-avatar--muted">WAF</span>
+                            <div class="admin-log-item__body">
+                                <strong>Tentativa de brute force bloqueada</strong>
+                                <p>Endpoint /api/v1/admin/auth (64 requisições / 30s) · Sistema WAF, automático via Cloud Security.</p>
+                                <small>Campinas, SP · Python-Requests · 187.32.14.88</small>
+                            </div>
+                            <div class="admin-log-item__meta">
+                                <span class="admin-tag admin-tag--danger">Bloqueado</span>
+                                <small>Hoje, 14:10 · há 33 min</small>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="admin-avatar">RM</span>
+                            <div class="admin-log-item__body">
+                                <strong>Publicação de novo lote de ingressos</strong>
+                                <p>Evento: Rock Sessions SP · 450 ingressos (Lote 2 - Pista Premium).</p>
+                                <small>Rodrigo Mendonça (#USR-9482, Organizador) · São Paulo, SP · Safari / iOS 17</small>
+                            </div>
+                            <div class="admin-log-item__meta">
+                                <span class="admin-status-pill admin-status-pill--ok">Concluído</span>
+                                <small>Hoje, 13:42 · há 1 hora</small>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="admin-avatar">FA</span>
+                            <div class="admin-log-item__body">
+                                <strong>Redefinição de senha de usuário</strong>
+                                <p>Ação administrativa aplicada sobre conta de terceiro, com confirmação em duas etapas.</p>
+                                <small>Felipe Alencar (#ADM-042, Admin Nível 2) · Belo Horizonte, MG</small>
+                            </div>
+                            <div class="admin-log-item__meta">
+                                <span class="admin-tag admin-tag--warn">Auditado</span>
+                                <small>Hoje, 11:20 · há 3 horas</small>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="admin-panel admin-hash-box">
+                    <div>
+                        <strong>Integridade Criptográfica</strong>
+                        <p>Merkle Root: <code>9a7b…c41e</code> · Bloco auditável nº 98.412</p>
+                    </div>
+                    <span class="admin-status-pill admin-status-pill--ok">100% Verificado</span>
+                </section>
+
+            </main>
+        </div>
+    </div>
+</body>
+</html>

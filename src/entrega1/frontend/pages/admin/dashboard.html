@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Visão Geral - Admin TrocaTicket</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar__brand">
+                <img src="../../../../../images/logo_navbar_web.png" alt="TrocaTicket">
+                <span>Intercâmbio Seguro</span>
+            </div>
+
+            <div class="admin-sidebar__user">
+                <span class="admin-avatar">RC</span>
+                <div>
+                    <strong>Renata Castro</strong>
+                    <small>Super Admin</small>
+                </div>
+            </div>
+
+            <div class="admin-nav">
+                <a href="dashboard.html" class="is-active">Visão Geral</a>
+                <a href="usuarios.html">Usuários e Acesso</a>
+                <a href="papeis.html">Papéis e Permissões</a>
+                <a href="configuracoes.html">Configurações do Sistema</a>
+                <a href="logs.html">Logs e Auditoria</a>
+                <a href="monitoramento.html">Monitoramento</a>
+                <a href="tickets.html">Suporte e Tickets</a>
+            </div>
+
+            <div class="admin-sidebar__footer">
+                <div class="admin-safe-box">
+                    <strong>Ambiente Seguro</strong>
+                    <p>SSL Ativo / 2FA obrigatório para transações de custódia e emissão de permissões.</p>
+                </div>
+                <a href="login.html" class="admin-logout">Sair da Conta</a>
+            </div>
+        </aside>
+
+        <div class="admin-content">
+
+            <div class="admin-topbar">
+                <input type="search" placeholder="Buscar usuários, logs, permissões ou eventos...">
+                <div class="admin-topbar__status">
+                    <span class="admin-status-dot"></span>
+                    Sistemas Operacionais 99.9%
+                </div>
+                <div class="admin-topbar__user">
+                    <strong>Renata Castro</strong>
+                    <small>admin@trocaticket.com.br</small>
+                </div>
+            </div>
+
+            <main class="admin-main">
+
+                <div class="admin-page-head">
+                    <div>
+                        <span class="admin-eyebrow">Painel de Controle Central</span>
+                        <h1>Visão Geral do Sistema</h1>
+                        <p>Acompanhe a atividade geral da plataforma, métricas de crescimento e alertas de infraestrutura em tempo real.</p>
+                    </div>
+                    <div class="admin-page-head__actions">
+                        <button type="button">Hoje</button>
+                        <button type="button">Semana</button>
+                        <button type="button" class="is-active">Mês</button>
+                    </div>
+                </div>
+
+                <div class="admin-stats">
+                    <div class="admin-stat-card">
+                        <span>Total de Usuários</span>
+                        <strong>12.480</strong>
+                        <small>+12,4% vs. mês anterior</small>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span>Usuários Ativos</span>
+                        <strong>9.312</strong>
+                        <small>Engajamento ativo em 30d</small>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span>Novos no Período</span>
+                        <strong>428</strong>
+                        <small>+32 hoje</small>
+                    </div>
+                    <div class="admin-stat-card admin-stat-card--dark">
+                        <span>Volume sob Custódia</span>
+                        <strong>R$ 842.150,00</strong>
+                        <small>Protegido via Smart Escrow 2.4</small>
+                    </div>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="admin-col-main">
+
+                        <section class="admin-panel">
+                            <h2>Atividade Recente da Rede</h2>
+                            <p>Acessos únicos vs. transações com validação de QR Code biométrico.</p>
+                            <div class="admin-chart">
+                                <span style="height: 40%"></span>
+                                <span style="height: 55%"></span>
+                                <span style="height: 45%"></span>
+                                <span style="height: 70%"></span>
+                                <span style="height: 60%"></span>
+                                <span style="height: 85%"></span>
+                                <span style="height: 100%"></span>
+                            </div>
+                        </section>
+
+                        <section class="admin-panel">
+                            <h2>Últimas Ações Administrativas</h2>
+                            <p>Registros operacionais auditados das últimas 24 horas.</p>
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ação executada</th>
+                                        <th>Alvo / entidade</th>
+                                        <th>Operador</th>
+                                        <th>Horário</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Aprovação de Produtor</td>
+                                        <td>LiveNation Brasil (CNPJ 18.234.***)</td>
+                                        <td>Renata Castro</td>
+                                        <td>Há 18 min</td>
+                                        <td><span class="admin-tag admin-tag--ok">Concluído</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Redefinição de Permissão</td>
+                                        <td>Auditor Financeiro #ADM-042</td>
+                                        <td>Sistema (2FA)</td>
+                                        <td>Há 42 min</td>
+                                        <td><span class="admin-tag admin-tag--warn">Auditado</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bloqueio Preventivo</td>
+                                        <td>Tentativa de bot (#BOT-9812)</td>
+                                        <td>WAF Firewall</td>
+                                        <td>Há 1h 10min</td>
+                                        <td><span class="admin-tag admin-tag--danger">Bloqueado</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+
+                    </div>
+
+                    <div class="admin-col-side">
+
+                        <section class="admin-panel">
+                            <h2>Ações Rápidas</h2>
+                            <a href="#" class="admin-quick-action admin-quick-action--primary">+ Novo Usuário Administrador</a>
+                            <a href="#" class="admin-quick-action">Ver Relatórios Consolidados</a>
+                            <a href="#" class="admin-quick-action">Auditoria de Acessos e Sessões</a>
+                        </section>
+
+                        <section class="admin-panel">
+                            <h2>Alertas do Sistema</h2>
+                            <div class="admin-alert admin-alert--danger">
+                                <strong>Tentativas de Login Falhas</strong>
+                                <p>5 credenciais inválidas consecutivas para a conta rodrigo.m@live.com. Há 14 min.</p>
+                            </div>
+                            <div class="admin-alert admin-alert--warn">
+                                <strong>Uso Elevado de CPU</strong>
+                                <p>Cluster de validação biométrica de QR Code operando com alta concorrência (88%). Há 35 min.</p>
+                            </div>
+                        </section>
+
+                        <section class="admin-panel">
+                            <h2>Status dos Serviços</h2>
+                            <ul class="admin-status-list">
+                                <li>
+                                    <span>API Emissão Ingressos</span>
+                                    <strong>24ms</strong>
+                                </li>
+                                <li>
+                                    <span>Gateway de Pagamentos PIX</span>
+                                    <strong>110ms</strong>
+                                </li>
+                                <li>
+                                    <span>Custódia Blockchain Escrow</span>
+                                    <strong>Ativo</strong>
+                                </li>
+                            </ul>
+                        </section>
+
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+</body>
+</html>

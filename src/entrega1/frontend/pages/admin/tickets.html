@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Suporte e Tickets - Admin TrocaTicket</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar__brand">
+                <img src="../../../../../images/logo_navbar_web.png" alt="TrocaTicket">
+                <span>Intercâmbio Seguro</span>
+            </div>
+
+            <div class="admin-sidebar__user">
+                <span class="admin-avatar">RC</span>
+                <div>
+                    <strong>Renata Castro</strong>
+                    <small>Super Admin</small>
+                </div>
+            </div>
+
+            <div class="admin-nav">
+                <a href="dashboard.html">Visão Geral</a>
+                <a href="usuarios.html">Usuários e Acesso</a>
+                <a href="papeis.html">Papéis e Permissões</a>
+                <a href="configuracoes.html">Configurações do Sistema</a>
+                <a href="logs.html">Logs e Auditoria</a>
+                <a href="monitoramento.html">Monitoramento</a>
+                <a href="tickets.html" class="is-active">Suporte e Tickets</a>
+            </div>
+
+            <div class="admin-sidebar__footer">
+                <div class="admin-safe-box">
+                    <strong>Ambiente Seguro</strong>
+                    <p>SSL Ativo / 2FA obrigatório para transações de custódia e emissão de permissões.</p>
+                </div>
+                <a href="login.html" class="admin-logout">Sair da Conta</a>
+            </div>
+        </aside>
+
+        <div class="admin-content">
+
+            <div class="admin-topbar">
+                <input type="search" placeholder="Buscar usuários, logs, permissões ou eventos...">
+                <div class="admin-topbar__status">
+                    <span class="admin-status-dot"></span>
+                    Sistemas Operacionais 99.9%
+                </div>
+                <div class="admin-topbar__user">
+                    <strong>Renata Castro</strong>
+                    <small>admin@trocaticket.com.br</small>
+                </div>
+            </div>
+
+            <main class="admin-main">
+
+                <div class="admin-page-head">
+                    <div>
+                        <span class="admin-eyebrow">Central de Atendimento · Fila Operacional Ativa</span>
+                        <h1>Suporte e Atendimento a Tickets</h1>
+                        <p>Gerencie chamados de usuários, mediação de disputas de custódia e suporte a organizadores.</p>
+                    </div>
+                    <div class="admin-mini-stats">
+                        <div><span>Abertos</span><strong>14</strong></div>
+                        <div><span>Em Andamento</span><strong>8</strong></div>
+                        <div><span>Resolvidos</span><strong>152</strong></div>
+                    </div>
+                </div>
+
+                <div class="admin-panel admin-filterbar">
+                    <input type="search" placeholder="Buscar por nome, e-mail ou Ticket ID...">
+                    <select>
+                        <option>Todas as prioridades</option>
+                        <option>Alta</option>
+                        <option>Média</option>
+                        <option>Baixa</option>
+                    </select>
+                    <select>
+                        <option>Todas as categorias</option>
+                        <option>Disputa de Custódia</option>
+                        <option>Gestão de Lotes</option>
+                        <option>Reembolso / Chargeback</option>
+                        <option>Financeiro &amp; Repasse</option>
+                    </select>
+                </div>
+
+                <section class="admin-panel admin-panel--flush">
+                    <ul class="admin-ticket-list">
+                        <li class="admin-ticket-list__item admin-ticket-list__item--active">
+                            <div class="admin-ticket-list__id">
+                                <strong>#TCK-3921</strong>
+                                <small>Mediação de Custódia · Há 18 min</small>
+                            </div>
+                            <div class="admin-ticket-list__body">
+                                <strong>Divergência na liberação do QR Code da Pista Premium</strong>
+                                <span><span class="admin-avatar admin-avatar--sm">GS</span> Gabriel Souza (Comprador)</span>
+                            </div>
+                            <div class="admin-ticket-list__tags">
+                                <span class="admin-tag admin-tag--danger">Alta</span>
+                                <span class="admin-tag admin-tag--warn">Em Andamento</span>
+                            </div>
+                        </li>
+                        <li class="admin-ticket-list__item">
+                            <div class="admin-ticket-list__id">
+                                <strong>#TCK-3918</strong>
+                                <small>Gestão de Lotes · Há 1h</small>
+                            </div>
+                            <div class="admin-ticket-list__body">
+                                <strong>Aumento de lote para Festival de Verão 2025</strong>
+                                <span><span class="admin-avatar admin-avatar--sm">RM</span> Rodrigo Mendonça (Organizador)</span>
+                            </div>
+                            <div class="admin-ticket-list__tags">
+                                <span class="admin-tag admin-tag--accent">Média</span>
+                                <span class="admin-tag admin-tag--info">Aberto</span>
+                            </div>
+                        </li>
+                        <li class="admin-ticket-list__item">
+                            <div class="admin-ticket-list__id">
+                                <strong>#TCK-3912</strong>
+                                <small>Reembolso / Chargeback · Há 2h</small>
+                            </div>
+                            <div class="admin-ticket-list__body">
+                                <strong>Solicitação de estorno por cancelamento de atração</strong>
+                                <span><span class="admin-avatar admin-avatar--sm">CL</span> Camila Lima (Compradora)</span>
+                            </div>
+                            <div class="admin-ticket-list__tags">
+                                <span class="admin-tag admin-tag--danger">Alta</span>
+                                <span class="admin-tag admin-tag--info">Aberto</span>
+                            </div>
+                        </li>
+                        <li class="admin-ticket-list__item">
+                            <div class="admin-ticket-list__id">
+                                <strong>#TCK-3890</strong>
+                                <small>Financeiro &amp; Repasse · Ontem</small>
+                            </div>
+                            <div class="admin-ticket-list__body">
+                                <strong>Homologação de conta bancária para repasse</strong>
+                                <span><span class="admin-avatar admin-avatar--sm">CM</span> Carlos Mendes (Produtor)</span>
+                            </div>
+                            <div class="admin-ticket-list__tags">
+                                <span class="admin-tag admin-tag--info">Baixa</span>
+                                <span class="admin-tag admin-tag--warn">Em Andamento</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="admin-panel admin-ticket-detail">
+                    <div class="admin-panel__head">
+                        <div>
+                            <span class="admin-eyebrow">Mediação · Escrow Ativa</span>
+                            <h2>#TCK-3921 — Divergência na liberação do QR Code da Pista Premium</h2>
+                            <p>Contrato vinculado #CUST-9820-BR · Festival de Verão 2025, Pista Premium · Vendedor: Camila Organizações ME · Comprador: Gabriel Souza.</p>
+                        </div>
+                        <span class="admin-status-pill admin-status-pill--ok">Operacional</span>
+                    </div>
+
+                    <div class="admin-mini-stats admin-mini-stats--start">
+                        <div><span>Custódia Bloqueada</span><strong>R$ 14.890,00</strong></div>
+                        <div><span>Valor sob Custódia</span><strong>R$ 294,00</strong></div>
+                        <div><span>Tempo Médio SLA</span><strong>14 min</strong></div>
+                    </div>
+
+                    <div class="admin-ticket-message">
+                        <span class="admin-avatar admin-avatar--sm">GS</span>
+                        <div>
+                            <strong>Gabriel Souza <small>· Comprador · há 18 min</small></strong>
+                            <p>Olá, efetuei o pagamento do ingresso para o Festival de Verão 2025 via cartão de crédito. O valor de R$ 294,00 foi debitado do meu limite e no extrato consta em custódia pelo TrocaTicket, porém o QR code dinâmico ainda não foi emitido no app para minha carteira. Poderiam checar o que ocorreu?</p>
+                            <small>📎 comprovante_transacao_pix_card.pdf · 240 KB</small>
+                        </div>
+                    </div>
+
+                    <div class="admin-ticket-message admin-ticket-message--internal">
+                        <span class="admin-avatar admin-avatar--sm">RC</span>
+                        <div>
+                            <strong>Renata Castro (Você) <small>· Super Admin · há 10 min</small></strong>
+                            <p><em>Nota interna de auditoria (visível apenas para a equipe TrocaTicket):</em> Gateway confirmou liquidação às 14:19:02 UTC. Falha pontual no webhook da catraca parceira (código HTTP 504). Não houve duplicidade no débito. Custódia permanece íntegra na conta garantida #9941.</p>
+                        </div>
+                    </div>
+
+                    <div class="admin-panel__foot">
+                        <button type="button" class="admin-btn-ghost">Bloquear Custódia Provisória</button>
+                        <button type="button" class="admin-btn-ghost">Reatribuir</button>
+                        <button type="button" class="admin-btn-ghost">Alterar Status</button>
+                        <button type="button" class="admin-btn-primary">Marcar como Resolvido</button>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+</body>
+</html>

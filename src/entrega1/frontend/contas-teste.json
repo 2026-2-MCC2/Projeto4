@@ -1,0 +1,30 @@
+{
+  "observacao": "Arquivo só de referência para testar as telas do site. Não é lido por nenhum script — é só uma lista de contas de exemplo, uma para cada tipo de usuário.",
+  "regra_de_acesso": "Cada conta deve poder entrar só na área do seu próprio tipo (ex.: a conta admin só acessa o painel do admin, a conta cliente só acessa a área de cliente). Essa regra ainda não é verificada de verdade — hoje os formulários de login não têm nenhuma validação. Isso deve ser implementado no backend quando ele existir (ou, antes disso, com JavaScript simulando a checagem).",
+  "contas_teste": [
+    {
+      "tipo": "cliente",
+      "nome": "Gabriel Souza",
+      "email": "gabriel.souza@email.com",
+      "senha": "Cliente123!"
+    },
+    {
+      "tipo": "organizador",
+      "nome": "Carlos Mendes",
+      "email": "carlos.mendes@liveprod.com.br",
+      "senha": "Organizador123!"
+    },
+    {
+      "tipo": "fornecedor",
+      "nome": "Fernanda Lima",
+      "email": "fernanda.lima@buffetpro.com.br",
+      "senha": "Fornecedor123!"
+    },
+    {
+      "tipo": "admin",
+      "nome": "Renata Castro",
+      "email": "admin@trocaticket.com.br",
+      "senha": "Admin123!"
+    }
+  ]
+}

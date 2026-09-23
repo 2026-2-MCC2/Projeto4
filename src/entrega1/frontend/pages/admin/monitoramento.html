@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Monitoramento - Admin TrocaTicket</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar__brand">
+                <img src="../../../../../images/logo_navbar_web.png" alt="TrocaTicket">
+                <span>Intercâmbio Seguro</span>
+            </div>
+
+            <div class="admin-sidebar__user">
+                <span class="admin-avatar">RC</span>
+                <div>
+                    <strong>Renata Castro</strong>
+                    <small>Super Admin</small>
+                </div>
+            </div>
+
+            <div class="admin-nav">
+                <a href="dashboard.html">Visão Geral</a>
+                <a href="usuarios.html">Usuários e Acesso</a>
+                <a href="papeis.html">Papéis e Permissões</a>
+                <a href="configuracoes.html">Configurações do Sistema</a>
+                <a href="logs.html">Logs e Auditoria</a>
+                <a href="monitoramento.html" class="is-active">Monitoramento</a>
+                <a href="tickets.html">Suporte e Tickets</a>
+            </div>
+
+            <div class="admin-sidebar__footer">
+                <div class="admin-safe-box">
+                    <strong>Ambiente Seguro</strong>
+                    <p>SSL Ativo / 2FA obrigatório para transações de custódia e emissão de permissões.</p>
+                </div>
+                <a href="login.html" class="admin-logout">Sair da Conta</a>
+            </div>
+        </aside>
+
+        <div class="admin-content">
+
+            <div class="admin-topbar">
+                <input type="search" placeholder="Buscar usuários, logs, permissões ou eventos...">
+                <div class="admin-topbar__status">
+                    <span class="admin-status-dot"></span>
+                    Sistemas Operacionais 99.9%
+                </div>
+                <div class="admin-topbar__user">
+                    <strong>Renata Castro</strong>
+                    <small>admin@trocaticket.com.br</small>
+                </div>
+            </div>
+
+            <main class="admin-main">
+
+                <div class="admin-page-head">
+                    <div>
+                        <span class="admin-eyebrow">Cluster BR-EAST-1 · Última checagem: 15:42:08</span>
+                        <h1>Monitoramento de Infraestrutura &amp; Serviços</h1>
+                        <p>Acompanhe em tempo real a saúde das APIs, microsserviços de custódia, carga de servidores e alertas operacionais.</p>
+                    </div>
+                </div>
+
+                <div class="admin-stats">
+                    <div class="admin-stat-card">
+                        <span>Pods Ativos</span>
+                        <strong>48 / 48</strong>
+                        <small>100% Saudáveis</small>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span>Latência Global</span>
+                        <strong>32 ms</strong>
+                        <small>-4ms vs. ontem</small>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span>Custódia Escrow</span>
+                        <strong>R$ 1.84M</strong>
+                        <small>420 transações em hold</small>
+                    </div>
+                    <div class="admin-stat-card admin-stat-card--dark">
+                        <span>Taxa de Erro (60m)</span>
+                        <strong>0.02%</strong>
+                        <small>Dentro do SLA (&lt; 0.1%)</small>
+                    </div>
+                </div>
+
+                <section class="admin-panel">
+                    <h2>Status dos Serviços Principais</h2>
+                    <div class="admin-service-grid">
+                        <div class="admin-service-card">
+                            <div class="admin-service-card__head">
+                                <span class="admin-status-pill admin-status-pill--ok">Operacional</span>
+                            </div>
+                            <strong>API Emissão de Ingressos</strong>
+                            <small>Core Engine v2.4.1</small>
+                            <div class="admin-service-card__metrics">
+                                <span>Uptime <strong>99.98%</strong></span>
+                                <span>Latência <strong>24 ms</strong></span>
+                            </div>
+                        </div>
+                        <div class="admin-service-card">
+                            <div class="admin-service-card__head">
+                                <span class="admin-status-pill admin-status-pill--ok">Operacional</span>
+                            </div>
+                            <strong>PostgreSQL Cluster</strong>
+                            <small>Multi-AZ Master + 2 Read</small>
+                            <div class="admin-service-card__metrics">
+                                <span>Uptime <strong>100%</strong></span>
+                                <span>Latência <strong>8 ms</strong></span>
+                            </div>
+                        </div>
+                        <div class="admin-service-card">
+                            <div class="admin-service-card__head">
+                                <span class="admin-status-pill admin-status-pill--ok">Operacional</span>
+                            </div>
+                            <strong>Gateway PIX &amp; Cartão</strong>
+                            <small>Bacen SPI / Adquirência</small>
+                            <div class="admin-service-card__metrics">
+                                <span>Uptime <strong>99.85%</strong></span>
+                                <span>Latência <strong>110 ms</strong></span>
+                            </div>
+                        </div>
+                        <div class="admin-service-card">
+                            <div class="admin-service-card__head">
+                                <span class="admin-status-pill admin-status-pill--ok">Operacional</span>
+                            </div>
+                            <strong>Custódia &amp; Criptografia</strong>
+                            <small>Smart Lockers / HSM</small>
+                            <div class="admin-service-card__metrics">
+                                <span>Uptime <strong>99.92%</strong></span>
+                                <span>Latência <strong>45 ms</strong></span>
+                            </div>
+                        </div>
+                        <div class="admin-service-card admin-service-card--warn">
+                            <div class="admin-service-card__head">
+                                <span class="admin-tag admin-tag--warn">Degradação</span>
+                            </div>
+                            <strong>Envio de E-mail (SMTP)</strong>
+                            <small>Fila moderada / Retry</small>
+                            <div class="admin-service-card__metrics">
+                                <span>Uptime <strong>97.40%</strong></span>
+                                <span>Latência <strong>380 ms</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="admin-grid">
+                    <div class="admin-col-main">
+                        <section class="admin-panel">
+                            <h2>Uso de Recursos de Hardware &amp; Tráfego</h2>
+                            <p>Métricas consolidadas dos clusters Kubernetes.</p>
+
+                            <div class="admin-progress-row">
+                                <div class="admin-progress-row__label">
+                                    <span>Memória RAM</span>
+                                    <strong>48%</strong>
+                                </div>
+                                <div class="admin-progress"><span style="width:48%"></span></div>
+                                <small>15.4 GB / 32 GB em uso · Buffer livre: 16.6 GB</small>
+                            </div>
+
+                            <div class="admin-progress-row">
+                                <div class="admin-progress-row__label">
+                                    <span>Armazenamento em Disco</span>
+                                    <strong>35%</strong>
+                                </div>
+                                <div class="admin-progress"><span style="width:35%"></span></div>
+                                <small>350 GB / 1 TB utilizado · Volume NVMe · 650 GB livres</small>
+                            </div>
+
+                            <div class="admin-progress-row">
+                                <div class="admin-progress-row__label">
+                                    <span>Pods de Validação QR Code</span>
+                                    <strong>64%</strong>
+                                </div>
+                                <div class="admin-progress"><span style="width:64%"></span></div>
+                                <small>Pico recente registrado · Cluster A: 58% · Cluster B: 71%</small>
+                            </div>
+
+                            <div class="admin-progress-row">
+                                <div class="admin-progress-row__label">
+                                    <span>Throughput de Requisições</span>
+                                    <strong>2.450 req/min</strong>
+                                </div>
+                                <div class="admin-progress"><span style="width:82%"></span></div>
+                                <small>Taxa de falha: 0.02% (nominal)</small>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="admin-col-side">
+                        <section class="admin-panel">
+                            <h2>Painel de Alertas Operacionais</h2>
+                            <div class="admin-alert admin-alert--warn">
+                                <strong>Fila de E-mails Transacionais com 142 mensagens pendentes</strong>
+                                <p>Taxa de throttling temporário no endpoint SMTP (SendGrid retry queue). Detectado há 12 min · Microsserviço de Notificações.</p>
+                            </div>
+                            <div class="admin-alert">
+                                <strong>Pico de tráfego em /api/v1/tickets/validate</strong>
+                                <p>Excedeu limite de burst momentaneamente. <span class="admin-status-pill admin-status-pill--ok">Mitigado</span></p>
+                            </div>
+                        </section>
+
+                        <section class="admin-panel">
+                            <h2>Redundância Criptográfica</h2>
+                            <p>Data Center Tier III — São Paulo. Failover automático em 3 zonas de disponibilidade com replicação síncrona zero data-loss.</p>
+                            <div class="admin-chip-list">
+                                <span class="admin-chip">Certificação SOC2 Tipo II</span>
+                                <span class="admin-chip">HSM FIPS 140-2 L3</span>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+</body>
+</html>
