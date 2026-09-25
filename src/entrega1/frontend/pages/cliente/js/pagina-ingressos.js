@@ -1,10 +1,3 @@
-// pagina-ingressos.js
-// Responsabilidade única: controlar a página ingressos.html —
-// busca os dados (mock assíncrono, em mock-api.js) e liga
-// os filtros/ordenação aos botões da tela.
-// (carregado como <script> comum, por isso usa MockAPI.buscarIngressos
-// em vez de import — funciona mesmo abrindo o arquivo direto, sem servidor)
-
 const lista = document.getElementById("lista-ingressos");
 const contador = document.getElementById("contador-ingressos");
 const pills = document.querySelectorAll(".cliente-filtro-pill");
@@ -17,8 +10,6 @@ function formatarPreco(valor) {
 }
 
 function renderCarregando() {
-  // 3 "esqueletos" simulando o formato dos itens reais, para a tela
-  // não ficar em branco enquanto os dados chegam.
   lista.innerHTML = Array.from({ length: 3 })
     .map(
       () => `

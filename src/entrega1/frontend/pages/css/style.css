@@ -2212,11 +2212,8 @@ footer div a:hover {
     }
 }
 
-/* =====================================================
-   CABEÇALHO PÚBLICO — link "Voltar" (usado em 404.html)
-   Sobrescreve o botão de destaque que "nav a:last-child"
-   aplicaria por padrão.
-   ===================================================== */
+/* ======================================================================== */
+
 header nav a.cabecalho-voltar:last-child {
     background: none;
     color: var(--text-muted);
@@ -2231,12 +2228,7 @@ header nav a.cabecalho-voltar:hover {
 }
 
 /* =====================================================
-   ÁREA DO CLIENTE — PÁGINA INICIAL (inicio.html)
-   Mesma ideia estrutural do admin-layout (sidebar fixa +
-   conteúdo), mas com paleta própria do cliente: nav ativo
-   com fundo suave em vez de preenchido, caixa de segurança
-   em verde, e cards de ingresso com badge por categoria via
-   data-categoria (mesma técnica vista na apostila).
+   ÁREA DO CLIENTE — PÁGINA INICIAL 
    ===================================================== */
 
 .cliente-layout {
@@ -2533,7 +2525,7 @@ header nav a.cabecalho-voltar:hover {
     height: 16px;
 }
 
-/* ===================== HERO — EVENTO EM DESTAQUE ===================== */
+/* ========================= EVENTO EM DESTAQUE ========================= */
 .cliente-hero {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -2817,11 +2809,7 @@ header nav a.cabecalho-voltar:hover {
 }
 
 /* =====================================================
-   ÁREA DO CLIENTE — PÁGINA DE INGRESSOS (ingressos.html)
-   Reaproveita .cliente-layout, .cliente-sidebar e
-   .cliente-topbar já definidos para inicio.html. Aqui
-   entram só as peças novas: barra de filtros, lista de
-   ingressos disponíveis e as etiquetas de cada item.
+   ÁREA DO CLIENTE — PÁGINA DE INGRESSOS 
    ===================================================== */
 
 .cliente-filtros-bar {
@@ -3074,12 +3062,7 @@ header nav a.cabecalho-voltar:hover {
 }
 
 /* =====================================================
-   ÁREA DO CLIENTE — VER INGRESSO (ver-ingresso.html)
-   Reaproveita .cliente-layout / .cliente-sidebar /
-   .cliente-topbar. O miolo segue a mesma lógica de
-   "detalhe mobile-first" da apostila: uma única coluna
-   no celular, virando duas (principal + resumo de compra)
-   a partir de 900px via CSS Grid.
+   ÁREA DO CLIENTE — VER INGRESSO 
    ===================================================== */
 
 .cliente-voltar {
@@ -3106,7 +3089,6 @@ header nav a.cabecalho-voltar:hover {
     gap: 1.5rem;
 }
 
-/* ---- coluna principal ---- */
 .cliente-detalhe-banner {
     position: relative;
     border-radius: 16px;
@@ -3187,7 +3169,6 @@ header nav a.cabecalho-voltar:hover {
     font-size: 0.9rem;
 }
 
-/* ---- coluna lateral: compra, vendedor, segurança ---- */
 .cliente-detalhe-resumo {
     display: flex;
     flex-direction: column;
@@ -3395,7 +3376,7 @@ header nav a.cabecalho-voltar:hover {
     margin-bottom: 0.1rem;
 }
 
-/* ===================== RESPONSIVO (VER INGRESSO) — mobile-first ===================== */
+/* ===================== RESPONSIVO (VER INGRESSO) ===================== */
 @media (min-width: 900px) {
     .cliente-detalhe {
         grid-template-columns: 2fr 1fr;
@@ -3409,9 +3390,7 @@ header nav a.cabecalho-voltar:hover {
 }
 
 /* =====================================================
-   ENTREGA 1 — ESTADOS DE CARREGAMENTO / ERRO / VAZIO
-   Usados por js/pagina-ingressos.js enquanto os dados
-   (mockados, de forma assíncrona) são buscados.
+    ESTADOS DE CARREGAMENTO / ERRO / VAZIO
    ===================================================== */
 
 .cliente-ordenar select {
@@ -3458,8 +3437,7 @@ header nav a.cabecalho-voltar:hover {
     font-weight: 600;
 }
 
-/* skeleton — usado durante o carregamento, para dar
-   sensação de estrutura já visível (em vez de tela em branco) */
+
 .cliente-skeleton {
     background: var(--white);
     border: 1px solid var(--border);
@@ -3483,7 +3461,7 @@ header nav a.cabecalho-voltar:hover {
 }
 
 /* =====================================================
-   ENTREGA 1 — PÁGINA 404 (não encontrada.html)
+     PÁGINA 404 
    ===================================================== */
 .pagina-404 {
     max-width: 480px;
@@ -3525,7 +3503,6 @@ header nav a.cabecalho-voltar:hover {
     background: var(--primary-hover);
 }
 
-/* logo do cabeçalho público (cadastro.html, 404.html) */
 header .logo {
     font-weight: 800;
     font-size: 1.05rem;

@@ -1,6 +1,3 @@
-// pagina-ver-ingresso.js
-// Responsabilidade única: o seletor de quantidade em ver-ingresso.html.
-
 const blocoPreco = document.querySelector(".cliente-compra-card__preco");
 const valorQuantidade = document.getElementById("quantidade-valor");
 const btnDiminuir = document.getElementById("btn-diminuir");
