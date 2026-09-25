@@ -1,9 +1,3 @@
-// mock-api.js
-// Simula uma API real: retorna Promises, tem atraso de rede e pode falhar.
-// Troque esta função por um fetch("https://sua-api.com/ingressos") quando
-// o back-end existir — o resto do código (pagina-ingressos.js) não muda.
-// Agrupado em "MockAPI" (em vez de export/import) pra funcionar mesmo
-// abrindo o arquivo direto no navegador, sem precisar de servidor local.
 const MockAPI = (() => {
 
 const INGRESSOS_MOCK = [
@@ -85,18 +79,16 @@ const INGRESSOS_MOCK = [
 const ATRASO_MS = 900;
 
 /**
- * Busca os ingressos disponíveis (mock assíncrono).
+ * Busca os ingressos disponíveis 
  * @param {Object} opcoes
- * @param {string} opcoes.categoria - "todos" ou uma categoria específica.
- * @param {string} opcoes.ordenar - "menor-preco" | "maior-preco" | "data".
- * @param {boolean} opcoes.forcarErro - usado para testar o estado de erro.
+ * @param {string} opcoes.categoria 
+ * @param {string} opcoes.ordenar 
+ * @param {boolean} opcoes.forcarErro 
  * @returns {Promise<Array>}
  */
 function buscarIngressos({ categoria = "todos", ordenar = "menor-preco", forcarErro = false } = {}) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      // Simula uma falha de rede ocasional (também pode ser forçada via forcarErro,
-      // usado no botão de teste durante o desenvolvimento).
       if (forcarErro) {
         reject(new Error("Não foi possível carregar os ingressos. Verifique sua conexão e tente novamente."));
         return;
@@ -122,8 +114,6 @@ function buscarIngressos({ categoria = "todos", ordenar = "menor-preco", forcarE
 }
 
 /**
- * Busca um único ingresso pelo id (usado futuramente por ver-ingresso.html
- * para carregar o ingresso certo via ?id= na URL).
  * @param {string} id
  * @returns {Promise<Object|null>}
  */
