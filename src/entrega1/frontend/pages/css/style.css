@@ -2211,3 +2211,1332 @@ footer div a:hover {
         text-align: center;
     }
 }
+
+/* =====================================================
+   CABEÇALHO PÚBLICO — link "Voltar" (usado em 404.html)
+   Sobrescreve o botão de destaque que "nav a:last-child"
+   aplicaria por padrão.
+   ===================================================== */
+header nav a.cabecalho-voltar:last-child {
+    background: none;
+    color: var(--text-muted);
+    padding: 0;
+    border-radius: 0;
+    font-weight: 500;
+    text-transform: none;
+}
+
+header nav a.cabecalho-voltar:hover {
+    color: var(--text);
+}
+
+/* =====================================================
+   ÁREA DO CLIENTE — PÁGINA INICIAL (inicio.html)
+   Mesma ideia estrutural do admin-layout (sidebar fixa +
+   conteúdo), mas com paleta própria do cliente: nav ativo
+   com fundo suave em vez de preenchido, caixa de segurança
+   em verde, e cards de ingresso com badge por categoria via
+   data-categoria (mesma técnica vista na apostila).
+   ===================================================== */
+
+.cliente-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+
+.cliente-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--bg);
+}
+
+/* ===================== BARRA LATERAL DO CLIENTE ===================== */
+.cliente-sidebar {
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.cliente-sidebar__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+.cliente-sidebar__brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: var(--white);
+    flex-shrink: 0;
+}
+
+.cliente-sidebar__brand-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.cliente-sidebar__brand strong {
+    display: block;
+    font-size: 1rem;
+}
+
+.cliente-sidebar__brand strong span {
+    color: var(--accent);
+}
+
+.cliente-sidebar__brand small {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cliente-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.cliente-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.cliente-nav a svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.cliente-nav a:hover {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.cliente-nav a.is-active {
+    background: #FFF7ED;
+    color: var(--accent);
+}
+
+.cliente-nav-label {
+    margin: 1.25rem 0 0.5rem;
+    padding: 0 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cliente-sidebar__footer {
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+.cliente-safe-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    background: #DCFCE7;
+    border-radius: 10px;
+    padding: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.cliente-safe-box svg {
+    width: 18px;
+    height: 18px;
+    color: #16A34A;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.cliente-safe-box strong {
+    display: block;
+    font-size: 0.8rem;
+    color: #15803D;
+}
+
+.cliente-safe-box p {
+    font-size: 0.72rem;
+    color: #16A34A;
+}
+
+.cliente-logout {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--danger);
+}
+
+.cliente-logout svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===================== TOPO DA ÁREA DO CLIENTE ===================== */
+.cliente-topbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.75rem 2rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+}
+
+.cliente-topbar h1 {
+    font-size: 1.4rem;
+}
+
+.cliente-topbar>div>p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 0.15rem;
+}
+
+.cliente-topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-shrink: 0;
+}
+
+.cliente-icon-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.cliente-icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.cliente-badge-dot {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--danger);
+}
+
+.cliente-topbar__user {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.cliente-topbar__user strong {
+    display: block;
+    font-size: 0.85rem;
+}
+
+.cliente-topbar__user small {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.cliente-dot-ok {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #16A34A;
+}
+
+/* ===================== CONTEÚDO PRINCIPAL ===================== */
+.cliente-main {
+    padding: 1.75rem 2rem 3rem;
+}
+
+.cliente-search-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.cliente-search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+}
+
+.cliente-search svg {
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.cliente-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font: inherit;
+    background: none;
+}
+
+.cliente-filtros-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1.25rem;
+    border: 1px solid #FDBA74;
+    border-radius: 10px;
+    background: #FFF7ED;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.cliente-filtros-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===================== HERO — EVENTO EM DESTAQUE ===================== */
+.cliente-hero {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    background: var(--primary);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.cliente-hero__info {
+    padding: 2rem;
+    color: var(--white);
+}
+
+.cliente-hero__badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.9rem;
+}
+
+.cliente-hero__info h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.9rem;
+}
+
+.cliente-hero__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.cliente-hero__meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #CBD5E1;
+}
+
+.cliente-hero__meta svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.cliente-hero__preco {
+    margin-bottom: 1.5rem;
+}
+
+.cliente-hero__preco small {
+    display: block;
+    font-size: 0.75rem;
+    color: #94A3B8;
+    margin-bottom: 0.15rem;
+}
+
+.cliente-hero__preco strong {
+    font-size: 1.6rem;
+}
+
+.cliente-hero__actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.cliente-btn-primario {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.cliente-btn-primario svg {
+    width: 15px;
+    height: 15px;
+}
+
+.cliente-btn-secundario {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--white);
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.cliente-btn-secundario svg {
+    width: 15px;
+    height: 15px;
+}
+
+.cliente-hero__imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===================== INGRESSOS EM DESTAQUE ===================== */
+.cliente-destaques__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.cliente-destaques__head h2 {
+    font-size: 1.15rem;
+}
+
+.cliente-destaques__head p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.15rem;
+}
+
+.cliente-ver-todos {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.cliente-ver-todos svg {
+    width: 14px;
+    height: 14px;
+}
+
+.cliente-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.cliente-ticket-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.cliente-ticket-card__imagem {
+    position: relative;
+}
+
+.cliente-ticket-card__imagem img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.cliente-ticket-card__badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: rgba(15, 23, 42, 0.85);
+    color: var(--white);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.cliente-ticket-card__imagem[data-categoria="esporte"] .cliente-ticket-card__badge {
+    background: var(--accent);
+}
+
+.cliente-ticket-card__corpo {
+    padding: 1.1rem 1.25rem 1.25rem;
+}
+
+.cliente-ticket-card__corpo h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.cliente-ticket-card__corpo p {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+}
+
+.cliente-ticket-card__corpo p svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.cliente-ticket-card__rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.cliente-ticket-card__rodape small {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.cliente-ticket-card__rodape strong {
+    font-size: 1.05rem;
+}
+
+.cliente-btn-detalhes {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.5rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.cliente-btn-detalhes svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ===================== RESPONSIVO (ÁREA DO CLIENTE) ===================== */
+@media (max-width: 900px) {
+    .cliente-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cliente-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .cliente-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .cliente-hero__imagem {
+        height: 200px;
+    }
+}
+
+@media (max-width: 640px) {
+    .cliente-topbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cliente-search-row {
+        flex-direction: column;
+    }
+}
+
+/* =====================================================
+   ÁREA DO CLIENTE — PÁGINA DE INGRESSOS (ingressos.html)
+   Reaproveita .cliente-layout, .cliente-sidebar e
+   .cliente-topbar já definidos para inicio.html. Aqui
+   entram só as peças novas: barra de filtros, lista de
+   ingressos disponíveis e as etiquetas de cada item.
+   ===================================================== */
+
+.cliente-filtros-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.cliente-filtros-bar__label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    flex-shrink: 0;
+}
+
+.cliente-filtros-bar__label svg {
+    width: 16px;
+    height: 16px;
+}
+
+.cliente-filtro-pill {
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cliente-filtro-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.cliente-filtro-pill.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+}
+
+.cliente-ordenar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.cliente-ordenar strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.cliente-ordenar svg {
+    width: 14px;
+    height: 14px;
+}
+
+.cliente-lista-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.1rem;
+}
+
+.cliente-lista-head h2 {
+    font-size: 1.15rem;
+}
+
+.cliente-lista-head p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.15rem;
+}
+
+.cliente-lista-contador {
+    flex-shrink: 0;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--white);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.cliente-ingresso-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cliente-ingresso-item {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+}
+
+.cliente-ingresso-item__imagem {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.cliente-ingresso-item__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cliente-ingresso-item__info h3 {
+    font-size: 0.98rem;
+    margin-bottom: 0.25rem;
+}
+
+.cliente-ingresso-item__info>p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 0.55rem;
+}
+
+.cliente-ingresso-item__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.cliente-tag {
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--text-muted);
+}
+
+.cliente-tag--custodia {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.cliente-tag--oferta {
+    background: #FFF7ED;
+    color: var(--accent);
+}
+
+.cliente-ingresso-item__preco {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.cliente-ingresso-item__preco strong {
+    display: block;
+    font-size: 1.15rem;
+}
+
+.cliente-ingresso-item__preco small {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.cliente-ingresso-item__acoes {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.cliente-icone-quadrado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.cliente-icone-quadrado svg {
+    width: 16px;
+    height: 16px;
+}
+
+.cliente-icone-quadrado:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.cliente-btn-comprar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cliente-btn-comprar svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* ===================== RESPONSIVO (PÁGINA DE INGRESSOS) ===================== */
+@media (max-width: 720px) {
+    .cliente-ordenar {
+        margin-left: 0;
+    }
+
+    .cliente-ingresso-item {
+        flex-wrap: wrap;
+    }
+
+    .cliente-ingresso-item__preco {
+        margin-left: 88px;
+        text-align: left;
+    }
+
+    .cliente-ingresso-item__acoes {
+        margin-left: auto;
+    }
+}
+
+/* =====================================================
+   ÁREA DO CLIENTE — VER INGRESSO (ver-ingresso.html)
+   Reaproveita .cliente-layout / .cliente-sidebar /
+   .cliente-topbar. O miolo segue a mesma lógica de
+   "detalhe mobile-first" da apostila: uma única coluna
+   no celular, virando duas (principal + resumo de compra)
+   a partir de 900px via CSS Grid.
+   ===================================================== */
+
+.cliente-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.cliente-voltar svg {
+    width: 15px;
+    height: 15px;
+}
+
+.cliente-voltar:hover {
+    color: var(--text);
+}
+
+.cliente-detalhe {
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* ---- coluna principal ---- */
+.cliente-detalhe-banner {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+}
+
+.cliente-detalhe-banner img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+.cliente-detalhe-banner .cliente-ticket-card__badge {
+    top: 1rem;
+    right: 1rem;
+}
+
+.cliente-detalhe-principal h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.cliente-detalhe-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.cliente-detalhe-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.cliente-detalhe-meta svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.cliente-detalhe-principal>.cliente-ingresso-item__tags {
+    margin-bottom: 1.25rem;
+}
+
+.cliente-detalhe-descricao {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.cliente-detalhe-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.cliente-detalhe-info-grid div span {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.3rem;
+}
+
+.cliente-detalhe-info-grid div strong {
+    font-size: 0.9rem;
+}
+
+/* ---- coluna lateral: compra, vendedor, segurança ---- */
+.cliente-detalhe-resumo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.cliente-compra-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.cliente-compra-card__preco {
+    margin-bottom: 1rem;
+}
+
+.cliente-compra-card__preco small {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+}
+
+.cliente-compra-card__preco strong {
+    font-size: 1.5rem;
+}
+
+.cliente-quantidade {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.cliente-quantidade span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.cliente-quantidade-stepper {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.cliente-quantidade-stepper button {
+    width: 26px;
+    height: 26px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cliente-compra-card .cliente-btn-comprar,
+.cliente-compra-card .cliente-btn-secundario-claro {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.6rem;
+    padding: 0.75rem;
+}
+
+.cliente-btn-secundario-claro {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cliente-btn-secundario-claro svg {
+    width: 15px;
+    height: 15px;
+}
+
+.cliente-compra-card__aviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.cliente-compra-card__aviso svg {
+    width: 15px;
+    height: 15px;
+    color: #16A34A;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.cliente-vendedor-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.cliente-vendedor-card h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    margin-bottom: 0.9rem;
+}
+
+.cliente-vendedor-card__perfil {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+}
+
+.cliente-vendedor-card__perfil strong {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+}
+
+.cliente-vendedor-card__perfil strong svg {
+    width: 14px;
+    height: 14px;
+    color: #16A34A;
+}
+
+.cliente-vendedor-card__perfil small {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.cliente-vendedor-card p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.cliente-passos {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.cliente-passos h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    margin-bottom: 0.9rem;
+}
+
+.cliente-passos ol {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.cliente-passos li {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.cliente-passos li span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #FFF7ED;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.cliente-passos li p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.cliente-passos li strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-bottom: 0.1rem;
+}
+
+/* ===================== RESPONSIVO (VER INGRESSO) — mobile-first ===================== */
+@media (min-width: 900px) {
+    .cliente-detalhe {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .cliente-detalhe-banner img {
+        height: 200px;
+    }
+}
+
+/* =====================================================
+   ENTREGA 1 — ESTADOS DE CARREGAMENTO / ERRO / VAZIO
+   Usados por js/pagina-ingressos.js enquanto os dados
+   (mockados, de forma assíncrona) são buscados.
+   ===================================================== */
+
+.cliente-ordenar select {
+    border: none;
+    background: none;
+    font: inherit;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.cliente-estado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-align: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 3rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.cliente-spinner {
+    width: 26px;
+    height: 26px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: cliente-girar 0.7s linear infinite;
+}
+
+@keyframes cliente-girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.cliente-estado--erro p {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+/* skeleton — usado durante o carregamento, para dar
+   sensação de estrutura já visível (em vez de tela em branco) */
+.cliente-skeleton {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+}
+
+.cliente-skeleton__bloco {
+    background: linear-gradient(90deg, var(--bg) 25%, var(--border) 50%, var(--bg) 75%);
+    background-size: 200% 100%;
+    animation: cliente-brilho 1.2s ease-in-out infinite;
+    border-radius: 8px;
+}
+
+@keyframes cliente-brilho {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* =====================================================
+   ENTREGA 1 — PÁGINA 404 (não encontrada.html)
+   ===================================================== */
+.pagina-404 {
+    max-width: 480px;
+    margin: 4rem auto;
+    text-align: center;
+    padding: 0 1.5rem;
+}
+
+.pagina-404__codigo {
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.pagina-404 h1 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.pagina-404 p {
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+}
+
+.pagina-404 a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.pagina-404 a:hover {
+    background: var(--primary-hover);
+}
+
+/* logo do cabeçalho público (cadastro.html, 404.html) */
+header .logo {
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+}
+
+header .logo-destaque {
+    color: var(--accent);
+}
+
+.cliente-quantidade-stepper button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
