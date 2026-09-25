@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Evento | TrocaTicket</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <header class="topbar"><a class="logo" href="dashboard.html"><img src="../../images/logo_navbar_web.png"
+                alt="TrocaTicket"></a>
+        <nav class="topnav"><a href="dashboard.html">Meus Eventos</a><a class="active" href="criar-evento.html">Criar
+                Evento</a><a href="fornecedores.html">Fornecedores</a><a href="publicar.html">Publicar</a></nav>
+        <div class="user"><span>Carlos Mendes</span><span class="avatar">CM</span></div>
+    </header>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="group">
+                <p class="side-title">Gestão do Organizador</p>
+                <nav class="side"><a href="dashboard.html">Meus Eventos</a><a class="active"
+                        href="criar-evento.html">Criar Evento</a><a href="fornecedores.html">Fornecedores</a><a
+                        href="publicar.html">Publicar</a></nav>
+            </div>
+            <div class="group">
+                <p class="side-title">Conta</p>
+                <nav class="side"><a href="#">Configurações</a><a href="../login.html">Sair</a></nav>
+            </div>
+        </aside>
+        <main class="content">
+            <div class="head">
+                <div><span class="eyebrow">Gestão de produção · Novo cadastro</span>
+                    <h1>Criar Novo Evento</h1>
+                    <p>Preencha as informações básicas do seu evento para iniciar a contratação de fornecedores e
+                        vendas.</p>
+                </div>
+            </div>
+            <div class="steps">
+                <div class="step active">
+                    <div class="circle">1</div>Dados do Evento
+                </div>
+                <div class="step">
+                    <div class="circle">2</div>Fornecedores &amp; Serviços
+                </div>
+                <div class="step">
+                    <div class="circle">3</div>Publicar &amp; Ingressos
+                </div>
+            </div>
+            <form action="fornecedores.html">
+                <section class="form-card">
+                    <h2>Seção 01 · Informações Gerais</h2>
+                    <p>Dados que serão exibidos nos ingressos, transferências em custódia e faturas digitais.</p>
+                    <div class="form-grid">
+                        <div class="field full"><label>Nome do Evento *</label><input required
+                                value="Festival de Verão São Paulo 2025"><span class="hint">Este nome será exibido nos
+                                ingressos, transferências em custódia e faturas digitais.</span></div>
+                        <div class="field full"><label>Descrição Completa *</label><textarea
+                                required>O maior encontro musical de abertura de verão da capital paulista! Serão 2 palcos simultâneos com os principais artistas da MPB, pop e música eletrônica nacional.</textarea>
+                        </div>
+                        <div class="field"><label>Categoria do Evento *</label><select required>
+                                <option>Show / Fest</option>
+                                <option>Esporte</option>
+                                <option>Teatro</option>
+                                <option>Corporativo</option>
+                            </select></div>
+                        <div class="field"><label>Classificação Etária *</label><select required>
+                                <option>16+</option>
+                                <option>Livre</option>
+                                <option>18+</option>
+                            </select></div>
+                    </div>
+                </section>
+                <section class="form-card">
+                    <h2>Seção 02 · Data, Horário e Local</h2>
+                    <div class="form-grid">
+                        <div class="field"><label>Data de Início *</label><input type="date" value="2025-10-25"
+                                required></div>
+                        <div class="field"><label>Horário de Abertura *</label><input type="time" value="18:00"
+                                required></div>
+                        <div class="field"><label>Data de Término *</label><input type="date" value="2025-10-26"
+                                required></div>
+                        <div class="field"><label>Capacidade Total do Local *</label><input type="number" value="15000"
+                                required></div>
+                        <div class="field full"><label>Local / Espaço Oficial *</label><input
+                                value="Allianz Parque, Av. Francisco Matarazzo, 1705 - Água Branca, São Paulo - SP"
+                                required></div>
+                    </div>
+                    <p class="hint" style="margin-top:14px">Para lotações acima de 5.000 pessoas, o envio do AVCB ativo
+                        é obrigatório antes da liberação do saldo de custódia.</p>
+                </section>
+                <section class="form-card">
+                    <h2>Seção 03 · Imagem de Capa e Banner</h2>
+                    <p>Exibição no Marketplace.</p>
+                    <div class="upload"><strong>Arraste e solte o banner aqui</strong>
+                        <p>PNG, JPG até 10MB · Proporção recomendada 16:9 · mínimo 1920x1080px.</p><input type="file"
+                            accept=".png,.jpg,.jpeg" style="margin-top:15px">
+                    </div>
+                </section>
+                <div class="actions"><a class="btn btn-outline" href="dashboard.html">Salvar Rascunho</a><button
+                        class="btn btn-primary">Próximo: Fornecedores</button></div>
+            </form>
+        </main>
+    </div>
+</body>
+
+</html>
