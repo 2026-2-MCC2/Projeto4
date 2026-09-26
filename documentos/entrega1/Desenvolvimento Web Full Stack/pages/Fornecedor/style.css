@@ -1,0 +1,483 @@
+:root {
+    --bg: #F8FAFC;
+    --white: #FFFFFF;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --border: #E2E8F0;
+    --primary: #0F172A;
+    --primary-hover: #1E293B;
+    --accent: #EA580C;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+nav a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: var(--text);
+}
+
+nav a:last-child {
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+}
+
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.page-head p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    max-width: 480px;
+    margin-top: 0.4rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.7rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-ghost {
+    display: inline-block;
+    border: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* cartões de estatística (dashboard.html) */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.stat-card span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 1.5rem;
+}
+
+.stat-card small {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.stat-card.dark {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.stat-card.dark span,
+.stat-card.dark small {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* painéis em duas colunas (dashboard.html) */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.panel {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.panel h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.proposal-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.proposal-list strong {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.proposal-list small {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.service-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.service-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.service-list span {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* etiquetas de status, reaproveitadas em várias páginas */
+.tag {
+    display: inline-block;
+    background: var(--bg);
+    color: var(--text-muted);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.tag.ok {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.tag.warn {
+    background: #FEF3C7;
+    color: #B45309;
+}
+
+.tag.danger {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+/* cartões de evento (eventos.html e busca.html) */
+.event-list {
+    gap: 1rem;
+}
+
+.event-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.event-card strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.event-card small {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+}
+
+.event-card__right {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-shrink: 0;
+}
+
+.event-card .valor {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+/* barra de busca (busca.html) */
+.search-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-bar input,
+.search-bar select {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font: inherit;
+    background: var(--white);
+}
+
+/* formulário e lista de propostas (propostas.html) */
+.proposta-container,
+.propostas-lista {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.proposta-container h2,
+.propostas-lista h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.proposta-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.proposta-card label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.proposta-card select,
+.proposta-card input,
+.proposta-card textarea {
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font: inherit;
+    background: var(--bg);
+}
+
+.proposta-card textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.proposta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.proposta-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.proposta-item strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+}
+
+.proposta-item small {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.proposta-item__right {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.proposta-item .valor {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.proposta-item .status {
+    display: inline-block;
+    background: #FEF3C7;
+    color: #B45309;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* campos de formulário simples (cadastro.html) */
+.form-card {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+}
+
+.form-card > p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.field label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font: inherit;
+    background: var(--bg);
+}
+
+.field input:focus,
+.field select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+.form-card button[type="submit"] {
+    margin-top: 0.5rem;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: var(--white);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+}
+
+.form-card button[type="submit"]:hover {
+    background: var(--primary-hover);
+}
+
+@media (max-width: 768px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        display: none;
+    }
+}

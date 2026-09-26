@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Fornecedor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Troca<span>Ticket</span></div>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="cadastro.html">Cadastrar Serviço</a>
+            <a href="busca.html">Buscar Eventos</a>
+            <a href="login.html">Sair</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="page-head">
+            <div>
+                <h1>Olá, [Nome da Empresa]!</h1>
+                <p>Acompanhe suas propostas, contratos ativos e o desempenho dos seus serviços na plataforma.</p>
+            </div>
+            <a href="cadastro.html" class="btn-primary">+ Cadastrar novo serviço</a>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <span>Propostas Recebidas</span>
+                <strong>12</strong>
+                <small>4 aguardando resposta</small>
+            </div>
+            <div class="stat-card">
+                <span>Contratos Ativos</span>
+                <strong>5</strong>
+                <small>Para os próximos 30 dias</small>
+            </div>
+            <div class="stat-card">
+                <span>Avaliação Média</span>
+                <strong>4,8 ★</strong>
+                <small>Baseado em 38 avaliações</small>
+            </div>
+            <div class="stat-card dark">
+                <span>Faturamento do Mês</span>
+                <strong>R$ 18.400,00</strong>
+                <small>Custódia liberada automaticamente</small>
+            </div>
+        </div>
+
+        <div class="grid">
+            <section class="panel">
+                <h2>Propostas Recentes</h2>
+                <ul class="list proposal-list">
+                    <li>
+                        <div>
+                            <strong>Festival de Verão 2025</strong>
+                            <small>Camila Organizações ME · Buffet completo para 500 pessoas</small>
+                        </div>
+                        <span class="tag warn">Aguardando resposta</span>
+                    </li>
+                    <li>
+                        <div>
+                            <strong>Rock Sessions SP</strong>
+                            <small>LiveNation Brasil · Serviço de bar e staff</small>
+                        </div>
+                        <span class="tag ok">Aceita</span>
+                    </li>
+                    <li>
+                        <div>
+                            <strong>Noite de Comédia Especial</strong>
+                            <small>Teatro Bradesco · Coffee break para 80 pessoas</small>
+                        </div>
+                        <span class="tag danger">Recusada</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="panel">
+                <h2>Meus Serviços Cadastrados</h2>
+                <ul class="list service-list">
+                    <li>
+                        <strong>Buffet Completo</strong>
+                        <span>A partir de R$ 45,00 por pessoa</span>
+                    </li>
+                    <li>
+                        <strong>Bar e Coquetelaria</strong>
+                        <span>A partir de R$ 2.500,00 por evento</span>
+                    </li>
+                </ul>
+                <a href="cadastro.html" class="btn-ghost">+ Adicionar outro serviço</a>
+            </section>
+        </div>
+
+    </main>
+
+</body>
+</html>

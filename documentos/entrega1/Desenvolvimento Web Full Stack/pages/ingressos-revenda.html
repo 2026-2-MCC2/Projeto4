@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Revenda de Ingressos - TrocaTicket</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html">
+            <img src="../../../../images/logo_navbar_web.png" alt="TrocaTicket">
+        </a>
+        <nav>
+            <a href="../index.html"> Início </a>
+            <a href="eventos.html"> Eventos </a>
+            <a href="ingressos-revenda.html"> Revenda </a>
+            <a href="login.html"> Entrar </a>
+            <a href="cadastro.html"> Criar conta </a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Ingressos disponíveis para revenda</h1>
+            <p>Compre com segurança ingressos revendidos por outros usuários, protegidos por custódia até a validação na entrada do evento.</p>
+            <form>
+                <label for="pesquisa"> Pesquisar ingressos </label>
+                <input type="search" id="pesquisa" name="pesquisa" placeholder="Digite o evento, artista ou local">
+                <button type="submit"> Pesquisar </button>
+            </form>
+        </section>
+
+        <section>
+            <aside>
+                <h2>Filtros</h2>
+                <fieldset>
+                    <legend>Categoria</legend>
+                    <div>
+                        <input type="checkbox" id="show" name="categoria" value="show">
+                        <label for="show"> Show </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="esporte" name="categoria" value="esporte">
+                        <label for="esporte"> Esporte </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="teatro" name="categoria" value="teatro">
+                        <label for="teatro"> Teatro </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="festival" name="categoria" value="festival">
+                        <label for="festival"> Festival </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="standup" name="categoria" value="standup">
+                        <label for="standup"> Stand-up </label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Local</legend>
+                    <label for="local"> Cidade ou estado </label>
+                    <input type="text" id="local" name="local" placeholder="Ex.: São Paulo">
+                </fieldset>
+
+                <button type="submit"> Aplicar filtros </button>
+            </aside>
+
+            <div>
+                <div>
+                    <h2>Ingressos disponíveis</h2>
+                    <label for="ordenacao"> Ordenar por: </label>
+                    <select id="ordenacao" name="ordenacao">
+                        <option value="preco"> Menor preço </option>
+                        <option value="data"> Data mais próxima </option>
+                    </select>
+                </div>
+
+                <article>
+                    <img src="../../../../images/eventos/evento-1.jpg" alt="Imagem do evento">
+                    <div>
+                        <p> FESTIVAL </p>
+                        <h3> Festival de Verão 2025 </h3>
+                        <p> 📍 Allianz Parque - São Paulo, SP </p>
+                        <p> 📅 25 de outubro, 18:00 </p>
+                        <p> Pista Premium · Custódia · Aceita troca </p>
+                        <p> <strong> R$ 280,00 </strong> por ingresso </p>
+                        <a href="login.html"> Comprar </a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="../../../../images/eventos/evento-2.jpg" alt="Imagem do evento">
+                    <div>
+                        <p> ESPORTE </p>
+                        <h3> Final do Campeonato Nacional </h3>
+                        <p> 📍 Estádio do Maracanã - Rio de Janeiro, RJ </p>
+                        <p> 📅 12 de novembro, 21:30 </p>
+                        <p> Cadeira Inferior · Custódia </p>
+                        <p> <strong> R$ 350,00 </strong> por ingresso </p>
+                        <a href="login.html"> Comprar </a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="../../../../images/eventos/evento-3.jpg" alt="Imagem do evento">
+                    <div>
+                        <p> TEATRO </p>
+                        <h3> Noite de Comédia Especial </h3>
+                        <p> 📍 Teatro Bradesco - São Paulo, SP </p>
+                        <p> 📅 05 de dezembro, 20:00 </p>
+                        <p> Plateia A · Custódia · Aceita contraproposta </p>
+                        <p> <strong> R$ 90,00 </strong> por ingresso </p>
+                        <a href="login.html"> Comprar </a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="../../../../images/eventos/evento-4.jpg" alt="Imagem do evento">
+                    <div>
+                        <p> FESTIVAL </p>
+                        <h3> Rock The Mountain 2025 </h3>
+                        <p> 📍 Petrópolis, RJ </p>
+                        <p> 📅 18 de março · Fim de semana 1 </p>
+                        <p> Passaporte 2 dias · Custódia </p>
+                        <p> <strong> R$ 180,00 </strong> por ingresso </p>
+                        <a href="login.html"> Comprar </a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="../../../../images/eventos/evento-1.jpg" alt="Imagem do evento">
+                    <div>
+                        <p> SHOW </p>
+                        <h3> Coldplay World Tour Brasil </h3>
+                        <p> 📍 Allianz Parque - São Paulo, SP </p>
+                        <p> 📅 05 de abril </p>
+                        <p> Pista Geral · Custódia · Alta demanda </p>
+                        <p> <strong> R$ 620,00 </strong> por ingresso </p>
+                        <a href="login.html"> Comprar </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <img src="../../../../images/logotipo_troca_ticket.png" alt="TrocaTicket">
+            <p> Venda e revenda de ingressos de forma segura. </p>
+        </div>
+        <div>
+            <h3> TrocaTicket </h3>
+            <a href="../index.html"> Início </a>
+            <a href="eventos.html"> Eventos </a>
+            <a href="login.html"> Entrar </a>
+            <a href="cadastro.html">Criar conta</a>
+        </div>
+        <div>
+            <h3>Ajuda</h3>
+            <a href="#">Termos de uso </a>
+            <a href="#"> Política de privacidade </a>
+        </div>
+        <p> &copy; 2026 TrocaTicket. Todos os direitos reservados.</p>
+        <p> Site desenvolvido por <a href="https://www.linkedin.com/in/alanas-rocha/">Alana</a>, <a href="https://github.com/BrunaClara">Bruna</a>, <a href="www.linkedin.com/in/geovanna-tamagusko">Geovanna</a> e <a href="https://github.com/juliaandmed">Julia</a>.</p>
+    </footer>
+</body>
+</html>
