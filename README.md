@@ -45,47 +45,58 @@ May the force be with you!
 |<br>
 |--> <b>documentos</b><br>
 |<br>
-|--> <b>imagens</b><br>
-|<br>
 |--> <b>src</b><br>
-&emsp;|--> Frontend<br>
-&emsp;&emsp;|--> index.html<br>
-&emsp;&emsp;|<br>
-&emsp;&emsp;|--> pages<br>
-&emsp;&emsp;&emsp;|--> login.html<br>
-&emsp;&emsp;&emsp;|--> cadastro.html<br>
-&emsp;&emsp;&emsp;|--> eventos.html<br>
-&emsp;&emsp;&emsp;|--> evento.html<br>
-&emsp;&emsp;&emsp;|--> comprar-ingresso.html<br>
-&emsp;&emsp;&emsp;|--> meus-ingressos.html<br>
-&emsp;&emsp;&emsp;|--> revender-ingresso.html<br>
-&emsp;&emsp;&emsp;|--> ingressos-revenda.html<br>
-&emsp;&emsp;&emsp;|--> perfil.html<br>
+&emsp;|--> <b>entrega1</b><br>
+&emsp;&emsp;|--> <b>frontend</b><br>
+&emsp;&emsp;&emsp;|--> index.html<br>
+&emsp;&emsp;&emsp;|--> contas-teste.json<br>
+&emsp;&emsp;&emsp;|--> servidor-estatico.js<br>
 &emsp;&emsp;&emsp;|<br>
-&emsp;&emsp;&emsp;|--> <b>organizador</b><br>
-&emsp;&emsp;&emsp;&emsp;|--> painel.html<br>
-&emsp;&emsp;&emsp;&emsp;|--> cadastrar-evento.html<br>
-&emsp;&emsp;&emsp;&emsp;|--> meus-eventos.html<br>
-&emsp;&emsp;&emsp;&emsp;|--> propostas.html<br>
+&emsp;&emsp;&emsp;|--> <b>images</b><br>
+&emsp;&emsp;&emsp;&emsp;|--> logo_navbar_web.png<br>
+&emsp;&emsp;&emsp;&emsp;|--> logo_troca_ticket.png<br>
+&emsp;&emsp;&emsp;&emsp;|--> logotipo_troca_ticket.png<br>
+&emsp;&emsp;&emsp;&emsp;|--> <b>eventos</b> (evento-1.jpg a evento-4.jpg)<br>
 &emsp;&emsp;&emsp;|<br>
-&emsp;&emsp;&emsp;|--> <b>fornecedor</b><br>
-&emsp;&emsp;&emsp;&emsp;|--> painel.html<br>
+&emsp;&emsp;&emsp;|--> <b>pages</b><br>
+&emsp;&emsp;&emsp;&emsp;|--> login.html<br>
+&emsp;&emsp;&emsp;&emsp;|--> cadastro.html<br>
 &emsp;&emsp;&emsp;&emsp;|--> eventos.html<br>
-&emsp;&emsp;&emsp;&emsp;|--> proposta.html<br>
-&emsp;&emsp;&emsp;&emsp;|--> minhas-propostas.html<br>
-&emsp;&emsp;&emsp;|<br>
-&emsp;&emsp;&emsp;|--> <b>administrador</b><br>
-&emsp;&emsp;&emsp;&emsp;|--> painel.html<br>
-&emsp;&emsp;&emsp;&emsp;|--> usuarios.html<br>
-&emsp;&emsp;&emsp;&emsp;|--> eventos.html<br>
-&emsp;&emsp;&emsp;&emsp;|--> aprovacoes.html<br>
-&emsp;&emsp;|<br>
-&emsp;&emsp;|--> <b>css</b><br>
-&emsp;&emsp;&emsp;|--> style.css<br>
-&emsp;&emsp;|<br>
-&emsp;&emsp;|--> <b>js</b><br>
-&emsp;&emsp;&emsp;|--> script.js<br>
-&emsp;|--> Backend<br>
+&emsp;&emsp;&emsp;&emsp;|--> ingressos-revenda.html<br>
+&emsp;&emsp;&emsp;&emsp;|<br>
+&emsp;&emsp;&emsp;&emsp;|--> <b>css</b><br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> style.css<br>
+&emsp;&emsp;&emsp;&emsp;|<br>
+&emsp;&emsp;&emsp;&emsp;|--> <b>cliente</b><br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> inicio.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> ingressos.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> ver-ingresso.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> compras.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> perfil.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> seus-ingressos.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> suas-revendas.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> configuracoes.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> 404.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> <b>js</b> (mock-api.js, pagina-ingressos.js, pagina-ver-ingresso.js)<br>
+&emsp;&emsp;&emsp;&emsp;|<br>
+&emsp;&emsp;&emsp;&emsp;|--> <b>Fornecedor</b><br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> dashboard.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> busca.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> propostas.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> eventos.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> fornecedores.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> cadastro.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> style.css<br>
+&emsp;&emsp;&emsp;&emsp;|<br>
+&emsp;&emsp;&emsp;&emsp;|--> <b>admin</b><br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> login.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> dashboard.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> usuarios.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> papeis.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> configuracoes.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> logs.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> monitoramento.html<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;|--> tickets.html<br>
 &emsp;|<br>
 |<br>
 |--> <b>README.md</b><br>     
