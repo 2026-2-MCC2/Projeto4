@@ -34,6 +34,11 @@ Meu projeto ajuda estudantes FECAP a configurarem seus githubs.
 May the force be with you!
 <br><br>
 
+## Entregas
+
+- [Modelagem do Banco de Dados](./documentos/entrega1/Projetos%20em%20Banco%20de%20Dados/README.md)
+  
+
 ## 🛠 Estrutura de pastas
 
 <b>-Raiz</b><br>
