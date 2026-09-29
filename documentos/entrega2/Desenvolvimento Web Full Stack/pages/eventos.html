@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eventos - TrocaTicket</title>
+
+    <link rel="icon" type="image/svg+xml" href="../../../imagens/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html">
+            <img src="../../../../images/logo_navbar_web.png"alt="TrocaTicket">
+        </a>
+        <nav>
+            <a href="../index.html"> Início </a>
+            <a href="eventos.html"> Eventos </a>
+            <a href="ingressos-revenda.html"> Revenda </a>
+            <a href="login.html"> Entrar </a>
+            <a href="cadastro.html"> Criar conta </a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Encontre seu próximo evento</h1>
+            <p>  Descubra eventos, shows, festivais, esportes e muito mais. </p>
+            <form>
+                <label for="pesquisa"> Pesquisar eventos </label>
+                <input type="search" id="pesquisa" name="pesquisa" placeholder="Digite o nome do evento, artista ou local" >
+                <button type="submit"> Pesquisar </button>
+            </form>
+        </section>
+
+        <section>
+            <aside>
+                <h2>Filtros</h2>
+                <fieldset>
+                    <legend>Categoria</legend>
+                    <div>
+                        <input type="checkbox" id="shows" name="categoria" value="shows">
+                        <label for="shows"> Shows </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="festivais" name="categoria" value="festivais">
+                        <label for="festivais"> Festivais </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="esportes" name="categoria" value="esportes">
+                        <label for="esportes"> Esportes </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="teatro" name="categoria" value="teatro">
+                        <label for="teatro"> Teatro </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="outros" name="categoria" value="outros" >
+                        <label for="outros"> Outros </label>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Local</legend>
+                    <label for="local"> Cidade ou estado  </label>
+                    <input type="text" id="local" name="local" placeholder="Ex.: São Paulo">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Data</legend>
+                    <label for="data"> A partir de </label>
+                    <input type="date" id="data" name="data">
+                </fieldset>
+
+                <button type="submit"> Aplicar filtros </button>
+            </aside>
+
+            <div>
+                <div>
+                    <h2>Eventos disponíveis</h2>
+                    <label for="ordenacao"> Ordenar por: </label>
+                    <select id="ordenacao" name="ordenacao">
+                        <option value="relevancia"> Relevância </option>
+                        <option value="data"> Data mais próxima </option>
+                    </select>
+                </div>
+
+                <article>
+                    <img src="../../../../images/eventos/evento-1.jpg" alt="Imagem do evento">
+                    <div>
+                        <p> SHOW</p>
+                        <h3> Nome do Evento </h3>
+                        <p> 📅 15 de outubro de 2026</p>
+                        <p>📍 São Paulo - SP </p>
+                        <p> A partir de <strong> R$ 80,00</strong> </p>
+                        <a href="login.html"> Ver evento </a>
+                    </div>
+                </article>
+
+                <article>
+                     <img src="../../../../images/eventos/evento-2.jpg" alt="Imagem do evento">
+                    <div>
+                        <p> FESTIVAL </p>
+                        <h3>Festival TrocaTicket</h3>
+                        <p>📅 22 de outubro de 2026</p>
+                        <p>📍 São Paulo - SP </p>
+                        <p> A partir de<strong>R$ 120,00 </strong></p>
+                        <a href="login.html">Ver evento </a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="../../../../images/eventos/evento-3.jpg" alt= "Imagem do evento">
+                    <div>
+                        <p>ESPORTE</p>
+                        <h3> Evento Esportivo</h3>
+                        <p>📅 05 de novembro de 2026</p>
+                        <p>📍 São Paulo - SP</p>
+                        <p> A partir de <strong>R$ 60,00</strong></p>
+                        <a href="login.html"> Ver evento </a>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="../../../../images/eventos/evento-4.jpg"alt="Imagem do evento">
+                    <div>
+                        <p> TEATRO </p>
+                        <h3> Espetáculo de Teatro</h3>
+                        <p> 📅 12 de novembro de 2026 </p>
+                        <p>📍 São Paulo - SP </p>
+                        <p>A partir de <strong> R$ 45,00 </strong> </p>
+                        <a href="login.html"> Ver evento</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+            <img src="../../../../images/logotipo_troca_ticket.png" alt="TrocaTicket">
+            <p> Venda e revenda de ingressos de forma segura. </p>
+        </div>
+        <div>
+            <h3> TrocaTicket </h3>
+            <a href="../index.html"> Início </a>
+            <a href="eventos.html"> Eventos </a>
+            <a href="login.html"> Entrar </a>
+            <a href="cadastro.html">Criar conta</a>
+        </div>
+        <div>
+            <h3>Ajuda</h3>
+            <a href="#">Termos de uso </a>
+            <a href="#"> Política de privacidade </a>
+        </div>
+            <p> &copy; 2026 TrocaTicket. Todos os direitos reservados.</p>
+            <p> Site desenvolvido por <a href="https://www.linkedin.com/in/alanas-rocha/">Alana</a>, <a href="https://github.com/BrunaClara">Bruna</a>, <a href="www.linkedin.com/in/geovanna-tamagusko">Geovanna</a> e <a href="https://github.com/juliaandmed">Julia</a>.</p>
+    </footer>
+</body>
+</html>

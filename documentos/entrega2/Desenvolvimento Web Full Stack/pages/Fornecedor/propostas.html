@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Propostas - Fornecedor</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Troca<span>Ticket</span></div>
+
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="busca.html">Buscar Oportunidades</a>
+            <a href="propostas.html">Minhas Propostas</a>
+            <a href="eventos.html">Meus Eventos</a>
+            <a href="fornecedores.html">Meu Perfil</a>
+            <a href="../login.html">Sair</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="page-head">
+            <div>
+                <h1>Minhas Propostas</h1>
+                <p>
+                    Envie e acompanhe suas propostas para os eventos.
+                </p>
+            </div>
+        </div>
+
+        <div class="proposta-container">
+
+            <h2>Enviar Nova Proposta</h2>
+
+            <div class="proposta-card">
+
+                <label for="evento">Evento:</label>
+
+                <select id="evento">
+                    <option value="">Selecione um evento</option>
+                    <option value="comedia">
+                        Noite de Comédia Especial
+                    </option>
+                    <option value="rock">
+                        Rock The Mountain 2025
+                    </option>
+                    <option value="coldplay">
+                        Coldplay World Tour Brasil
+                    </option>
+                </select>
+
+                <label for="servico">Serviço oferecido:</label>
+
+                <input
+                    type="text"
+                    id="servico"
+                    placeholder="Ex.: Buffet / Segurança / Som"
+                >
+
+                <label for="valor">Valor da proposta:</label>
+
+                <input
+                    type="number"
+                    id="valor"
+                    placeholder="R$ 0,00"
+                    step="0.01"
+                >
+
+                <label for="descricao">Descrição da proposta:</label>
+
+                <textarea
+                    id="descricao"
+                    placeholder="Digite os detalhes da sua proposta..."
+                ></textarea>
+
+                <button type="button" class="btn-primary">
+                    Enviar Proposta
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="propostas-lista">
+
+            <h2>Propostas Enviadas</h2>
+
+            <div class="proposta-item">
+
+                <div>
+                    <strong>Noite de Comédia Especial</strong>
+
+                    <small>
+                        Serviço: Buffet / Coffee break
+                    </small>
+
+                    <small>
+                        Enviada em: 20/09/2026
+                    </small>
+                </div>
+
+                <div class="proposta-item__right">
+
+                    <span class="valor">
+                        R$ 4.000,00
+                    </span>
+
+                    <span class="status">
+                        Em análise
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="proposta-item">
+
+                <div>
+                    <strong>Rock The Mountain 2025</strong>
+
+                    <small>
+                        Serviço: Segurança
+                    </small>
+
+                    <small>
+                        Enviada em: 18/09/2026
+                    </small>
+                </div>
+
+                <div class="proposta-item__right">
+
+                    <span class="valor">
+                        R$ 18.000,00
+                    </span>
+
+                    <span class="status">
+                        Aguardando resposta
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
+

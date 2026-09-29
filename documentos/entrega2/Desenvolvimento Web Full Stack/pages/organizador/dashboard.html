@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão do Organizador | TrocaTicket</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="logo" href="dashboard.html"><img src="../../images/logo_navbar_web.png" alt="TrocaTicket"></a>
+    <nav class="topnav"><a class="active" href="dashboard.html">Gestão do Organizador</a><a
+        href="criar-evento.html">Criar Evento</a><a href="fornecedores.html">Fornecedores</a><a
+        href="publicar.html">Publicar</a></nav>
+    <div class="user"><span>Carlos Mendes</span><span class="avatar">CM</span></div>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="group">
+        <p class="side-title">Gestão do Organizador</p>
+        <nav class="side"><a class="active" href="dashboard.html">Meus Eventos</a><a href="criar-evento.html">Criar
+            Evento</a><a href="fornecedores.html">Fornecedores</a><a href="publicar.html">Publicar</a></nav>
+      </div>
+      <div class="group">
+        <p class="side-title">Conta</p>
+        <nav class="side"><a href="#">Configurações</a><a href="../login.html">Sair</a></nav>
+      </div>
+    </aside>
+    <main class="content">
+      <div class="head">
+        <div><span class="eyebrow">Painel do produtor</span>
+          <h1>Meus Eventos</h1>
+          <p>Gerencie suas produções, acompanhe a venda de ingressos e gerencie fornecedores.</p>
+        </div><a class="btn btn-primary" href="criar-evento.html">+ Criar Evento</a>
+      </div>
+      <section class="stats">
+        <div class="stat"><span>Eventos Ativos</span><strong>4</strong><small>4 em cartaz</small></div>
+        <div class="stat"><span>Eventos Encerrados</span><strong>12</strong><small>Histórico completo</small></div>
+        <div class="stat"><span>Ingressos Vendidos</span><strong>3.480</strong><small>de 4.000 · 87% ocupação</small>
+        </div>
+        <div class="stat dark"><span>Receita em Custódia</span><strong>R$ 412.300</strong><small>R$ 84.500 liberados em
+            conta</small></div>
+      </section>
+      <div class="grid2">
+        <section class="card">
+          <h2>Eventos</h2>
+          <article class="event">
+            <div><span class="badge ok">Em Venda</span>
+              <h3>Festival de Verão 2025</h3>
+              <p>25 de outubro de 2025 · 18:00 · Allianz Parque</p>
+              <p>R$ 182.000 em escrow · 1.820 / 2.000 (91%)</p>
+            </div>
+            <div><a class="btn btn-outline" href="publicar.html">Gerenciar</a></div>
+          </article>
+          <article class="event">
+            <div><span class="badge ok">Em Venda</span>
+              <h3>Noite Eletrônica Sunset</h3>
+              <p>14 de novembro de 2025 · 22:00 · Arena Morumbi</p>
+              <p>R$ 117.600 em escrow · 840 / 1.000 (84%)</p>
+            </div>
+            <div><a class="btn btn-outline" href="publicar.html">Gerenciar</a></div>
+          </article>
+          <article class="event">
+            <div><span class="badge ok">Em Venda</span>
+              <h3>Summit de Tecnologia &amp; Inovação 2025</h3>
+              <p>05 de dezembro de 2025 · 09:00 · Centro de Convenções Pro Magno</p>
+              <p>R$ 96.600 em escrow · 420 / 500 (84%)</p>
+            </div>
+            <div><a class="btn btn-outline" href="publicar.html">Gerenciar</a></div>
+          </article>
+          <article class="event">
+            <div><span class="badge gray">Edição Pendente</span>
+              <h3>Festival Sons da Primavera</h3>
+              <p>20 de janeiro de 2026 · 16:00 · Parque Villa-Lobos</p>
+              <p>0 / 1.500 · Aguardando publicação oficial</p>
+            </div>
+            <div><a class="btn btn-outline" href="criar-evento.html">Continuar</a></div>
+          </article>
+        </section>
+        <aside class="card">
+          <h2>Proteção Antifraude TrocaTicket</h2>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:14px">100% dos ingressos emitidos possuem validação
+            criptográfica via smart escrow.</p>
+          <div class="metric"><span>Repasses</span><strong>Bloqueados em escrow</strong></div>
+          <div class="metric"><span>Liberação</span><strong>Após validação na portaria</strong></div>
+          <div class="metric"><span>Segurança</span><strong>Custódia verificada</strong></div>
+        </aside>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

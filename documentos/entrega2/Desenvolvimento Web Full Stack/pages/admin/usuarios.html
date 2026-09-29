@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuários e Acesso - Admin TrocaTicket</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar__brand">
+                <img src="../../../../../images/logo_navbar_web.png" alt="TrocaTicket">
+                <span>Intercâmbio Seguro</span>
+            </div>
+
+            <div class="admin-sidebar__user">
+                <span class="admin-avatar">RC</span>
+                <div>
+                    <strong>Renata Castro</strong>
+                    <small>Super Admin</small>
+                </div>
+            </div>
+
+            <div class="admin-nav">
+                <a href="dashboard.html">Visão Geral</a>
+                <a href="usuarios.html" class="is-active">Usuários e Acesso</a>
+                <a href="papeis.html">Papéis e Permissões</a>
+                <a href="configuracoes.html">Configurações do Sistema</a>
+                <a href="logs.html">Logs e Auditoria</a>
+                <a href="monitoramento.html">Monitoramento</a>
+                <a href="tickets.html">Suporte e Tickets</a>
+            </div>
+
+            <div class="admin-sidebar__footer">
+                <div class="admin-safe-box">
+                    <strong>Ambiente Seguro</strong>
+                    <p>SSL Ativo / 2FA obrigatório para transações de custódia e emissão de permissões.</p>
+                </div>
+                <a href="login.html" class="admin-logout">Sair da Conta</a>
+            </div>
+        </aside>
+
+        <div class="admin-content">
+
+            <div class="admin-topbar">
+                <input type="search" placeholder="Buscar usuários, logs, permissões ou eventos...">
+                <div class="admin-topbar__status">
+                    <span class="admin-status-dot"></span>
+                    Sistemas Operacionais 99.9%
+                </div>
+                <div class="admin-topbar__user">
+                    <strong>Renata Castro</strong>
+                    <small>admin@trocaticket.com.br</small>
+                </div>
+            </div>
+
+            <main class="admin-main">
+
+                <div class="admin-page-head">
+                    <div>
+                        <span class="admin-eyebrow">Segurança &amp; Governança · Painel Geral</span>
+                        <h1>Gestão de Usuários e Acesso</h1>
+                        <p>Visualize, gerencie e audite todos os usuários registrados, papéis atribuídos e status operacionais na plataforma de custódia.</p>
+                    </div>
+                    <div class="admin-mini-stats">
+                        <div>
+                            <span>Total Geral</span>
+                            <strong>12.480</strong>
+                        </div>
+                        <div>
+                            <span>Ativos Hoje</span>
+                            <strong>9.124</strong>
+                        </div>
+                        <div>
+                            <span>Bloqueados</span>
+                            <strong class="is-danger">38</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-panel admin-filterbar">
+                    <input type="search" placeholder="Buscar por nome, e-mail ou documento...">
+                    <select>
+                        <option>Papel: Todos</option>
+                        <option>Administrador</option>
+                        <option>Organizador</option>
+                        <option>Usuário</option>
+                    </select>
+                    <select>
+                        <option>Status: Todos</option>
+                        <option>Ativo</option>
+                        <option>Inativo</option>
+                        <option>Bloqueado</option>
+                    </select>
+                    <a href="#" class="admin-quick-action admin-quick-action--primary admin-filterbar__new">+ Novo Usuário</a>
+                </div>
+
+                <div class="admin-users-wrap">
+
+                    <div class="admin-bulk-bar">
+                        <span class="admin-bulk-bar__icon">✓</span>
+                        <div>
+                            <strong>3 usuários selecionados</strong>
+                            <p>Ações em massa para os cadastros marcados</p>
+                        </div>
+                        <div class="admin-bulk-bar__actions">
+                            <button type="button">Alterar Papel</button>
+                            <button type="button">Desativar Selecionados</button>
+                            <button type="button">Exportar CSV / PDF</button>
+                            <button type="button" class="is-danger">Excluir Selecionados</button>
+                        </div>
+                    </div>
+
+                    <section class="admin-panel admin-panel--flush">
+                        <table class="admin-table admin-table--users">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" aria-label="Selecionar todos"></th>
+                                    <th>Usuário / Nome</th>
+                                    <th>E-mail</th>
+                                    <th>Papel</th>
+                                    <th>Status</th>
+                                    <th>Data de Criação</th>
+                                    <th>Último Acesso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" checked></td>
+                                    <td class="admin-user-cell">
+                                        <span class="admin-avatar">RM</span>
+                                        <div><strong>Rodrigo Mendonça</strong><small>#USR-89021</small></div>
+                                    </td>
+                                    <td>rodrigo.m@live.com</td>
+                                    <td><span class="admin-tag admin-tag--accent">Organizador</span></td>
+                                    <td><span class="admin-status-pill admin-status-pill--ok">Ativo</span></td>
+                                    <td>12/03/2024</td>
+                                    <td>Há 12 min</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" checked></td>
+                                    <td class="admin-user-cell">
+                                        <span class="admin-avatar">CM</span>
+                                        <div><strong>Carlos Mendes</strong><small>#USR-77341</small></div>
+                                    </td>
+                                    <td>carlos.mendes@liveprod.com.br</td>
+                                    <td><span class="admin-tag admin-tag--accent">Organizador</span></td>
+                                    <td><span class="admin-status-pill admin-status-pill--ok">Ativo</span></td>
+                                    <td>20/01/2024</td>
+                                    <td>Há 1 hora</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td class="admin-user-cell">
+                                        <span class="admin-avatar">GS</span>
+                                        <div><strong>Gabriel Souza</strong><small>#USR-99201</small></div>
+                                    </td>
+                                    <td>gabriel@exemplo.com</td>
+                                    <td><span class="admin-tag admin-tag--info">Usuário / Comprador</span></td>
+                                    <td><span class="admin-status-pill admin-status-pill--ok">Ativo</span></td>
+                                    <td>05/02/2025</td>
+                                    <td>Há 3 horas</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td class="admin-user-cell">
+                                        <span class="admin-avatar">MC</span>
+                                        <div><strong>Mariana Costa</strong><small>#USR-54129</small></div>
+                                    </td>
+                                    <td>mariana.costa@email.com</td>
+                                    <td><span class="admin-tag admin-tag--info">Usuário / Vendedor</span></td>
+                                    <td><span class="admin-status-pill admin-status-pill--off">Inativo</span></td>
+                                    <td>18/11/2024</td>
+                                    <td>Há 14 dias</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td class="admin-user-cell">
+                                        <span class="admin-avatar">FA</span>
+                                        <div><strong>Felipe Alencar</strong><small>#ADM-00042</small></div>
+                                    </td>
+                                    <td>felipe.alencar@security.com</td>
+                                    <td><span class="admin-tag admin-tag--dark">Administrador</span></td>
+                                    <td><span class="admin-status-pill admin-status-pill--ok">Ativo</span></td>
+                                    <td>10/10/2023</td>
+                                    <td>Há 5 min</td>
+                                </tr>
+                                <tr class="is-flagged">
+                                    <td><input type="checkbox" checked></td>
+                                    <td class="admin-user-cell">
+                                        <span class="admin-avatar">LP</span>
+                                        <div><strong>Luciana Paes</strong><small>#USR-10443 (Flagged)</small></div>
+                                    </td>
+                                    <td>luciana.p@fakebox.net</td>
+                                    <td><span class="admin-tag admin-tag--info">Usuário</span></td>
+                                    <td><span class="admin-tag admin-tag--danger">Bloqueado (Suspeita Fraude)</span></td>
+                                    <td>01/02/2025</td>
+                                    <td>Há 2 dias</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td class="admin-user-cell">
+                                        <span class="admin-avatar">CL</span>
+                                        <div><strong>Camila Lima</strong><small>#USR-65811</small></div>
+                                    </td>
+                                    <td>camila.lima@eventos.com</td>
+                                    <td><span class="admin-tag admin-tag--accent">Organizador</span></td>
+                                    <td><span class="admin-status-pill admin-status-pill--ok">Ativo</span></td>
+                                    <td>15/09/2024</td>
+                                    <td>Ontem</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="admin-table-footer">
+                            <span>Mostrando 1 a 7 de 12.480 usuários</span>
+                            <div class="admin-table-footer__pages">
+                                <button type="button">Anterior</button>
+                                <button type="button" class="is-active">1</button>
+                                <button type="button">2</button>
+                                <button type="button">3</button>
+                                <span>…</span>
+                                <button type="button">42</button>
+                                <button type="button">Próximo</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="admin-panel admin-audit-note">
+                    <div>
+                        <strong>Auditoria de Permissões e LGPD</strong>
+                        <p>Todas as concessões de acesso de Administrador e Organizador exigem autenticação em duas etapas e são salvas no livro de auditoria contínua.</p>
+                    </div>
+                    <a href="#">Ver logs de acesso →</a>
+                </div>
+
+            </main>
+        </div>
+    </div>
+</body>
+</html>
