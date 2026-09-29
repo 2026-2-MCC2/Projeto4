@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Configurações do Sistema - Admin TrocaTicket</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar__brand">
+                <img src="../../../../../images/logo_navbar_web.png" alt="TrocaTicket">
+                <span>Intercâmbio Seguro</span>
+            </div>
+
+            <div class="admin-sidebar__user">
+                <span class="admin-avatar">RC</span>
+                <div>
+                    <strong>Renata Castro</strong>
+                    <small>Super Admin</small>
+                </div>
+            </div>
+
+            <div class="admin-nav">
+                <a href="dashboard.html">Visão Geral</a>
+                <a href="usuarios.html">Usuários e Acesso</a>
+                <a href="papeis.html">Papéis e Permissões</a>
+                <a href="configuracoes.html" class="is-active">Configurações do Sistema</a>
+                <a href="logs.html">Logs e Auditoria</a>
+                <a href="monitoramento.html">Monitoramento</a>
+                <a href="tickets.html">Suporte e Tickets</a>
+            </div>
+
+            <div class="admin-sidebar__footer">
+                <div class="admin-safe-box">
+                    <strong>Ambiente Seguro</strong>
+                    <p>SSL Ativo / 2FA obrigatório para transações de custódia e emissão de permissões.</p>
+                </div>
+                <a href="login.html" class="admin-logout">Sair da Conta</a>
+            </div>
+        </aside>
+
+        <div class="admin-content">
+
+            <div class="admin-topbar">
+                <input type="search" placeholder="Buscar usuários, logs, permissões ou eventos...">
+                <div class="admin-topbar__status">
+                    <span class="admin-status-dot"></span>
+                    Sistemas Operacionais 99.9%
+                </div>
+                <div class="admin-topbar__user">
+                    <strong>Renata Castro</strong>
+                    <small>admin@trocaticket.com.br</small>
+                </div>
+            </div>
+
+            <main class="admin-main admin-main--with-footbar">
+
+                <div class="admin-page-head">
+                    <div>
+                        <span class="admin-eyebrow">Painel de Controle Central</span>
+                        <h1>Configurações do Sistema</h1>
+                        <p>Gerencie preferências globais de operação, integrações financeiras, políticas rigorosas de custódia e infraestrutura de comunicação.</p>
+                    </div>
+                    <div class="admin-mini-stats">
+                        <div>
+                            <span>Configurações</span>
+                            <strong style="font-size:1rem">Sincronizadas</strong>
+                        </div>
+                        <div>
+                            <span>Versão</span>
+                            <strong style="font-size:1rem">v2.4.12-prod</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-tabbar">
+                    <span class="is-active">Gerais</span>
+                    <span>Marca &amp; Visual</span>
+                    <span>Integrações &amp; APIs</span>
+                    <span>E-mail (SMTP)</span>
+                    <span>Segurança &amp; Acesso</span>
+                </div>
+
+                <section class="admin-panel">
+                    <div class="admin-panel__head">
+                        <div>
+                            <h2>1. Preferências Gerais da Plataforma</h2>
+                            <p>Defina informações públicas fundamentais e os parâmetros regionais de operação.</p>
+                        </div>
+                        <span class="admin-tag admin-tag--info">Geral</span>
+                    </div>
+                    <div class="admin-field-grid">
+                        <div class="admin-field">
+                            <label>Nome Oficial do Sistema</label>
+                            <input type="text" value="TrocaTicket - Intercâmbio Seguro de Ingressos">
+                        </div>
+                        <div class="admin-field">
+                            <label>E-mail de Contato Suporte</label>
+                            <input type="email" value="suporte@trocaticket.com.br">
+                        </div>
+                        <div class="admin-field">
+                            <label>Idioma Padrão</label>
+                            <select>
+                                <option>Português (Brasil) - pt_BR</option>
+                            </select>
+                        </div>
+                        <div class="admin-field">
+                            <label>Fuso Horário Operacional</label>
+                            <select>
+                                <option>Horário de Brasília (GMT-03:00)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin-toggle-row">
+                        <div>
+                            <strong>Modo de Manutenção</strong>
+                            <p>Impede novos depósitos em custódia e compras no marketplace; apenas administradores acessam.</p>
+                        </div>
+                        <label class="admin-switch">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="admin-panel">
+                    <div class="admin-panel__head">
+                        <div>
+                            <h2>2. Personalização de Marca</h2>
+                            <p>Gerencie ativos visuais e identidades cromáticas exibidas para compradores e vendedores.</p>
+                        </div>
+                        <span class="admin-tag admin-tag--accent">Identidade</span>
+                    </div>
+                    <div class="admin-field-grid">
+                        <div class="admin-field">
+                            <label>Logotipo Oficial da Plataforma</label>
+                            <div class="admin-asset-row">
+                                <img src="../../../../../images/logo_navbar_web.png" alt="Logo atual">
+                                <div>
+                                    <strong>logo_trocaticket_vector.svg</strong>
+                                    <small>SVG Vetorial / 240x64px</small>
+                                </div>
+                                <button type="button" class="admin-btn-ghost">Substituir</button>
+                            </div>
+                        </div>
+                        <div class="admin-field">
+                            <label>Paleta de Cores do Ecossistema</label>
+                            <div class="admin-color-row">
+                                <div><span class="admin-swatch" style="background:#EA580C"></span>Primária (Ações)<small>#EA580C</small></div>
+                                <div><span class="admin-swatch" style="background:#0F172A"></span>Secundária (Custódia)<small>#0F172A</small></div>
+                                <div><span class="admin-swatch" style="background:#F8FAFC;border:1px solid var(--border)"></span>Fundo<small>#F8FAFC</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="admin-panel">
+                    <div class="admin-panel__head">
+                        <div>
+                            <h2>3. Integrações &amp; Chaves de API</h2>
+                            <p>Conecte gateways bancários (PIX), motores antifraude e endpoints de webhook em tempo real.</p>
+                        </div>
+                        <span class="admin-tag admin-tag--dark">REST API v1</span>
+                    </div>
+                    <div class="admin-field-grid">
+                        <div class="admin-field">
+                            <label>Chave de Produção API (Live)</label>
+                            <div class="admin-key-row">
+                                <code>sk_live_9482••••••••••••</code>
+                                <button type="button" class="admin-btn-ghost">Copiar</button>
+                                <button type="button" class="admin-btn-ghost">Regenerar</button>
+                            </div>
+                        </div>
+                        <div class="admin-field">
+                            <label>Chave Sandbox / Ambiente de Testes</label>
+                            <div class="admin-key-row">
+                                <code>sk_test_1092••••••••••••</code>
+                                <button type="button" class="admin-btn-ghost">Copiar</button>
+                                <button type="button" class="admin-btn-ghost">Regenerar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <label>Webhooks Ativos de Notificação</label>
+                    <ul class="admin-webhook-list">
+                        <li>
+                            <div>
+                                <strong>https://api.trocaticket.com/v1/escrow/events</strong>
+                                <small>Dispara quando o saldo da custódia é bloqueado ou liquidado.</small>
+                            </div>
+                            <span class="admin-status-pill admin-status-pill--ok">Ativo (200 OK)</span>
+                        </li>
+                        <li>
+                            <div>
+                                <strong>https://webhook.pagamentos.com.br/pix</strong>
+                                <small>Recepção de notificações assíncronas do Banco Central / BACEN.</small>
+                            </div>
+                            <span class="admin-status-pill admin-status-pill--ok">Ativo (200 OK)</span>
+                        </li>
+                    </ul>
+                    <button type="button" class="admin-btn-ghost">+ Adicionar Webhook</button>
+                </section>
+
+                <section class="admin-panel">
+                    <div class="admin-panel__head">
+                        <div>
+                            <h2>4. E-mail Transacional (SMTP)</h2>
+                            <p>Configuração do servidor de disparo de tokens 2FA, ingressos nominais e comprovantes.</p>
+                        </div>
+                        <span class="admin-tag admin-tag--ok">Conectado (SendGrid)</span>
+                    </div>
+                    <div class="admin-field-grid admin-field-grid--4">
+                        <div class="admin-field">
+                            <label>Servidor SMTP</label>
+                            <input type="text" value="smtp.sendgrid.net">
+                        </div>
+                        <div class="admin-field">
+                            <label>Porta de Comunicação</label>
+                            <input type="text" value="587 (TLS)">
+                        </div>
+                        <div class="admin-field">
+                            <label>Usuário SMTP</label>
+                            <input type="text" value="apikey_trocaticket_mailer">
+                        </div>
+                        <div class="admin-field">
+                            <label>Senha / API Token</label>
+                            <input type="password" value="senha-de-exemplo">
+                        </div>
+                    </div>
+                    <div class="admin-toggle-row">
+                        <div>
+                            <strong>✓ Último teste de envio bem-sucedido há 2h</strong>
+                            <p>Latência: 312ms</p>
+                        </div>
+                        <button type="button" class="admin-btn-ghost">Enviar E-mail de Teste</button>
+                    </div>
+                </section>
+
+                <section class="admin-panel">
+                    <div class="admin-panel__head">
+                        <div>
+                            <h2>5. Segurança e Políticas de Acesso</h2>
+                            <p>Diretrizes obrigatórias de senha, autenticação multifator e renovação de tokens de sessão.</p>
+                        </div>
+                        <span class="admin-tag admin-tag--warn">Nível Bancário</span>
+                    </div>
+                    <div class="admin-field-grid">
+                        <div class="admin-field">
+                            <label>Política de Senhas dos Usuários</label>
+                            <p class="admin-hint">Comprimento mínimo: 8 caracteres · Maiúsculas e minúsculas · Dígitos numéricos · Caracteres especiais (@#$%)</p>
+                        </div>
+                        <div class="admin-field">
+                            <div class="admin-toggle-row admin-toggle-row--tight">
+                                <strong>Autenticação em 2 Fatores (2FA)</strong>
+                                <label class="admin-switch">
+                                    <input type="checkbox" checked>
+                                    <span></span>
+                                </label>
+                            </div>
+                            <p class="admin-hint">Obrigatório para Admins e Organizadores.</p>
+                        </div>
+                        <div class="admin-field">
+                            <label>Expiração de Sessão por Inatividade</label>
+                            <select>
+                                <option>30 minutos</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <div class="admin-footbar">
+                <span>⚠ Modificações no fuso ou e-mail exigem reinicialização dos workers de mensageria</span>
+                <div>
+                    <button type="button" class="admin-btn-ghost">Descartar Alterações</button>
+                    <button type="button" class="admin-btn-primary">Salvar Configurações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

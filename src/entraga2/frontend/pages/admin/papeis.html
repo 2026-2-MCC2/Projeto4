@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Papéis e Permissões - Admin TrocaTicket</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar__brand">
+                <img src="../../../../../images/logo_navbar_web.png" alt="TrocaTicket">
+                <span>Intercâmbio Seguro</span>
+            </div>
+
+            <div class="admin-sidebar__user">
+                <span class="admin-avatar">RC</span>
+                <div>
+                    <strong>Renata Castro</strong>
+                    <small>Super Admin</small>
+                </div>
+            </div>
+
+            <div class="admin-nav">
+                <a href="dashboard.html">Visão Geral</a>
+                <a href="usuarios.html">Usuários e Acesso</a>
+                <a href="papeis.html" class="is-active">Papéis e Permissões</a>
+                <a href="configuracoes.html">Configurações do Sistema</a>
+                <a href="logs.html">Logs e Auditoria</a>
+                <a href="monitoramento.html">Monitoramento</a>
+                <a href="tickets.html">Suporte e Tickets</a>
+            </div>
+
+            <div class="admin-sidebar__footer">
+                <div class="admin-safe-box">
+                    <strong>Ambiente Seguro</strong>
+                    <p>SSL Ativo / 2FA obrigatório para transações de custódia e emissão de permissões.</p>
+                </div>
+                <a href="login.html" class="admin-logout">Sair da Conta</a>
+            </div>
+        </aside>
+
+        <div class="admin-content">
+
+            <div class="admin-topbar">
+                <input type="search" placeholder="Buscar usuários, logs, permissões ou eventos...">
+                <div class="admin-topbar__status">
+                    <span class="admin-status-dot"></span>
+                    Sistemas Operacionais 99.9%
+                </div>
+                <div class="admin-topbar__user">
+                    <strong>Renata Castro</strong>
+                    <small>admin@trocaticket.com.br</small>
+                </div>
+            </div>
+
+            <main class="admin-main">
+
+                <div class="admin-page-head">
+                    <div>
+                        <span class="admin-eyebrow">Governança &amp; Segurança</span>
+                        <h1>Papéis e Permissões</h1>
+                        <p>Defina níveis de acesso granulares, gerencie privilégios por módulo e atribua funções a equipes e colaboradores com proteção em custódia.</p>
+                    </div>
+                </div>
+
+                <section class="admin-panel">
+                    <div class="admin-panel__head">
+                        <h2>Perfis do Sistema</h2>
+                        <span class="admin-tag admin-tag--info">5 ativos</span>
+                    </div>
+
+                    <div class="admin-role-grid">
+                        <div class="admin-role-card admin-role-card--active">
+                            <span class="admin-tag admin-tag--dark">Super Admin</span>
+                            <h3>Administrador</h3>
+                            <p>Acesso total e irrestrito ao sistema.</p>
+                            <small>5 membros associados</small>
+                        </div>
+                        <div class="admin-role-card">
+                            <span class="admin-tag admin-tag--accent">Catálogo</span>
+                            <h3>Editor / Curador</h3>
+                            <p>Gestão de catálogo de eventos e conteúdo público.</p>
+                            <small>12 membros</small>
+                        </div>
+                        <div class="admin-role-card">
+                            <span class="admin-tag admin-tag--accent">Parceiros</span>
+                            <h3>Organizador</h3>
+                            <p>Gestão de eventos próprios, fornecedores e propostas.</p>
+                            <small>1.840 membros</small>
+                        </div>
+                        <div class="admin-role-card">
+                            <span class="admin-tag admin-tag--info">Atendimento</span>
+                            <h3>Suporte / Atendimento</h3>
+                            <p>Mediação de disputas e tickets de usuários.</p>
+                            <small>24 membros</small>
+                        </div>
+                        <div class="admin-role-card">
+                            <span class="admin-tag admin-tag--info">Compliance</span>
+                            <h3>Auditor de Custódia Escrow</h3>
+                            <p>Visualização e liberação de liquidação financeira.</p>
+                            <small>3 membros</small>
+                        </div>
+                        <a href="#" class="admin-role-card admin-role-card--new">
+                            <span>+</span>
+                            Criar Novo Perfil Customizado
+                        </a>
+                    </div>
+                </section>
+
+                <div class="admin-grid">
+                    <div class="admin-col-main">
+                        <section class="admin-panel">
+                            <div class="admin-panel__head">
+                                <div>
+                                    <h2>Permissões: Administrador (Super Admin)</h2>
+                                    <p>Acesso irrestrito a configurações de infraestrutura, auditoria de transações e controle de usuários.</p>
+                                </div>
+                            </div>
+
+                            <table class="admin-table admin-perm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Módulo do sistema</th>
+                                        <th>Ver</th>
+                                        <th>Criar</th>
+                                        <th>Editar</th>
+                                        <th>Excluir</th>
+                                        <th>Acesso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Financeiro e Custódia (Escrow)</strong><small>Liberação de repasse, retenção e estornos Pix</small></td>
+                                        <td>✔</td><td>✔</td><td>✔</td><td>✔</td>
+                                        <td><span class="admin-tag admin-tag--dark">Total</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Usuários</strong><small>Perfis, bloqueios e validação documental (KYC)</small></td>
+                                        <td>✔</td><td>✔</td><td>✔</td><td>✔</td>
+                                        <td><span class="admin-tag admin-tag--dark">Total</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Eventos</strong><small>Aprovação, moderação de datas e categorias</small></td>
+                                        <td>✔</td><td>✔</td><td>✔</td><td>—</td>
+                                        <td><span class="admin-tag admin-tag--accent">Parcial</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Ingressos</strong><small>Lotes, revendas secundárias e integridade de QR</small></td>
+                                        <td>✔</td><td>✔</td><td>✔</td><td>✔</td>
+                                        <td><span class="admin-tag admin-tag--dark">Total</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Configurações do Sistema</strong><small>Taxas percentuais, limites e parâmetros do gateway</small></td>
+                                        <td>✔</td><td>—</td><td>✔</td><td>—</td>
+                                        <td><span class="admin-tag admin-tag--warn">Crítico</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Logs e Auditoria</strong><small>Rastreabilidade completa de ações e assinaturas</small></td>
+                                        <td>✔</td><td>—</td><td>—</td><td>—</td>
+                                        <td><span class="admin-tag admin-tag--info">Imutável</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="admin-panel__foot">
+                                <button type="button" class="admin-btn-ghost">Restaurar Padrão</button>
+                                <button type="button" class="admin-btn-primary">Salvar Alterações</button>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="admin-col-side">
+                        <section class="admin-panel">
+                            <h2>Proteção Granular</h2>
+                            <p>Alterações de privilégios em "Custódia" e "Logs de Auditoria" requerem dupla autenticação física (FIDO2 / 2FA).</p>
+                        </section>
+
+                        <section class="admin-panel">
+                            <h2>Atribuir papel a usuários</h2>
+                            <p>Pessoas que herdam diretamente as capacidades deste perfil no ecossistema — 2 selecionados de 5.</p>
+                            <div class="admin-chip-list">
+                                <span class="admin-chip"><span class="admin-avatar admin-avatar--sm">FA</span> Felipe Alencar</span>
+                                <span class="admin-chip"><span class="admin-avatar admin-avatar--sm">RC</span> Renata Castro (Você)</span>
+                            </div>
+                            <input type="text" placeholder="+ Adicionar usuário (digite nome ou e-mail)...">
+                            <small class="admin-hint">Usuários adicionados terão acesso imediato após a próxima reautenticação de sessão.</small>
+                        </section>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+</body>
+</html>
