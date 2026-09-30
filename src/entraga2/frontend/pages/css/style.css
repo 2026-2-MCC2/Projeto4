@@ -8,6 +8,7 @@
     --primary: #0F172A;
     --primary-hover: #1E293B;
     --white: #FFFFFF;
+    --surface: #FFFFFF;
 }
 
 /* ===================== RESET E BASE ===================== */
@@ -718,9 +719,29 @@ footer div a:hover {
     }
 }
 
+/* @split:admin:inicio */
 /* =====================================================
    CSS DAS PÁGINAS DO ADMINISTRADOR
    ===================================================== */
+
+/* Link só para quem navega pelo teclado: fica invisível fora da tela
+   até receber foco (Tab), aí aparece no canto para pular direto pro
+   conteúdo sem ter que passar por todo o menu lateral. */
+.admin-skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 100;
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.75rem 1.25rem;
+    border-radius: 0 0 8px 8px;
+    font-weight: 600;
+}
+
+.admin-skip-link:focus {
+    top: 0;
+}
 
 /* ===================== LOGIN DO ADMIN ===================== */
 .admin-card {
@@ -745,6 +766,172 @@ footer div a:hover {
     display: grid;
     grid-template-columns: 260px 1fr;
     min-height: 100vh;
+    color: var(--text);
+    background: var(--bg);
+    --surface: var(--white);
+}
+
+.admin-layout .admin-main > .admin-panel {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 0 0 1.5rem;
+}
+
+.admin-layout[data-tema-admin="bilhete-dourado"] {
+    --bg: #FFF7ED;
+    --text: #431407;
+    --text-muted: #8A5B45;
+    --border: #FED7AA;
+    --accent: #C2410C;
+    --primary: #431407;
+    --primary-hover: #7C2D12;
+    --surface: #FFFFFF;
+}
+
+.admin-layout[data-tema-admin="palco-rubi"] {
+    --bg: #FFF1F2;
+    --text: #4C0519;
+    --text-muted: #885264;
+    --border: #FECDD3;
+    --accent: #BE123C;
+    --primary: #4C0519;
+    --primary-hover: #881337;
+    --surface: #FFFFFF;
+}
+
+.admin-layout[data-tema-admin="camarote-oceano"] {
+    --bg: #ECFEFF;
+    --text: #083344;
+    --text-muted: #4B7180;
+    --border: #A5F3FC;
+    --accent: #0E7490;
+    --primary: #083344;
+    --primary-hover: #164E63;
+    --surface: #FFFFFF;
+}
+
+.admin-layout[data-tema-admin="ultima-sessao"] {
+    --bg: #111923;
+    --text: #E6EEF6;
+    --text-muted: #A3B2C2;
+    --border: #344250;
+    --accent: #C2410C;
+    --primary: #263548;
+    --primary-hover: #354A60;
+    --surface: #1B2733;
+    color-scheme: dark;
+}
+
+.admin-layout[data-tema-admin] .admin-sidebar,
+.admin-layout[data-tema-admin] .admin-sidebar-close,
+.admin-layout[data-tema-admin] .admin-menu-toggle,
+.admin-layout[data-tema-admin] .admin-topbar,
+.admin-layout[data-tema-admin] .admin-page-head__actions button.is-active,
+.admin-layout[data-tema-admin] .admin-stat-card:not(.admin-stat-card--dark),
+.admin-layout[data-tema-admin] .admin-panel,
+.admin-layout[data-tema-admin] .admin-table-footer__pages button,
+.admin-layout[data-tema-admin] .admin-btn-ghost,
+.admin-layout[data-tema-admin] .admin-footbar,
+.admin-layout[data-tema-admin] .admin-hash-box code,
+.admin-layout[data-tema-admin] .admin-theme-option {
+    background-color: var(--surface);
+}
+
+.admin-layout[data-tema-admin] .admin-nav a {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    align-items: center;
+    justify-content: stretch;
+    gap: 0.7rem;
+    min-height: 44px;
+}
+
+.admin-nav__icon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+}
+
+.admin-layout[data-tema-admin] .admin-nav a span {
+    text-align: justify;
+    text-align-last: left;
+}
+
+.admin-theme-picker {
+    min-width: 0;
+    margin-top: 1.25rem;
+    border: 0;
+}
+
+.admin-theme-picker legend {
+    margin-bottom: 0.7rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.admin-theme-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 0.75rem;
+}
+
+.admin-theme-option {
+    display: grid;
+    grid-template-columns: 18px 62px minmax(0, 1fr);
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 76px;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.admin-theme-option input {
+    accent-color: var(--accent);
+}
+
+.admin-theme-option:has(input:checked) {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+}
+
+.admin-theme-option:has(input:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.admin-theme-option__swatches {
+    display: flex;
+    gap: 0.2rem;
+}
+
+.admin-theme-option__swatches span {
+    width: 18px;
+    aspect-ratio: 1;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+}
+
+.admin-theme-option__copy {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+.admin-theme-option__copy strong {
+    font-size: 0.85rem;
+}
+
+.admin-theme-option__copy small {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    line-height: 1.35;
+}
+
+.admin-layout[data-tema-admin] .admin-theme-option__copy small {
+    color: var(--text-muted);
 }
 
 .admin-content {
@@ -759,6 +946,7 @@ footer div a:hover {
    Aqui eu zero border/border-radius antes de definir os meus, senão
    os dois estilos se misturam. */
 .admin-sidebar {
+    position: relative;
     background: var(--white);
     border: none;
     border-right: 1px solid var(--border);
@@ -766,6 +954,65 @@ footer div a:hover {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+}
+
+/* Botão "X" de dentro do próprio menu. Existe porque o botão hamburguer
+   da barra do topo fica embaixo do menu quando ele abre no celular/tablet
+   (o menu passa por cima, com z-index maior) — então sem esse botão aqui
+   dentro não tinha como fechar de novo. Só aparece no modo mobile
+   (ver @media mais abaixo). */
+.admin-sidebar-close {
+    display: none;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* Botão "hamburguer" que abre/fecha o menu em telas estreitas.
+   Fica escondido no desktop porque lá a barra lateral já é fixa. */
+.admin-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* Camada escura atrás do menu aberto no celular/tablet, para poder
+   fechar tocando ou clicando fora dele. Sem "cursor" nenhum porque
+   ela nunca aparece no desktop. */
+.admin-sidebar-backdrop {
+    display: none;
+}
+
+/* Qualquer link, botão ou campo do painel do admin precisa de um
+   contorno visível ao navegar só pelo teclado (Tab), já que o reset
+   do topo do arquivo não mexe no outline por padrão do navegador —
+   aqui a gente deixa esse contorno consistente com a cor da marca. */
+.admin-layout a:focus-visible,
+.admin-layout button:focus-visible,
+.admin-layout input:focus-visible,
+.admin-layout [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 .admin-sidebar__brand {
@@ -833,6 +1080,9 @@ footer div a:hover {
 }
 
 .admin-nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
     padding: 0.65rem 0.75rem;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -882,14 +1132,16 @@ footer div a:hover {
 .admin-topbar {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    padding: 1rem 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
     background: var(--white);
     border-bottom: 1px solid var(--border);
 }
 
 .admin-topbar input[type="search"] {
     flex: 1;
+    min-width: 160px;
     max-width: 420px;
     padding: 0.6rem 1rem;
     border: 1px solid var(--border);
@@ -1670,6 +1922,8 @@ footer div a:hover {
 
 .admin-tabbar {
     display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
     gap: 1.5rem;
     border-bottom: 1px solid var(--border);
     margin-bottom: 1.5rem;
@@ -1690,13 +1944,17 @@ footer div a:hover {
 
 .admin-field-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
     margin-bottom: 1.25rem;
 }
 
+.admin-field-grid > * {
+    min-width: 0;
+}
+
 .admin-field-grid--4 {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .admin-field label {
@@ -1743,12 +2001,18 @@ footer div a:hover {
 
 .admin-asset-row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 0.75rem;
+}
+
+.admin-asset-row > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .admin-asset-row img {
@@ -1800,10 +2064,16 @@ footer div a:hover {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    flex-wrap: wrap;
+    min-width: 0;
 }
 
 .admin-key-row code {
     flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-wrap: normal;
+    white-space: nowrap;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -2156,6 +2426,42 @@ footer div a:hover {
         grid-template-columns: 1fr;
     }
 
+    /* Em vez de empilhar a barra lateral inteira acima do conteúdo
+       (o que ficava estranho e enorme), ela agora fica escondida fora
+       da tela e só desliza para dentro quando o botão hamburguer é
+       tocado/clicado ou aberto via teclado. */
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 50;
+        width: min(280px, 85vw);
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .admin-sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    .admin-sidebar-close {
+        display: inline-flex;
+    }
+
+    .admin-sidebar-backdrop.is-open {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        background: rgba(15, 23, 42, 0.45);
+    }
+
+    .admin-menu-toggle {
+        display: inline-flex;
+    }
+
     .admin-stats {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2169,7 +2475,19 @@ footer div a:hover {
     }
 
     .admin-mini-stats {
+        width: 100%;
+        min-width: 0;
+        flex-wrap: wrap;
+        flex-shrink: 1;
         justify-content: flex-start;
+        gap: 0.75rem;
+    }
+
+    .admin-mini-stats > div {
+        min-width: 0;
+        flex: 1 1 90px;
+        text-align: left;
+        overflow-wrap: anywhere;
     }
 
     .admin-panel--flush {
@@ -2186,7 +2504,17 @@ footer div a:hover {
 
     .admin-field-grid,
     .admin-field-grid--4 {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .admin-key-row code {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .admin-key-row button {
+        flex: 1 1 auto;
+        min-width: 0;
     }
 
     .admin-log-list li {
@@ -2209,11 +2537,62 @@ footer div a:hover {
         flex-direction: column;
         align-items: stretch;
         text-align: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .admin-footbar > span {
+        width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .admin-footbar > div {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .admin-footbar button {
+        min-width: 0;
+        min-height: 44px;
+        padding: 0.5rem;
+        white-space: normal;
     }
 }
 
+@media (max-width: 380px) {
+    .admin-main {
+        padding: 1rem;
+    }
+
+    .admin-layout .admin-panel {
+        display: block;
+        min-width: 0;
+        padding: 1rem;
+    }
+
+    .admin-panel__head {
+        flex-wrap: wrap;
+    }
+
+    .admin-field-grid,
+    .admin-field-grid--4 {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+    }
+
+    .admin-theme-option {
+        grid-template-columns: 16px 54px minmax(0, 1fr);
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+}
+/* @split:admin:fim */
+
 /* ======================================================================== */
 
+/* @split:base-extra:inicio */
 header nav a.cabecalho-voltar:last-child {
     background: none;
     color: var(--text-muted);
@@ -2226,9 +2605,10 @@ header nav a.cabecalho-voltar:last-child {
 header nav a.cabecalho-voltar:hover {
     color: var(--text);
 }
+/* @split:base-extra:fim */
 
 /* =====================================================
-   ÁREA DO CLIENTE — PÁGINA INICIAL 
+   ÁREA DO CLIENTE — PÁGINA INICIAL
    ===================================================== */
 
 .cliente-layout {

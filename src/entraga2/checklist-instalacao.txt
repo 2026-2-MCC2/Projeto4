@@ -1,0 +1,48 @@
+CHECKLIST DE INSTALACAO - maquina da Geovanna
+================================================
+
+[x] Node.js e npm
+    Ja instalados. node v24.18.1 / npm 11.16.0
+
+[x] OpenCode CLI
+    Ja instalado globalmente (funciona em qualquer pasta do notebook).
+    Comando usado: npm install -g opencode-ai
+    Verificar com: opencode --version
+
+[x] Projeto React (via Vite)
+    Criado em: src/entraga2/frontend-react/
+    (pasta IRMA de frontend/ e backend/, nao fica dentro de nenhuma delas -
+    se seu editor estiver aberto so na pasta frontend/, essa pasta nova NAO
+    vai aparecer na barra lateral. Precisa abrir a pasta entraga2/ inteira,
+    ou "Add Folder to Workspace" apontando pra frontend-react/.)
+
+    Dentro dela ja existe: src/paginas/admin/ (8 arquivos .jsx, um por
+    pagina do admin), src/componentes/admin/ (layout, formularios,
+    primitivos reutilizaveis), src/rotas-admin.js, e um script
+    scripts/split-admin-css.mjs.
+
+    OBS IMPORTANTE: esse conteudo do admin ja veio pronto/gerado (nao fui
+    eu, Claude, quem escreveu - possivelmente saiu do OpenCode). Isso entra
+    em conflito com o combinado de aprender escrevendo cada pedaco. Decidir
+    com calma: usar isso como gabarito pra estudar (entender o que cada
+    arquivo faz) ou recomecar do zero escrevendo por conta propria.
+
+[ ] React Router (pacote react-router-dom)
+    Necessario para trocar de "pagina" dentro do React (substitui os
+    links <a href="pagina.html"> por navegacao entre componentes).
+    Conferir se ja esta no package.json de frontend-react/ (o rotas-admin.js
+    sugere que sim, mas confirmar antes de instalar de novo).
+
+[ ] Backend (Node + Express)
+    Pasta src/entraga2/backend/ ainda esta vazia.
+    Vai precisar: express, mysql2, dotenv (isso e tarefa de outra frente
+    do grupo, so deixando anotado aqui pra nao esquecer que existe).
+
+[ ] Banco de dados (MySQL)
+    Nenhum schema/tabela criada ainda.
+
+COMO ATUALIZAR ESTE ARQUIVO
+------------------------------
+Sempre que instalar algo novo (ou o grupo decidir algo, tipo "vamos usar
+Vite"), marca o [x] e anota a versao/comando usado, do mesmo jeito que os
+itens ja marcados acima.

@@ -1,0 +1,71 @@
+ERROS ENCONTRADOS - Organizador, Fornecedor e Cliente
+========================================================
+(Estes 3 modulos NAO sao meu escopo de edicao - este arquivo e so para eu
+avisar quem cuida de cada pasta. O Admin esta sendo corrigido direto, em
+paralelo, fora deste arquivo.)
+
+1. FORNECEDOR
+--------------
+
+1.1. dashboard.html (linha 18)
+   Link "Sair" esta assim:      href="login.html"
+   Devia estar assim:           href="../login.html"
+
+   Motivo: o arquivo login.html fica em pages/, e dashboard.html fica em
+   pages/Fornecedor/ (uma pasta abaixo). Sem o "../", o link procura um
+   login.html DENTRO de Fornecedor/, que nao existe -> da 404 ao clicar em
+   "Sair". Os outros arquivos da mesma pasta (busca.html, cadastro.html,
+   fornecedores.html, eventos.html) ja usam "../login.html" corretamente -
+   so esse arquivo ficou diferente.
+
+1.2. propostas.html (linha 8)
+   Folha de estilo carregada:   href="../css/style.css"  (o style.css GERAL)
+   Devia carregar:               href="style.css"  (o style.css PROPRIO da
+                                  pasta Fornecedor)
+
+   Motivo: todos os outros arquivos da pasta Fornecedor usam o style.css
+   local (pages/Fornecedor/style.css). So o propostas.html esta puxando o
+   style.css global (pages/css/style.css), que provavelmente nao tem as
+   mesmas classes -> a tela de propostas deve estar com aparencia diferente
+   das demais telas de Fornecedor.
+
+2. CLIENTE
+-----------
+
+2.1. Mesmo tipo de erro do item 1.1, em tres arquivos:
+   - inicio.html          (linha 68): href="login.html"   -> devia ser "../login.html"
+   - ingressos.html       (linha 68): href="login.html"   -> devia ser "../login.html"
+   - ver-ingresso.html    (linha 68): href="login.html"   -> devia ser "../login.html"
+
+   Os outros arquivos da mesma pasta (configuracoes.html, seus-ingressos.html,
+   suas-revendas.html, perfil.html, compras.html) ja usam "../login.html"
+   certinho - so esses 3 ficaram sem o "../".
+
+3. ORGANIZADOR
+----------------
+   Nao encontrei esse tipo de erro nessa pasta - os links de "Sair" e a
+   folha de estilo (../css/style.css) estao consistentes em todos os
+   arquivos verificados.
+
+4. ARQUIVOS SOLTOS (em pages/ direto, fora das 3 pastas) - bonus
+-------------------------------------------------------------------
+   cadastro.html (linha 14): imagem da logo com 4 niveis de "../" quando so
+   precisava de 1 (o arquivo esta direto em pages/, nao dentro de subpasta).
+   login.html (linha 13): mesmo tipo de erro, com 2 niveis quando precisava
+   de 1.
+   eventos.html (linhas 15 e 142): mesmo tipo de erro, e ainda falta um
+   espaco antes do atributo alt na linha 15 (...logo_navbar_web.png"alt=...).
+
+   (Atualizacao: passou a ser escopo editar - ver secao "PATCH ADMIN + SOLTOS".)
+
+5. COMO ISSO MUDA QUANDO MIGRAR PARA REACT
+----------------------------------------------
+   - Link "Sair" (itens 1.1 e 2.1): em vez de contar quantos "../" precisa
+     subir em cada arquivo, o React Router usa caminhos fixos a partir da
+     raiz do site, tipo <Link to="/login">. Nao depende de em qual pasta o
+     componente esta guardado, entao esse erro de "esqueci o ../" deixa de
+     existir.
+   - Estilo errado (item 1.2): cada componente React normalmente importa
+     o proprio arquivo de CSS (import "./Propostas.css"), entao nao da pra
+     "puxar sem querer" o CSS de outro modulo - o import e explicito e o
+     editor avisa se o arquivo nao existir.
