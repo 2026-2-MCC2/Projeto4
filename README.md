@@ -37,7 +37,16 @@ May the force be with you!
 ## Entregas
 
 - [Modelagem do Banco de Dados](./documentos/entrega1/Projetos%20em%20Banco%20de%20Dados/README.md)
-  
+
+## 🌐 Acesse o projeto
+
+   <p align="center">
+     <a href="https://projeto4-bckx.onrender.com"><img src="https://img.shields.io/badge/Acessar%20o%20site-InterLink-6C47FF?style=for-the-badge&logo=render&logoColor=white" alt="Acessar o site InterLink"></a>
+   </p>
+
+   🔗 **Link:** <https://projeto4-bckx.onrender.com>
+
+   > Front-end (React + Vite) hospedado como Static Site no Render, com deploy automático a cada commit na branch `main`.  
 
 ## 🛠 Estrutura de pastas
 
