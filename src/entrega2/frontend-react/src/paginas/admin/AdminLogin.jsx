@@ -1,8 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { entrarComoAdmin } from '../../componentes/admin/autenticacao'
 import { FormularioLoginAdmin } from '../../componentes/admin/formularios'
 
 export function AdminLogin() {
   const navegar = useNavigate()
+
+  function aoFazerLogin() {
+    entrarComoAdmin()
+    navegar('/admin')
+  }
 
   return (
     <>
@@ -18,7 +24,7 @@ export function AdminLogin() {
           <h1>Painel Administrativo</h1>
           <p>Acesso restrito à equipe TrocaTicket.</p>
 
-          <FormularioLoginAdmin aoEnviar={() => navegar('/admin')} />
+          <FormularioLoginAdmin aoEnviar={aoFazerLogin} />
         </section>
       </main>
 

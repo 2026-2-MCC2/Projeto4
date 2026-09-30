@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { adminAtual, temasPainel } from '../../dados/admin'
 import { ADMIN_ROTAS } from '../../rotas-admin'
+import { sairComoAdmin } from './autenticacao'
 import { ContextoLayoutAdmin } from './contexto-layout'
 import { Avatar, Botao } from './primitivos'
 
@@ -205,7 +206,10 @@ function BarraLateral({ aberto, aoFechar }) {
         <Botao
           variante="suave"
           className="admin-logout"
-          aoClicar={() => navegar('/admin/login')}
+          aoClicar={() => {
+            sairComoAdmin()
+            navegar('/admin/login')
+          }}
         >
           Sair da Conta
         </Botao>
