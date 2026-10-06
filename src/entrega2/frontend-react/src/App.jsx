@@ -15,6 +15,18 @@ import { AdminPapeis } from './paginas/admin/AdminPapeis'
 import { AdminTickets } from './paginas/admin/AdminTickets'
 import { AdminUsuarios } from './paginas/admin/AdminUsuarios'
 
+import { ClienteLayout } from './componentes/cliente/ClienteLayout'
+
+import { ClienteInicio } from './paginas/cliente/ClienteInicio'
+import { ClienteIngressos } from './paginas/cliente/ClienteIngressos'
+import { ClienteVerIngresso } from './paginas/cliente/ClienteVerIngresso'
+import { ClienteCompras } from './paginas/cliente/ClienteCompras'
+import { ClientePerfil } from './paginas/cliente/ClientePerfil'
+import { ClienteSeusIngressos } from './paginas/cliente/ClienteSeusIngressos'
+import { ClienteSuasRevendas } from './paginas/cliente/ClienteSuasRevendas'
+import { ClienteConfiguracoes } from './paginas/cliente/ClienteConfiguracoes'
+import { Cliente404 } from './paginas/cliente/Cliente404'
+
 export function App() {
   return (
     <BrowserRouter>
@@ -44,10 +56,6 @@ export function App() {
         </Route>
 
         <Route
-          path="/cliente/*"
-          element={<EmConstrucao modulo="Área do Cliente" />}
-        />
-        <Route
           path="/fornecedor/*"
           element={<EmConstrucao modulo="Área do Fornecedor" />}
         />
@@ -65,3 +73,49 @@ export function App() {
     </BrowserRouter>
   )
 }
+
+<Route path="/cliente" element={<ClienteLayout />}>
+
+<Route index element={<ClienteInicio />} />
+
+<Route
+  path="ingressos"
+  element={<ClienteIngressos />}
+/>
+
+<Route
+  path="ingressos/:id"
+  element={<ClienteVerIngresso />}
+/>
+
+<Route
+  path="compras"
+  element={<ClienteCompras />}
+/>
+
+<Route
+  path="perfil"
+  element={<ClientePerfil />}
+/>
+
+<Route
+  path="seus-ingressos"
+  element={<ClienteSeusIngressos />}
+/>
+
+<Route
+  path="suas-revendas"
+  element={<ClienteSuasRevendas />}
+/>
+
+<Route
+  path="configuracoes"
+  element={<ClienteConfiguracoes />}
+/>
+
+<Route
+  path="*"
+  element={<Cliente404 />}
+/>
+
+</Route>
