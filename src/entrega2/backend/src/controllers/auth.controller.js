@@ -107,4 +107,14 @@ async function login(req, res) {
   });
 }
 
-module.exports = { cadastrar, login };
+// Retorna os dados do usuário logado (rota protegida)
+async function me(req, res) {
+  const { rows } = await pool.query(
+    'SELECT id_usuario, nome, email, telefone, tipo, status_cadastro FROM usuarios WHERE id_usuario = $1',
+    [req.usuario.id]
+  );
+  if (!rows[0]) return res.status(404).json({ erro: 'Usuário não encontrado' });
+  res.json(rows[0]);
+}
+
+module.exports = { cadastrar, login, me };
