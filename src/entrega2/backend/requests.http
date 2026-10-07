@@ -84,3 +84,35 @@ GET http://localhost:3000/api/auth/me
 ### 10. Token FALSO (deve dar 401)
 GET http://localhost:3000/api/auth/me
 Authorization: Bearer token.falso.123
+
+### 11. Login do ADMIN (deve dar 200 + token)
+# @name loginAdmin
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@trocaticket.com.br",
+  "senha": "Admin123!"
+}
+
+### 12. RF03 – Admin lista pendentes (deve dar 200 com o Carlos)
+GET http://localhost:3000/api/admin/cadastros
+Authorization: Bearer {{loginAdmin.response.body.token}}
+
+### 13. RF03 – CLIENTE tenta listar (deve dar 403)
+GET http://localhost:3000/api/admin/cadastros
+Authorization: Bearer {{loginCliente.response.body.token}}
+
+### 14. RF04 – Decisão inválida (deve dar 400)
+PATCH http://localhost:3000/api/admin/cadastros/2
+Authorization: Bearer {{loginAdmin.response.body.token}}
+Content-Type: application/json
+
+{ "decisao": "talvez" }
+
+### 15. RF04 – Admin APROVA o Carlos (deve dar 200)
+PATCH http://localhost:3000/api/admin/cadastros/2
+Authorization: Bearer {{loginAdmin.response.body.token}}
+Content-Type: application/json
+
+{ "decisao": "aprovado" }
