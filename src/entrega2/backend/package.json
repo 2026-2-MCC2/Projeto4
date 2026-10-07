@@ -1,11 +1,17 @@
 {
+  
   "name": "backend",
   "version": "1.0.0",
   "main": "src/server.js",
+  
+  "engines": {
+  "node": ">=20"
+},
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
-  },
+  "dev": "nodemon src/server.js",
+  "start": "node src/server.js",
+  "criar-admin": "node scripts/criar-admin.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,4 +27,6 @@
   "devDependencies": {
     "nodemon": "^3.1.14"
   }
+
+  
 }
