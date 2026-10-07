@@ -73,3 +73,14 @@ Content-Type: application/json
   "email": "gabriel.souza@email.com",
   "senha": "senhaerrada"
 }
+
+### 8. Meus dados COM token (deve dar 200)
+GET http://localhost:3000/api/auth/me
+Authorization: Bearer {{loginCliente.response.body.token}}
+
+### 9. SEM token (deve dar 401)
+GET http://localhost:3000/api/auth/me
+
+### 10. Token FALSO (deve dar 401)
+GET http://localhost:3000/api/auth/me
+Authorization: Bearer token.falso.123
