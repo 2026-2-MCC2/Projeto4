@@ -1,0 +1,46 @@
+### 1. Cadastro de CLIENTE (deve dar 201 e "aprovado")
+POST http://localhost:3000/api/auth/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Gabriel Souza",
+  "email": "gabriel.souza@email.com",
+  "senha": "Cliente123!",
+  "tipo": "cliente",
+  "cpf": "123.456.789-01"
+}
+
+### 2. Cadastro de ORGANIZADOR (deve dar 201 e "pendente")
+POST http://localhost:3000/api/auth/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Carlos Mendes",
+  "email": "carlos.mendes@liveprod.com.br",
+  "senha": "Organizador123!",
+  "tipo": "organizador",
+  "cnpj": "12.345.678/0001-90",
+  "endereco": "Av. Paulista, 1000"
+}
+
+### 3. E-mail repetido (deve dar 409)
+POST http://localhost:3000/api/auth/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Gabriel Cópia",
+  "email": "gabriel.souza@email.com",
+  "senha": "Cliente123!",
+  "tipo": "cliente",
+  "cpf": "999.999.999-99"
+}
+
+### 4. Dados inválidos (deve dar 400)
+POST http://localhost:3000/api/auth/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Sem senha",
+  "email": "teste@email.com",
+  "tipo": "cliente"
+}

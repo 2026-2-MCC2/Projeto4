@@ -23,4 +23,6 @@ app.get('/health', async (req, res) => {
   }
 });
 
+app.use('/api/auth', require('./routes/auth.routes'));
+
 module.exports = app;
