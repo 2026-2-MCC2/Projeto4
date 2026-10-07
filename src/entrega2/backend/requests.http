@@ -44,3 +44,32 @@ Content-Type: application/json
   "email": "teste@email.com",
   "tipo": "cliente"
 }
+
+### 5. Login do CLIENTE aprovado (deve dar 200 + token)
+# @name loginCliente
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "gabriel.souza@email.com",
+  "senha": "Cliente123!"
+}
+
+
+### 6. Login do ORGANIZADOR pendente (deve dar 403)
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "carlos.mendes@liveprod.com.br",
+  "senha": "Organizador123!"
+}
+
+### 7. Senha errada (deve dar 401)
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "gabriel.souza@email.com",
+  "senha": "senhaerrada"
+}
