@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const pool = require('../config/db');
+const jwt = require('jsonwebtoken');
 
 const TIPOS_PUBLICOS = ['cliente', 'organizador', 'fornecedor']; // admin não se cadastra sozinho
 const soDigitos = (valor) => String(valor || '').replace(/\D/g, ''); // "123.456-7" → "1234567"
@@ -65,4 +66,45 @@ async function cadastrar(req, res) {
   }
 }
 
-module.exports = { cadastrar };
+
+// RF02 – Login (só usuários aprovados)
+async function login(req, res) {
+  const { email, senha } = req.body;
+  if (!email || !senha) {
+    return res.status(400).json({ erro: 'Informe e-mail e senha' });
+  }
+
+  // 1. Busca o usuário
+  const { rows } = await pool.query(
+    'SELECT id_usuario, nome, email, senha_hash, tipo, status_cadastro FROM usuarios WHERE email = $1',
+    [email.toLowerCase()]
+  );
+  const usuario = rows[0];
+
+  // 2. Confere a senha (mesma mensagem nos dois casos, para não revelar se o e-mail existe)
+  if (!usuario || !(await bcrypt.compare(senha, usuario.senha_hash))) {
+    return res.status(401).json({ erro: 'E-mail ou senha inválidos' });
+  }
+
+  // 3. Confere a aprovação
+  if (usuario.status_cadastro === 'pendente') {
+    return res.status(403).json({ erro: 'Cadastro aguardando aprovação do administrador' });
+  }
+  if (usuario.status_cadastro === 'recusado') {
+    return res.status(403).json({ erro: 'Cadastro recusado' });
+  }
+
+  // 4. Gera o token
+  const token = jwt.sign(
+    { id: usuario.id_usuario, tipo: usuario.tipo },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_IN || '1d' }
+  );
+
+  res.json({
+    token,
+    usuario: { id: usuario.id_usuario, nome: usuario.nome, email: usuario.email, tipo: usuario.tipo },
+  });
+}
+
+module.exports = { cadastrar, login };
