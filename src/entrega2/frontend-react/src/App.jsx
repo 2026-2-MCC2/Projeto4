@@ -38,6 +38,13 @@ import { FornecedorMeusEventos } from './paginas/fornecedor/FornecedorMeusEvento
 import { FornecedorPerfil } from './paginas/fornecedor/FornecedorPerfil'
 import { FornecedorCadastroServico } from './paginas/fornecedor/FornecedorCadastroServico'
 
+import { OrganizadorLayout } from './componentes/organizador/OrganizadorLayout'
+import { OrganizadorInicio } from './paginas/organizador/OrganizadorInicio'
+import { OrganizadorCriarEvento } from './paginas/organizador/OrganizadorCriarEvento'
+import { OrganizadorFornecedores } from './paginas/organizador/OrganizadorFornecedores'
+import { OrganizadorPublicar } from './paginas/organizador/OrganizadorPublicar'
+import { OrganizadorConfiguracoes } from './paginas/organizador/OrganizadorConfiguracoes'
+
 export function App() {
   return (
     <BrowserRouter>
@@ -88,10 +95,16 @@ export function App() {
         <Route path="servicos/novo" element={<FornecedorCadastroServico />} />
         <Route path="*" element={<Navigate to="/fornecedor" replace />} /> </Route>
 
-        <Route
-          path="/organizador/*"
-          element={<EmConstrucao modulo="Área do Organizador" />}
-        />
+        
+          <Route path="/organizador" element={<OrganizadorLayout />}>
+          <Route index element={<OrganizadorInicio />} />
+          <Route path="criar-evento" element={<OrganizadorCriarEvento />} />
+          <Route path="fornecedores" element={<OrganizadorFornecedores />} />
+          <Route path="publicar" element={<OrganizadorPublicar />} />
+          <Route path="configuracoes" element={<OrganizadorConfiguracoes />} />
+          <Route path="*" element={<Navigate to="/organizador" replace />} />
+        </Route>
+      
 
         <Route
           path="/revenda/*"
