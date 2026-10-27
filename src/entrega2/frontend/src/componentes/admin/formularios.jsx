@@ -186,15 +186,15 @@ export function AbasSeveridade({ opcoes, ativa, aoTrocar }) {
   )
 }
 
-export function FormularioLoginAdmin({ aoEnviar }) {
-  const [email, setEmail] = useState('admin@trocaticket.com.br')
+export function FormularioLoginAdmin({ aoEnviar, erro, carregando }) {
+  const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault()
-        aoEnviar()
+        aoEnviar(email, senha)
       }}
     >
       <div>
@@ -220,8 +220,13 @@ export function FormularioLoginAdmin({ aoEnviar }) {
           required
         />
       </div>
-      <button type="submit" className="admin-login-btn">
-        Entrar no painel
+      {erro && (
+        <p role="alert" style={{ color: 'red' }}>
+          {erro}
+        </p>
+      )}
+      <button type="submit" className="admin-login-btn" disabled={carregando}>
+        {carregando ? 'Entrando...' : 'Entrar no painel'}
       </button>
     </form>
   )

@@ -18,9 +18,11 @@ function validarEvento(corpo) {
   const dataFim = temDataFim ? data(corpo.data_fim) : null;
   const temDescricao = !vazio(corpo.descricao);
   const descricao = temDescricao ? texto(corpo.descricao, 2000) : null;
-  const publicoMinimo = inteiro(corpo.publico_minimo);
-  const publicoMaximo = inteiro(corpo.publico_maximo);
-  const margem = numero(corpo.margem_lucro);
+  const temPublicoMinimo = !vazio(corpo.publico_minimo);
+  const temPublicoMaximo = !vazio(corpo.publico_maximo);
+  const publicoMinimo = temPublicoMinimo ? inteiro(corpo.publico_minimo) : null;
+  const publicoMaximo = temPublicoMaximo ? inteiro(corpo.publico_maximo) : null;
+  const margem = numero(corpo.margem_lucro ?? 0);
 
   if (!nome) return { erro: 'Informe o nome do evento (até 150 caracteres)' };
   if (!local) return { erro: 'Informe o local do evento (até 200 caracteres)' };
@@ -30,11 +32,15 @@ function validarEvento(corpo) {
     return { erro: 'A data de fim não pode ser anterior à data de início' };
   }
   if (temDescricao && !descricao) return { erro: 'A descrição deve ter no máximo 2000 caracteres' };
-  if (publicoMinimo === null || publicoMinimo <= 0) {
+  // público é opcional enquanto o evento está em rascunho; passa a ser exigido só para publicar (RF08)
+  if (temPublicoMinimo && (publicoMinimo === null || publicoMinimo <= 0)) {
     return { erro: 'O público mínimo deve ser um número inteiro maior que zero' };
   }
-  if (publicoMaximo === null || publicoMaximo < publicoMinimo) {
+  if (temPublicoMaximo && (publicoMaximo === null || publicoMaximo < (publicoMinimo ?? 1))) {
     return { erro: 'O público máximo deve ser um número inteiro maior ou igual ao mínimo' };
+  }
+  if (temPublicoMaximo && !temPublicoMinimo) {
+    return { erro: 'Informe também o público mínimo' };
   }
   if (margem === null || margem < 0 || margem >= 100) {
     return { erro: 'A margem de lucro deve estar entre 0 e 99,99 (em %)' };

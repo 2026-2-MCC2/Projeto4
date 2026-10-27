@@ -1,13 +1,28 @@
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { entrarComoAdmin } from '../../componentes/admin/autenticacao'
+import { entrar } from '../../api/auth'
 import { FormularioLoginAdmin } from '../../componentes/admin/formularios'
 
 export function AdminLogin() {
   const navegar = useNavigate()
+  const [erro, setErro] = useState('')
+  const [carregando, setCarregando] = useState(false)
 
-  function aoFazerLogin() {
-    entrarComoAdmin()
-    navegar('/admin')
+  async function aoFazerLogin(email, senha) {
+    setErro('')
+    setCarregando(true)
+    try {
+      const usuario = await entrar(email, senha)
+      if (usuario.tipo !== 'administrador') {
+        setErro('Esta conta não tem acesso ao painel administrativo.')
+        return
+      }
+      navegar('/admin')
+    } catch (erroLogin) {
+      setErro(erroLogin.message)
+    } finally {
+      setCarregando(false)
+    }
   }
 
   return (
@@ -24,7 +39,7 @@ export function AdminLogin() {
           <h1>Painel Administrativo</h1>
           <p>Acesso restrito à equipe TrocaTicket.</p>
 
-          <FormularioLoginAdmin aoEnviar={aoFazerLogin} />
+          <FormularioLoginAdmin aoEnviar={aoFazerLogin} erro={erro} carregando={carregando} />
         </section>
       </main>
 

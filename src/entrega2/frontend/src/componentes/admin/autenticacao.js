@@ -1,25 +1,11 @@
-const CHAVE_SESSAO_ADMIN = 'trocaticket-admin-logado'
+// Sessão do admin agora usa o JWT real devolvido por POST /api/auth/login
+// (antes era só uma flag fixa em sessionStorage).
+import { estaAutenticado, sair } from '../../api/auth'
 
 export function estaLogadoComoAdmin() {
-  try {
-    return window.sessionStorage.getItem(CHAVE_SESSAO_ADMIN) === '1'
-  } catch {
-    return false
-  }
-}
-
-export function entrarComoAdmin() {
-  try {
-    window.sessionStorage.setItem(CHAVE_SESSAO_ADMIN, '1')
-  } catch {
-    return
-  }
+  return estaAutenticado('administrador')
 }
 
 export function sairComoAdmin() {
-  try {
-    window.sessionStorage.removeItem(CHAVE_SESSAO_ADMIN)
-  } catch {
-    return
-  }
+  sair()
 }

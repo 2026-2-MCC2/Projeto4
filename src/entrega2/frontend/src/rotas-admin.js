@@ -2,6 +2,7 @@ export const ADMIN_ROTAS = [
   { caminho: '/admin', rotulo: 'Visão Geral', icone: 'painel' },
   { caminho: '/admin/usuarios', rotulo: 'Usuários e Acesso', icone: 'usuarios' },
   { caminho: '/admin/papeis', rotulo: 'Papéis e Permissões', icone: 'permissoes' },
+  { caminho: '/admin/relatorios', rotulo: 'Relatórios de Eventos', icone: 'relatorios' },
   {
     caminho: '/admin/configuracoes',
     rotulo: 'Configurações do Sistema',

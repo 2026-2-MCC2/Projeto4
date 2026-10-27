@@ -1,29 +1,108 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { oportunidadesIniciais } from '../../dados/fornecedor'
+import { api } from '../../api/cliente'
 
 export function FornecedorEventos() {
+  const [eventos, setEventos] = useState([])
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState('')
+
   const [pesquisa, setPesquisa] = useState('')
-  const [tipo, setTipo] = useState('')
-  const [buscaAplicada, setBuscaAplicada] = useState({ pesquisa: '', tipo: '' })
-  const filtrados = useMemo(() => oportunidadesIniciais.filter(e =>
-    `${e.nome} ${e.local} ${e.organizador}`.toLowerCase().includes(buscaAplicada.pesquisa.toLowerCase()) &&
-    (!buscaAplicada.tipo || e.tipo === buscaAplicada.tipo)
-  ), [buscaAplicada])
-  function buscar(e) { e.preventDefault(); setBuscaAplicada({ pesquisa, tipo }) }
+  const [buscaAplicada, setBuscaAplicada] = useState('')
+
+  const [expandidoId, setExpandidoId] = useState(null)
+  const [detalhe, setDetalhe] = useState(null)
+  const [carregandoDetalhe, setCarregandoDetalhe] = useState(false)
+  const [erroDetalhe, setErroDetalhe] = useState('')
+
+  useEffect(() => {
+    let ativo = true
+    setCarregando(true)
+    setErro('')
+    api.get('/api/fornecedor/eventos')
+      .then((dados) => {
+        if (ativo) setEventos(Array.isArray(dados) ? dados : [])
+      })
+      .catch((e) => {
+        if (ativo) setErro(e.message)
+      })
+      .finally(() => {
+        if (ativo) setCarregando(false)
+      })
+    return () => {
+      ativo = false
+    }
+  }, [])
+
+  const filtrados = useMemo(() => eventos.filter(e =>
+    `${e.nome} ${e.local} ${e.organizador}`.toLowerCase().includes(buscaAplicada.toLowerCase())
+  ), [buscaAplicada, eventos])
+
+  function buscar(e) {
+    e.preventDefault()
+    setBuscaAplicada(pesquisa)
+  }
+
+  function alternarExpandido(idEvento) {
+    if (expandidoId === idEvento) {
+      setExpandidoId(null)
+      setDetalhe(null)
+      setErroDetalhe('')
+      return
+    }
+    setExpandidoId(idEvento)
+    setDetalhe(null)
+    setErroDetalhe('')
+    setCarregandoDetalhe(true)
+    api.get(`/api/fornecedor/eventos/${idEvento}`)
+      .then((dados) => setDetalhe(dados))
+      .catch((e) => setErroDetalhe(e.message))
+      .finally(() => setCarregandoDetalhe(false))
+  }
+
   return <>
     <div className="fornecedor-page-head"><div><h1>Buscar oportunidades</h1><p>Eventos que ainda procuram fornecedores para seus serviços.</p></div></div>
     <form className="fornecedor-busca" onSubmit={buscar}>
-      <input value={pesquisa} onChange={e => setPesquisa(e.target.value)} placeholder="Nome do evento ou local" aria-label="Nome do evento ou local" />
-      <select value={tipo} onChange={e => setTipo(e.target.value)} aria-label="Tipo de serviço">
-        <option value="">Todos os serviços</option><option value="buffet">Buffet</option><option value="seguranca">Segurança</option><option value="som">Som e iluminação</option><option value="palco">Palco</option><option value="limpeza">Limpeza</option>
-      </select>
+      <input value={pesquisa} onChange={e => setPesquisa(e.target.value)} placeholder="Nome do evento, local ou organizador" aria-label="Nome do evento, local ou organizador" />
       <button className="fornecedor-btn" type="submit">Buscar</button>
     </form>
-    <ul className="fornecedor-eventos-lista">{filtrados.map(e => <li key={e.id} className="fornecedor-evento-card">
-      <div><strong>{e.nome}</strong><small>{e.data} · {e.local}</small><small>Organizador: {e.organizador} · Precisa de: {e.servico}</small></div>
-      <div className="fornecedor-evento-direita"><span>{e.valor}</span><Link className="fornecedor-btn" to={`/fornecedor/propostas?evento=${e.id}`}>Enviar proposta</Link></div>
-    </li>)}</ul>
-    {filtrados.length === 0 && <p className="fornecedor-vazio">Nenhuma oportunidade encontrada com esses filtros.</p>}
+
+    {carregando && <p>Carregando oportunidades...</p>}
+    {erro && <p className="fornecedor-mensagem erro">{erro}</p>}
+
+    {!carregando && !erro && <>
+      <ul className="fornecedor-eventos-lista">{filtrados.map(e => <li key={e.id_evento} className="fornecedor-evento-card fornecedor-evento-card-coluna">
+        <div className="fornecedor-evento-linha">
+          <div><strong>{e.nome}</strong><small>{e.data} · {e.local}</small><small>Organizador: {e.organizador} · {e.total_itens} item(ns) de custo</small></div>
+          <div className="fornecedor-evento-direita">
+            <button type="button" className="fornecedor-btn secundario" onClick={() => alternarExpandido(e.id_evento)}>
+              {expandidoId === e.id_evento ? 'Ocultar itens' : 'Ver itens'}
+            </button>
+          </div>
+        </div>
+
+        {expandidoId === e.id_evento && <div className="fornecedor-evento-itens">
+          {carregandoDetalhe && <p>Carregando itens...</p>}
+          {erroDetalhe && <p className="fornecedor-mensagem erro">{erroDetalhe}</p>}
+          {detalhe && <>
+            {detalhe.descricao && <p className="fornecedor-evento-descricao">{detalhe.descricao}</p>}
+            <ul className="fornecedor-itens-lista">
+              {detalhe.itens.map(item => <li key={item.id_item} className="fornecedor-item-linha">
+                <div><strong>{item.nome}</strong><small>{item.categoria}</small>{item.descricao && <small>{item.descricao}</small>}</div>
+                <div className="fornecedor-evento-direita">
+                  {item.minha_proposta
+                    ? <span className={`fornecedor-tag ${item.status_proposta === 'aceita' ? 'ok' : 'aviso'}`}>
+                        {item.status_proposta === 'aceita' ? 'Proposta aceita' : 'Proposta enviada'}
+                      </span>
+                    : <Link className="fornecedor-btn" to={`/fornecedor/propostas?evento=${e.id_evento}&item=${item.id_item}`}>Enviar proposta</Link>}
+                </div>
+              </li>)}
+              {!detalhe.itens.length && <p className="fornecedor-vazio">Este evento ainda não tem itens de custo cadastrados.</p>}
+            </ul>
+          </>}
+        </div>}
+      </li>)}</ul>
+      {filtrados.length === 0 && <p className="fornecedor-vazio">Nenhuma oportunidade encontrada com esses filtros.</p>}
+    </>}
   </>
 }

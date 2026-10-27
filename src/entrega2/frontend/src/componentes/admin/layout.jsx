@@ -43,6 +43,12 @@ const simbolosNavegacao = {
     </>
   ),
   monitoramento: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
+  relatorios: (
+    <>
+      <path d="M4 19V5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" />
+      <path d="M8 13h3m-3 4h8m-8-8h2" />
+    </>
+  ),
   tickets: (
     <>
       <path d="M2 9a3 3 0 0 0 0 6v3a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3a3 3 0 0 1 0-6V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />

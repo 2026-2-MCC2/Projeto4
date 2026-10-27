@@ -1,17 +1,17 @@
 import { useState } from 'react'
+import { obterUsuario } from '../../api/auth'
 
 export function FornecedorPerfil() {
-  const usuario = JSON.parse(localStorage.getItem('usuarioLogado') || 'null')
-  const [empresa, setEmpresa] = useState(usuario?.empresa || 'Buffet Pro')
-  const [responsavel, setResponsavel] = useState(usuario?.nome || 'Fernanda Lima')
-  const [email, setEmail] = useState(usuario?.email || 'fernanda.lima@buffetpro.com.br')
+  const usuario = obterUsuario()
+  const [empresa, setEmpresa] = useState(usuario?.empresa || '')
+  const [responsavel, setResponsavel] = useState(usuario?.nome || '')
+  const [email, setEmail] = useState(usuario?.email || '')
   const [telefone, setTelefone] = useState('')
   const [mensagem, setMensagem] = useState('')
   function salvar(e) {
     e.preventDefault()
-    const atualizado = { ...(usuario || {}), nome: responsavel, email, empresa, telefone }
-    localStorage.setItem('usuarioLogado', JSON.stringify(atualizado))
-    setMensagem('Perfil atualizado localmente para demonstração.')
+    // A API ainda não tem uma rota para editar o cadastro do fornecedor (fora do RF05-RF14).
+    setMensagem('Exibição apenas: ainda não existe uma rota no backend para salvar o perfil do fornecedor.')
   }
   return <>
     <div className="fornecedor-page-head"><div><h1>Meu perfil</h1><p>Confira e atualize os dados da sua empresa fornecedora.</p></div></div>

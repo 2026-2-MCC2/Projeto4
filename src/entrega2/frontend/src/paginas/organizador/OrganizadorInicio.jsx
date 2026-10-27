@@ -1,5 +1,95 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { eventosOrganizador } from '../../dados/organizador'
-const moeda = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0})
-export function OrganizadorInicio(){const [busca,setBusca]=useState('');const lista=useMemo(()=>eventosOrganizador.filter(e=>(e.nome+' '+e.local).toLowerCase().includes(busca.toLowerCase())),[busca]);const ativos=eventosOrganizador.filter(e=>e.status==='Em venda');const vendidos=eventosOrganizador.reduce((s,e)=>s+e.vendidos,0);const total=eventosOrganizador.reduce((s,e)=>s+e.total,0);const receita=eventosOrganizador.reduce((s,e)=>s+e.receita,0);return <section><div className="org-titulo"><div><small>PAINEL DO PRODUTOR</small><h1>Meus eventos</h1><p>Gerencie suas produções, vendas de ingressos e fornecedores.</p></div><Link className="org-botao" to="/organizador/criar-evento">+ Criar evento</Link></div><div className="org-metricas"><article><span>Eventos ativos</span><strong>{ativos.length}</strong><small>Em venda</small></article><article><span>Eventos encerrados</span><strong>12</strong><small>Histórico completo</small></article><article><span>Ingressos vendidos</span><strong>{vendidos.toLocaleString('pt-BR')}</strong><small>de {total.toLocaleString('pt-BR')}</small></article><article><span>Receita em custódia</span><strong>{moeda(receita)}</strong><small>Dados demonstrativos</small></article></div><div className="org-lista-topo"><h2>Seus eventos</h2><input aria-label="Buscar evento" placeholder="Buscar por nome ou local..." value={busca} onChange={e=>setBusca(e.target.value)}/></div><div className="org-eventos">{lista.map(e=><article className="org-card" key={e.id}><div className="org-card-topo"><span className={e.status==='Rascunho'?'org-status rascunho':'org-status'}>{e.status}</span><span>{e.status==='Rascunho'?'Custódia não iniciada':'Custódia ativa'}</span></div><h3>{e.nome}</h3><p>{e.data} · {e.local}</p><div className="org-progresso"><span style={{width:`${e.total?Math.min(100,e.vendidos/e.total*100):0}%`}}/></div><div className="org-card-numeros"><span>Ingressos: <b>{e.vendidos.toLocaleString('pt-BR')} / {e.total.toLocaleString('pt-BR')}</b></span><span>{e.total?Math.round(e.vendidos/e.total*100):0}% vendidos</span></div><strong>{moeda(e.receita)} em custódia</strong><div className="org-acoes"><Link className="org-botao secundario" to="/organizador/publicar">Gerenciar</Link>{e.status==='Rascunho'&&<Link className="org-botao" to="/organizador/criar-evento">Continuar editando</Link>}</div></article>)}{!lista.length&&<p>Nenhum evento encontrado.</p>}</div><p className="org-nota">Os números exibidos são dados de demonstração. A publicação e a custódia ainda não estão conectadas a um backend.</p></section>}
+import { api } from '../../api/cliente'
+
+const ROTULOS_STATUS = {
+  rascunho: 'Rascunho',
+  aberto: 'Em cotação',
+  fechado: 'Fechado',
+  cancelado: 'Cancelado',
+}
+
+export function OrganizadorInicio() {
+  const [busca, setBusca] = useState('')
+  const [eventos, setEventos] = useState([])
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState('')
+
+  useEffect(() => {
+    let ativo = true
+    setCarregando(true)
+    setErro('')
+    api.get('/api/eventos')
+      .then((dados) => {
+        if (ativo) setEventos(Array.isArray(dados) ? dados : [])
+      })
+      .catch((e) => {
+        if (ativo) setErro(e.message)
+      })
+      .finally(() => {
+        if (ativo) setCarregando(false)
+      })
+    return () => {
+      ativo = false
+    }
+  }, [])
+
+  const lista = useMemo(
+    () =>
+      eventos.filter((e) =>
+        `${e.nome} ${e.local}`.toLowerCase().includes(busca.toLowerCase())
+      ),
+    [busca, eventos]
+  )
+
+  return (
+    <section>
+      <div className="org-titulo">
+        <div>
+          <small>PAINEL DO ORGANIZADOR</small>
+          <h1>Meus eventos</h1>
+          <p>Gerencie o planejamento, os custos e as propostas de cada evento.</p>
+        </div>
+        <Link className="org-botao" to="/organizador/criar-evento">
+          + Criar evento
+        </Link>
+      </div>
+
+      <div className="org-lista-topo">
+        <h2>Seus eventos</h2>
+        <input
+          aria-label="Buscar evento"
+          placeholder="Buscar por nome ou local..."
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+        />
+      </div>
+
+      {carregando && <p>Carregando eventos...</p>}
+      {erro && <p className="org-aviso">{erro}</p>}
+
+      {!carregando && !erro && (
+        <div className="org-eventos">
+          {lista.map((e) => (
+            <article className="org-card" key={e.id_evento}>
+              <div className="org-card-topo">
+                <span className={e.status === 'rascunho' ? 'org-status rascunho' : 'org-status'}>
+                  {ROTULOS_STATUS[e.status] || e.status}
+                </span>
+                <span>{e.total_itens ?? 0} item(ns) de custo</span>
+              </div>
+              <h3>{e.nome}</h3>
+              <p>{e.data} · {e.local}</p>
+              <div className="org-acoes">
+                <Link className="org-botao secundario" to={`/organizador/evento/${e.id_evento}`}>
+                  Gerenciar
+                </Link>
+              </div>
+            </article>
+          ))}
+          {!lista.length && <p>Nenhum evento encontrado.</p>}
+        </div>
+      )}
+    </section>
+  )
+}

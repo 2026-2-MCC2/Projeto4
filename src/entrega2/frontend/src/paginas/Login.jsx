@@ -2,27 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CabecalhoSimples } from '../componentes/publico/Cabecalho'
 import { RodapeSimples } from '../componentes/publico/Rodape'
-
-const contasTeste = [
-  {
-    tipo: 'cliente',
-    nome: 'Gabriel Souza',
-    email: 'gabriel.souza@email.com',
-    senha: 'Cliente123!',
-  },
-  {
-    tipo: 'organizador',
-    nome: 'Carlos Mendes',
-    email: 'carlos.mendes@liveprod.com.br',
-    senha: 'Organizador123!',
-  },
-  {
-    tipo: 'fornecedor',
-    nome: 'Fernanda Lima',
-    email: 'fernanda.lima@buffetpro.com.br',
-    senha: 'Fornecedor123!',
-  },
-]
+import { entrar } from '../api/auth'
 
 export function Login() {
   const navegar = useNavigate()
@@ -30,37 +10,29 @@ export function Login() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [erro, setErro] = useState('')
+  const [carregando, setCarregando] = useState(false)
 
-  function fazerLogin(e) {
+  async function fazerLogin(e) {
     e.preventDefault()
-
     setErro('')
+    setCarregando(true)
 
-    const conta = contasTeste.find(
-      (usuario) =>
-        usuario.email.toLowerCase() === email.toLowerCase() &&
-        usuario.senha === senha,
-    )
+    try {
+      const usuario = await entrar(email, senha)
 
-    if (!conta) {
-      setErro('E-mail ou senha incorretos.')
-      return
-    }
-
-    // Guarda temporariamente o usuário logado.
-    // Depois, quando existir backend, isso será substituído
-    // pela autenticação real.
-    localStorage.setItem(
-      'usuarioLogado',
-      JSON.stringify(conta),
-    )
-
-    if (conta.tipo === 'cliente') {
-      navegar('/cliente')
-    } else if (conta.tipo === 'organizador') {
-      navegar('/organizador')
-    } else if (conta.tipo === 'fornecedor') {
-      navegar('/fornecedor')
+      if (usuario.tipo === 'cliente') {
+        navegar('/cliente')
+      } else if (usuario.tipo === 'organizador') {
+        navegar('/organizador')
+      } else if (usuario.tipo === 'fornecedor') {
+        navegar('/fornecedor')
+      } else {
+        navegar('/admin')
+      }
+    } catch (erroLogin) {
+      setErro(erroLogin.message)
+    } finally {
+      setCarregando(false)
     }
   }
 
@@ -119,8 +91,8 @@ export function Login() {
               </p>
             )}
 
-            <button type="submit">
-              Entrar
+            <button type="submit" disabled={carregando}>
+              {carregando ? 'Entrando...' : 'Entrar'}
             </button>
           </form>
 

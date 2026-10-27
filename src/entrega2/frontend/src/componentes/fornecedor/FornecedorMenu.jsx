@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
+import { sair as sairDaConta } from '../../api/auth'
 
 const links = [
   { to: '/fornecedor', label: 'Dashboard', end: true },
@@ -12,7 +13,7 @@ const links = [
 export function FornecedorMenu() {
   const navegar = useNavigate()
   function sair() {
-    localStorage.removeItem('usuarioLogado')
+    sairDaConta()
     navegar('/login')
   }
   return <aside className="fornecedor-menu">

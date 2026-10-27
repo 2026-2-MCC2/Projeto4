@@ -2,6 +2,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { RequireAuthAdmin } from './componentes/admin/RequireAuthAdmin'
+import { RequireAuth } from './componentes/RequireAuth'
 import { AdminLayout } from './componentes/admin/layout'
 import { EmConstrucao } from './paginas/EmConstrucao'
 
@@ -18,6 +19,7 @@ import { AdminMonitoramento } from './paginas/admin/AdminMonitoramento'
 import { AdminPapeis } from './paginas/admin/AdminPapeis'
 import { AdminTickets } from './paginas/admin/AdminTickets'
 import { AdminUsuarios } from './paginas/admin/AdminUsuarios'
+import { AdminRelatorios } from './paginas/admin/AdminRelatorios'
 
 import { ClienteLayout } from './componentes/cliente/ClienteLayout'
 import { ClienteInicio } from './paginas/cliente/ClienteInicio'
@@ -41,8 +43,7 @@ import { FornecedorCadastroServico } from './paginas/fornecedor/FornecedorCadast
 import { OrganizadorLayout } from './componentes/organizador/OrganizadorLayout'
 import { OrganizadorInicio } from './paginas/organizador/OrganizadorInicio'
 import { OrganizadorCriarEvento } from './paginas/organizador/OrganizadorCriarEvento'
-import { OrganizadorFornecedores } from './paginas/organizador/OrganizadorFornecedores'
-import { OrganizadorPublicar } from './paginas/organizador/OrganizadorPublicar'
+import { OrganizadorGerenciarEvento } from './paginas/organizador/OrganizadorGerenciarEvento'
 import { OrganizadorConfiguracoes } from './paginas/organizador/OrganizadorConfiguracoes'
 
 export function App() {
@@ -80,13 +81,21 @@ export function App() {
           <Route index element={<AdminDashboard />} />
           <Route path="usuarios" element={<AdminUsuarios />} />
           <Route path="papeis" element={<AdminPapeis />} />
+          <Route path="relatorios" element={<AdminRelatorios />} />
           <Route path="configuracoes" element={<AdminConfiguracoes />} />
           <Route path="logs" element={<AdminLogs />} />
           <Route path="monitoramento" element={<AdminMonitoramento />} />
           <Route path="tickets" element={<AdminTickets />} />
         </Route>
 
-        <Route path="/fornecedor" element={<FornecedorLayout />}>
+        <Route
+          path="/fornecedor"
+          element={
+            <RequireAuth tipo="fornecedor" destino="/login">
+              <FornecedorLayout />
+            </RequireAuth>
+          }
+        >
         <Route index element={<FornecedorInicio />} />
         <Route path="busca" element={<FornecedorEventos />} />
         <Route path="propostas" element={<FornecedorPropostas />} />
@@ -95,16 +104,22 @@ export function App() {
         <Route path="servicos/novo" element={<FornecedorCadastroServico />} />
         <Route path="*" element={<Navigate to="/fornecedor" replace />} /> </Route>
 
-        
-          <Route path="/organizador" element={<OrganizadorLayout />}>
+
+          <Route
+            path="/organizador"
+            element={
+              <RequireAuth tipo="organizador" destino="/login">
+                <OrganizadorLayout />
+              </RequireAuth>
+            }
+          >
           <Route index element={<OrganizadorInicio />} />
           <Route path="criar-evento" element={<OrganizadorCriarEvento />} />
-          <Route path="fornecedores" element={<OrganizadorFornecedores />} />
-          <Route path="publicar" element={<OrganizadorPublicar />} />
+          <Route path="evento/:id" element={<OrganizadorGerenciarEvento />} />
           <Route path="configuracoes" element={<OrganizadorConfiguracoes />} />
           <Route path="*" element={<Navigate to="/organizador" replace />} />
         </Route>
-      
+
 
         <Route
           path="/revenda/*"
