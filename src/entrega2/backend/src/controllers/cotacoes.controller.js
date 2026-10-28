@@ -1,6 +1,7 @@
 const pool = require('../config/db');
 const { emTransacao } = require('../config/transacao');
 const { idValido } = require('../utils/validar');
+const { registrarLog } = require('../utils/registrar-log');
 
 const STATUS_PROPOSTA = ['enviada', 'aceita', 'recusada'];
 
@@ -87,6 +88,7 @@ async function selecionarProposta(req, res) {
       [proposta.id_proposta]
     );
   });
+  await registrarLog(req.usuario.id, 'proposta_selecionada', `#${proposta.id_proposta} — item ${proposta.id_item}`);
   res.json({ id_proposta: proposta.id_proposta, id_item: proposta.id_item, status: 'aceita' });
 }
 

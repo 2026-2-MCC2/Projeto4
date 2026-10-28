@@ -1,4 +1,5 @@
 const pool = require('../config/db');
+const { registrarLog } = require('../utils/registrar-log');
 
 const STATUS_VALIDOS = ['pendente', 'aprovado', 'recusado'];
 
@@ -48,6 +49,7 @@ async function decidirCadastro(req, res) {
   if (!rows[0]) {
     return res.status(404).json({ erro: 'Usuário não encontrado' });
   }
+  await registrarLog(req.usuario.id, 'cadastro_' + decisao, `${rows[0].tipo} #${rows[0].id_usuario} — ${rows[0].nome}`);
   res.json(rows[0]);
 }
 

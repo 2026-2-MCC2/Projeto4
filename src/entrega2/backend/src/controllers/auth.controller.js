@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const pool = require('../config/db');
 const jwt = require('jsonwebtoken');
+const { registrarLog } = require('../utils/registrar-log');
 
 const TIPOS_PUBLICOS = ['cliente', 'organizador', 'fornecedor']; // admin não se cadastra sozinho
 const soDigitos = (valor) => String(valor || '').replace(/\D/g, ''); // "123.456-7" → "1234567"
@@ -53,6 +54,7 @@ async function cadastrar(req, res) {
     }
 
     await client.query('COMMIT'); // confirma tudo
+    await registrarLog(idUsuario, 'cadastro_criado', `${tipo} — status inicial: ${status}`);
     res.status(201).json({ id_usuario: idUsuario, tipo, status_cadastro: status });
   } catch (erro) {
     await client.query('ROLLBACK'); // desfaz tudo se algo falhou
@@ -101,6 +103,7 @@ async function login(req, res) {
     { expiresIn: process.env.JWT_EXPIRES_IN || '1d' }
   );
 
+  await registrarLog(usuario.id_usuario, 'login', usuario.tipo);
   res.json({
     token,
     usuario: { id: usuario.id_usuario, nome: usuario.nome, email: usuario.email, tipo: usuario.tipo },

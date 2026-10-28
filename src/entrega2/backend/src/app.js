@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const pool = require('./config/db');
+require('./config/tipos-pg');   // datas e números saem no formato certo no JSON
 
 const app = express();          // cria a aplicação
 
@@ -25,5 +26,22 @@ app.get('/health', async (req, res) => {
 
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/admin', require('./routes/admin.routes'));
+app.use('/api/eventos', require('./routes/eventos.routes'));         // Organizador
+app.use('/api/fornecedor', require('./routes/fornecedor.routes'));   // Fornecedor
+app.use('/api/relatorios', require('./routes/relatorios.routes'));   // Administrador (RF14)
+app.use('/api/tickets', require('./routes/tickets.routes'));         // Suporte (qualquer usuário logado)
+
+// ATENÇÃO: estas duas ficam SEMPRE por último, depois de todas as rotas
+app.use((req, res) => {
+  res.status(404).json({ erro: 'Rota não encontrada' });
+});
+
+app.use((erro, req, res, next) => {
+  if (erro.type === 'entity.parse.failed') {
+    return res.status(400).json({ erro: 'JSON inválido no corpo da requisição' });
+  }
+  console.error(erro);
+  res.status(500).json({ erro: 'Erro interno do servidor' });
+});
 
 module.exports = app;

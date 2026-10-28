@@ -1,5 +1,6 @@
 const pool = require('../config/db');
 const { idValido, numero, data, texto, vazio, hoje } = require('../utils/validar');
+const { registrarLog } = require('../utils/registrar-log');
 
 // Só aparecem para o fornecedor os eventos abertos para cotação que ainda não terminaram
 const EVENTO_DISPONIVEL = "e.status = 'aberto' AND COALESCE(e.data_fim, e.data) >= CURRENT_DATE";
@@ -105,6 +106,7 @@ async function enviarProposta(req, res) {
       [itens[0].id_evento, idItem, req.idFornecedor,
        dados.valor_total, dados.descricao, dados.validade, dados.observacoes]
     );
+    await registrarLog(req.usuario.id, 'proposta_enviada', `#${rows[0].id_proposta} — item ${idItem}`);
     res.status(201).json(rows[0]);
   } catch (erroBanco) {
     if (erroBanco.code === '23505') { // código do Postgres para "valor duplicado"

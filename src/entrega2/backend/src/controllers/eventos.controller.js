@@ -2,6 +2,7 @@ const pool = require('../config/db');
 const { emTransacao } = require('../config/transacao');
 const { CAMPOS_EVENTO } = require('../services/eventos');
 const { numero, inteiro, data, texto, vazio } = require('../utils/validar');
+const { registrarLog } = require('../utils/registrar-log');
 
 // Para onde um evento pode "andar" (RF08): rascunho → aberto → fechado, ou cancelado
 const TRANSICOES = {
@@ -68,6 +69,7 @@ async function criarEvento(req, res) {
     [req.idOrganizador, dados.nome, dados.data, dados.data_fim, dados.local, dados.descricao,
      dados.publico_minimo, dados.publico_maximo, dados.margem_lucro]
   );
+  await registrarLog(req.usuario.id, 'evento_criado', `#${rows[0].id_evento} — ${rows[0].nome}`);
   res.status(201).json(rows[0]);
 }
 
@@ -166,6 +168,7 @@ async function alterarStatus(req, res) {
     }
     return rows[0];
   });
+  await registrarLog(req.usuario.id, 'evento_status_alterado', `#${evento.id_evento} -> ${novo}`);
   res.json(evento);
 }
 

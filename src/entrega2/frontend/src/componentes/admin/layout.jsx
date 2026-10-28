@@ -1,12 +1,24 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { adminAtual, temasPainel } from '../../dados/admin'
+import { temasPainel } from '../../dados/admin'
 import { ADMIN_ROTAS } from '../../rotas-admin'
+import { obterUsuario } from '../../api/auth'
 import { sairComoAdmin } from './autenticacao'
 import { ContextoLayoutAdmin } from './contexto-layout'
 import { Avatar, Botao } from './primitivos'
 
-const chaveTemaAdmin = `trocaticket-tema-admin:${adminAtual.email.toLowerCase()}`
+// Iniciais pro avatar, a partir do nome real do admin logado (ex.: "Geovanna Tamagusko" -> "GT")
+function iniciaisDoNome(nome) {
+  const partes = (nome || '').trim().split(/\s+/).filter(Boolean)
+  if (partes.length === 0) return '?'
+  if (partes.length === 1) return partes[0].slice(0, 2).toUpperCase()
+  return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase()
+}
+
+function chaveTemaAdmin() {
+  const usuario = obterUsuario()
+  return `trocaticket-tema-admin:${(usuario?.email || 'anon').toLowerCase()}`
+}
 
 const simbolosNavegacao = {
   painel: (
@@ -77,7 +89,7 @@ function IconeNavegacao({ nome }) {
 
 function lerTemaAdmin() {
   try {
-    const temaSalvo = window.localStorage.getItem(chaveTemaAdmin)
+    const temaSalvo = window.localStorage.getItem(chaveTemaAdmin())
     return temasPainel.some((tema) => tema.id === temaSalvo)
       ? temaSalvo
       : temasPainel[0].id
@@ -97,7 +109,7 @@ export function AdminLayout() {
 
     atualizarTemaAdmin(tema)
     try {
-      window.localStorage.setItem(chaveTemaAdmin, tema)
+      window.localStorage.setItem(chaveTemaAdmin(), tema)
     } catch {
       return
     }
@@ -158,6 +170,7 @@ export function AdminLayout() {
 
 function BarraLateral({ aberto, aoFechar }) {
   const navegar = useNavigate()
+  const usuario = obterUsuario()
 
   return (
     <aside
@@ -179,10 +192,10 @@ function BarraLateral({ aberto, aoFechar }) {
       </div>
 
       <div className="admin-sidebar__user">
-        <Avatar iniciais={adminAtual.iniciais} />
+        <Avatar iniciais={iniciaisDoNome(usuario?.nome)} />
         <div>
-          <strong>{adminAtual.nome}</strong>
-          <small>{adminAtual.cargo}</small>
+          <strong>{usuario?.nome || 'Administrador'}</strong>
+          <small>Administrador</small>
         </div>
       </div>
 
@@ -225,6 +238,7 @@ function BarraLateral({ aberto, aoFechar }) {
 }
 
 function BarraTopo({ botaoMenuRef, menuAberto, aoAlternarMenu }) {
+  const usuario = obterUsuario()
   return (
     <div className="admin-topbar">
       <button
@@ -248,8 +262,8 @@ function BarraTopo({ botaoMenuRef, menuAberto, aoAlternarMenu }) {
         Sistemas Operacionais 99.9%
       </div>
       <div className="admin-topbar__user">
-        <strong>{adminAtual.nome}</strong>
-        <small>{adminAtual.email}</small>
+        <strong>{usuario?.nome || 'Administrador'}</strong>
+        <small>{usuario?.email || ''}</small>
       </div>
     </div>
   )
