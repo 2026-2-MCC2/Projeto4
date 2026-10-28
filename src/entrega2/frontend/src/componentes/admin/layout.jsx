@@ -225,7 +225,7 @@ function BarraLateral({ aberto, aoFechar }) {
         <Botao
           variante="suave"
           className="admin-logout"
-          aoClicar={() => {
+          onClick={() => {
             sairComoAdmin()
             navegar('/admin/login')
           }}

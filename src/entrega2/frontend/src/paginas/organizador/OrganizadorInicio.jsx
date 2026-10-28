@@ -9,6 +9,8 @@ const ROTULOS_STATUS = {
   cancelado: 'Cancelado',
 }
 
+const moeda = (n) => Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+
 export function OrganizadorInicio() {
   const [busca, setBusca] = useState('')
   const [eventos, setEventos] = useState([])
@@ -80,6 +82,11 @@ export function OrganizadorInicio() {
               </div>
               <h3>{e.nome}</h3>
               <p>{e.data} · {e.local}</p>
+              <p className="org-ticket-preco">
+                {e.ticket_a_partir_de != null
+                  ? <>Ingresso a partir de <strong>{moeda(e.ticket_a_partir_de)}</strong></>
+                  : 'Defina o público do evento para calcular o ingresso'}
+              </p>
               <div className="org-acoes">
                 <Link className="org-botao secundario" to={`/organizador/evento/${e.id_evento}`}>
                   Gerenciar

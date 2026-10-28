@@ -123,9 +123,11 @@
     display: grid;
     grid-template-columns: 18px minmax(0, 1fr);
     align-items: center;
-    justify-content: stretch;
+    justify-items: start;
+    justify-content: start;
     gap: 0.7rem;
     min-height: 44px;
+    text-align: left;
 }
 
 .admin-nav__icon {
@@ -135,8 +137,8 @@
 }
 
 .admin-layout[data-tema-admin] .admin-nav a span {
-    text-align: justify;
-    text-align-last: left;
+    text-align: left;
+    justify-self: start;
 }
 
 .admin-theme-picker {

@@ -3,6 +3,7 @@ const { emTransacao } = require('../config/transacao');
 const { CAMPOS_EVENTO } = require('../services/eventos');
 const { numero, inteiro, data, texto, vazio } = require('../utils/validar');
 const { registrarLog } = require('../utils/registrar-log');
+const { montarOrcamento, montarTicket } = require('../services/orcamento');
 
 // Para onde um evento pode "andar" (RF08): rascunho → aberto → fechado, ou cancelado
 const TRANSICOES = {
@@ -74,6 +75,9 @@ async function criarEvento(req, res) {
 }
 
 // RF05 – Listar os eventos do organizador logado
+// Acrescenta "ticket_a_partir_de": o ticket-alvo no cenário de público mínimo,
+// pra aparecer direto na lista sem precisar entrar em cada evento (null se o
+// evento ainda não tem público mínimo/máximo definidos).
 async function listarEventos(req, res) {
   const { rows } = await pool.query(
     `SELECT e.id_evento, e.nome, e.data, e.data_fim, e.local, e.publico_minimo,
@@ -84,7 +88,19 @@ async function listarEventos(req, res) {
       ORDER BY e.data DESC, e.id_evento DESC`,
     [req.idOrganizador]
   );
-  res.json(rows);
+
+  const comTicket = await Promise.all(
+    rows.map(async (evento) => {
+      if (evento.publico_minimo === null || evento.publico_maximo === null) {
+        return { ...evento, ticket_a_partir_de: null };
+      }
+      const orcamento = await montarOrcamento(evento.id_evento);
+      const ticket = montarTicket(evento, orcamento);
+      const minimo = ticket.cenarios?.find((c) => c.cenario === 'minimo');
+      return { ...evento, ticket_a_partir_de: minimo ? minimo.ticket_alvo : null };
+    })
+  );
+  res.json(comTicket);
 }
 
 // RF05 – Ver um evento (req.evento já foi carregado e conferido pelo middleware)
@@ -172,6 +188,26 @@ async function alterarStatus(req, res) {
   res.json(evento);
 }
 
+// Visão geral: todas as propostas recebidas em qualquer evento do organizador,
+// pra não precisar entrar evento por evento só pra ver o que está pendente de decisão.
+async function listarPropostasOrganizador(req, res) {
+  const { rows } = await pool.query(
+    `SELECT p.id_proposta, p.id_item, p.id_evento, e.nome AS evento, e.status AS status_evento,
+            i.nome AS item, i.categoria, u.nome AS fornecedor,
+            p.valor_total, p.descricao, p.validade, p.observacoes, p.status, p.data_proposta
+       FROM propostas p
+       JOIN eventos e      ON e.id_evento = p.id_evento
+       JOIN itens_custo i  ON i.id_item = p.id_item
+       JOIN fornecedores f ON f.id_fornecedor = p.id_fornecedor
+       JOIN usuarios u     ON u.id_usuario = f.id_usuario
+      WHERE e.id_organizador = $1 AND p.id_item IS NOT NULL
+      ORDER BY (p.status = 'enviada') DESC, p.data_proposta DESC`,
+    [req.idOrganizador]
+  );
+  res.json(rows);
+}
+
 module.exports = {
   criarEvento, listarEventos, buscarEvento, atualizarEvento, excluirEvento, alterarStatus,
+  listarPropostasOrganizador,
 };

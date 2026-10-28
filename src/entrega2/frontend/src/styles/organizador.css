@@ -7,4 +7,6 @@
 .org-tabela th{color:#53627a;font-weight:700}
 .org-card dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:10px 0}
 .org-card dt{color:#65738a;font-weight:600}
+.org-ticket-preco{color:#176b43;font-size:.88rem;margin:4px 0 0}
+.org-ticket-preco strong{font-size:1rem}
 .org-card dd{margin:0}

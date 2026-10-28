@@ -44,6 +44,7 @@ import { OrganizadorLayout } from './componentes/organizador/OrganizadorLayout'
 import { OrganizadorInicio } from './paginas/organizador/OrganizadorInicio'
 import { OrganizadorCriarEvento } from './paginas/organizador/OrganizadorCriarEvento'
 import { OrganizadorGerenciarEvento } from './paginas/organizador/OrganizadorGerenciarEvento'
+import { OrganizadorPropostas } from './paginas/organizador/OrganizadorPropostas'
 import { OrganizadorConfiguracoes } from './paginas/organizador/OrganizadorConfiguracoes'
 
 export function App() {
@@ -116,6 +117,7 @@ export function App() {
           <Route index element={<OrganizadorInicio />} />
           <Route path="criar-evento" element={<OrganizadorCriarEvento />} />
           <Route path="evento/:id" element={<OrganizadorGerenciarEvento />} />
+          <Route path="propostas" element={<OrganizadorPropostas />} />
           <Route path="configuracoes" element={<OrganizadorConfiguracoes />} />
           <Route path="*" element={<Navigate to="/organizador" replace />} />
         </Route>

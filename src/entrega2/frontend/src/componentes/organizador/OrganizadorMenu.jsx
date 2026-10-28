@@ -4,6 +4,7 @@ import { sair } from '../../api/auth'
 const links = [
   { to: '/organizador', label: 'Meus eventos', end: true },
   { to: '/organizador/criar-evento', label: 'Criar evento' },
+  { to: '/organizador/propostas', label: 'Propostas' },
   { to: '/organizador/configuracoes', label: 'Configurações' },
 ]
 

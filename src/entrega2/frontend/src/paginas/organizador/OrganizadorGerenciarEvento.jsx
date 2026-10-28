@@ -852,13 +852,12 @@ function AbaTicket({ evento }) {
   const [carregando, setCarregando] = useState(false)
   const [erro, setErro] = useState('')
 
-  async function calcular(e) {
-    e.preventDefault()
+  async function calcular(publicoEsperadoAtual) {
     setErro('')
     setCarregando(true)
     setTicket(null)
     try {
-      const query = publicoEsperado !== '' ? { publico_esperado: publicoEsperado } : undefined
+      const query = publicoEsperadoAtual !== '' ? { publico_esperado: publicoEsperadoAtual } : undefined
       const dados = await api.get(`/api/eventos/${evento.id_evento}/ticket`, query)
       setTicket(dados)
     } catch (e) {
@@ -872,10 +871,16 @@ function AbaTicket({ evento }) {
     }
   }
 
+  // calcula sozinho assim que a aba abre, sem precisar clicar em nada
+  useEffect(() => {
+    calcular('')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [evento.id_evento])
+
   return (
     <div className="org-card">
       <h2>Ticket</h2>
-      <form className="org-form" onSubmit={calcular}>
+      <form className="org-form" onSubmit={(e) => { e.preventDefault(); calcular(publicoEsperado) }}>
         <label>
           Público esperado (opcional)
           <input
@@ -888,11 +893,12 @@ function AbaTicket({ evento }) {
         </label>
         <div className="org-acoes">
           <button className="org-botao" type="submit" disabled={carregando}>
-            {carregando ? 'Calculando...' : 'Calcular ticket'}
+            {carregando ? 'Calculando...' : 'Recalcular'}
           </button>
         </div>
       </form>
 
+      {carregando && !ticket && <p>Calculando ticket...</p>}
       {erro && <p role="alert" className="org-aviso">{erro}</p>}
 
       {ticket && (

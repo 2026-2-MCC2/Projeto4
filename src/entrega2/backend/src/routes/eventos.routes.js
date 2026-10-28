@@ -17,6 +17,10 @@ router.use(autenticar, permitir('organizador'), exigirOrganizador);
 router.post('/', eventos.criarEvento);
 router.get('/', eventos.listarEventos);
 
+// visão geral de propostas de TODOS os eventos do organizador (sem precisar entrar em cada um)
+// precisa vir antes de "/:id" pra não ser confundida com um id de evento
+router.get('/propostas', eventos.listarPropostasOrganizador);
+
 // daqui para baixo toda rota tem /:id → confere se o evento é do organizador logado
 router.use('/:id', carregarEvento);
 
