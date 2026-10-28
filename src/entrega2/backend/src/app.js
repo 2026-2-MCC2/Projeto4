@@ -5,7 +5,21 @@ require('./config/tipos-pg');   // datas e números saem no formato certo no JSO
 
 const app = express();          // cria a aplicação
 
-app.use(cors());                // libera o frontend a chamar a API
+// Só libera o(s) domínio(s) do nosso próprio front-end (configurável por
+// variável de ambiente), não qualquer site. Sempre libera localhost nas
+// portas comuns de dev (Vite) pra não travar o desenvolvimento local.
+const origensPermitidas = [
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://localhost:4173',
+].filter(Boolean);
+
+app.use(cors({
+  origin(origem, callback) {
+    if (!origem || origensPermitidas.includes(origem)) return callback(null, true);
+    callback(new Error('Origem não permitida pelo CORS'));
+  },
+}));
 app.use(express.json());        // permite ler JSON enviado pelo frontend
 
 // rota de teste

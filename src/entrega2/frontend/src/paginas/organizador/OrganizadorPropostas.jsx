@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../../api/cliente'
-
-const moeda = (n) => Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+import { moeda } from '../../utils/formatar'
 
 const ROTULOS_STATUS = {
   enviada: 'Aguardando decisão',

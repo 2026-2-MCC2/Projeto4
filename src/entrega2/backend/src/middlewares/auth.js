@@ -10,7 +10,7 @@ function autenticar(req, res, next) {
   }
 
   try {
-    req.usuario = jwt.verify(token, process.env.JWT_SECRET); // { id, tipo, iat, exp }
+    req.usuario = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] }); // { id, tipo, iat, exp }
     next(); // libera para a próxima etapa
   } catch {
     return res.status(401).json({ erro: 'Token inválido ou expirado' });

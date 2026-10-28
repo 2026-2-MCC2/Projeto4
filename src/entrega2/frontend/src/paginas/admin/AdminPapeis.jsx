@@ -10,22 +10,7 @@ import {
   Painel,
   Tag,
 } from '../../componentes/admin/primitivos'
-
-function formatarData(data) {
-  if (!data) return ''
-  try {
-    return new Date(data).toLocaleDateString('pt-BR')
-  } catch {
-    return data
-  }
-}
-
-function iniciaisDoNome(nome) {
-  const partes = (nome || '').trim().split(/\s+/).filter(Boolean)
-  if (partes.length === 0) return '?'
-  if (partes.length === 1) return partes[0].slice(0, 2).toUpperCase()
-  return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase()
-}
+import { iniciaisDoNome, formatarData } from '../../utils/formatar'
 
 const ROTULO_TIPO = {
   cliente: 'Cliente',

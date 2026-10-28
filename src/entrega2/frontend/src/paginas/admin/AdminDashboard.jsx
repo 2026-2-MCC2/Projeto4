@@ -3,6 +3,7 @@ import { api } from '../../api/cliente'
 import { CabecalhoPagina } from '../../componentes/admin/layout'
 import { CartaoEstatistica, Painel } from '../../componentes/admin/primitivos'
 import { ListaStatus } from '../../componentes/admin/dados'
+import { moeda as formatarMoeda } from '../../utils/formatar'
 
 const ROTULO_TIPO = {
   organizador: 'Organizadores',
@@ -23,13 +24,6 @@ const ROTULO_STATUS_PROPOSTA = {
   aceita: 'Aceita',
   recusada: 'Recusada',
   cancelada: 'Cancelada',
-}
-
-function formatarMoeda(valor) {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(valor || 0)
 }
 
 function formatarTempoAtividade(segundos) {

@@ -12,6 +12,7 @@ import {
   Tag,
 } from '../../componentes/admin/primitivos'
 import { BarraFiltros } from '../../componentes/admin/formularios'
+import { iniciaisDoNome } from '../../utils/formatar'
 
 const OPCOES_STATUS = [
   { valor: '', rotulo: 'Todos os status' },
@@ -51,12 +52,6 @@ function rotuloCategoria(categoria) {
   return OPCOES_CATEGORIA.find((opcao) => opcao.valor === categoria)?.rotulo || categoria
 }
 
-function iniciaisDoNome(nome) {
-  const partes = (nome || '').trim().split(/\s+/).filter(Boolean)
-  if (partes.length === 0) return '?'
-  if (partes.length === 1) return partes[0].slice(0, 2).toUpperCase()
-  return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase()
-}
 
 function formatarData(data) {
   if (!data) return ''

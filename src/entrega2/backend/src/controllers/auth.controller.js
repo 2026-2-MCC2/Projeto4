@@ -14,8 +14,10 @@ async function cadastrar(req, res) {
   if (!nome || !email || !senha || !TIPOS_PUBLICOS.includes(tipo)) {
     return res.status(400).json({ erro: 'Preencha nome, email, senha e um tipo válido' });
   }
-  if (senha.length < 6) {
-    return res.status(400).json({ erro: 'A senha deve ter pelo menos 6 caracteres' });
+  if (senha.length < 8 || !/[A-Za-z]/.test(senha) || !/[0-9]/.test(senha)) {
+    return res.status(400).json({
+      erro: 'A senha deve ter pelo menos 8 caracteres, com letras e números',
+    });
   }
   if (tipo === 'cliente' && soDigitos(cpf).length !== 11) {
     return res.status(400).json({ erro: 'CPF inválido' });

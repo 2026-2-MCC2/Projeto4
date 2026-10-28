@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../../api/cliente'
+import { moeda } from '../../utils/formatar'
 
 const ROTULOS_STATUS = {
   rascunho: 'Rascunho',
@@ -8,8 +9,6 @@ const ROTULOS_STATUS = {
   fechado: 'Fechado',
   cancelado: 'Cancelado',
 }
-
-const moeda = (n) => Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 
 export function OrganizadorInicio() {
   const [busca, setBusca] = useState('')

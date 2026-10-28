@@ -3,6 +3,7 @@ import { api } from '../../api/cliente'
 import { CabecalhoPagina } from '../../componentes/admin/layout'
 import { Avatar, Botao, MiniEstatisticas, Painel, Tag } from '../../componentes/admin/primitivos'
 import { BarraFiltros } from '../../componentes/admin/formularios'
+import { iniciaisDoNome, formatarData } from '../../utils/formatar'
 
 const OPCOES_STATUS = [
   { valor: 'pendente', rotulo: 'Pendentes' },
@@ -29,20 +30,6 @@ const TOM_STATUS = {
   recusado: 'danger',
 }
 
-// Iniciais pro avatar, a partir do nome do cadastro (ex.: "Rodrigo Mendonça" -> "RM")
-function iniciaisDoNome(nome) {
-  const partes = (nome || '').trim().split(/\s+/).filter(Boolean)
-  if (partes.length === 0) return '?'
-  if (partes.length === 1) return partes[0].slice(0, 2).toUpperCase()
-  return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase()
-}
-
-function formatarData(valor) {
-  if (!valor) return '—'
-  const data = new Date(valor)
-  if (Number.isNaN(data.getTime())) return valor
-  return data.toLocaleDateString('pt-BR')
-}
 
 export function AdminUsuarios() {
   const [statusFiltro, setStatusFiltro] = useState('pendente')

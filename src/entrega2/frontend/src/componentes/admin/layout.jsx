@@ -6,14 +6,7 @@ import { obterUsuario } from '../../api/auth'
 import { sairComoAdmin } from './autenticacao'
 import { ContextoLayoutAdmin } from './contexto-layout'
 import { Avatar, Botao } from './primitivos'
-
-// Iniciais pro avatar, a partir do nome real do admin logado (ex.: "Geovanna Tamagusko" -> "GT")
-function iniciaisDoNome(nome) {
-  const partes = (nome || '').trim().split(/\s+/).filter(Boolean)
-  if (partes.length === 0) return '?'
-  if (partes.length === 1) return partes[0].slice(0, 2).toUpperCase()
-  return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase()
-}
+import { iniciaisDoNome } from '../../utils/formatar'
 
 function chaveTemaAdmin() {
   const usuario = obterUsuario()

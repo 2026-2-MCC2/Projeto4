@@ -4,20 +4,55 @@
 // pelas mesmas regras do app (não é um dump solto de SQL).
 // Rodar: node scripts/seed-dados-reais.js
 // Pode rodar mais de uma vez: pula quem já existe (mesmo e-mail).
+//
+// IMPORTANTE: este arquivo é commitado (vai pro GitHub, que é público aqui).
+// Por isso as senhas NUNCA ficam escritas aqui — são geradas na hora e salvas
+// só em scripts/seed-credenciais.local.json, que está no .gitignore.
 require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const pool = require('../src/config/db');
 
-const SENHA_PADRAO = 'Senha123!';
+const ARQUIVO_CREDENCIAIS = path.join(__dirname, 'seed-credenciais.local.json');
+
+function gerarSenha() {
+  const alfabeto = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#%';
+  const bytes = crypto.randomBytes(16);
+  let s = '';
+  for (let i = 0; i < 16; i++) s += alfabeto[bytes[i] % alfabeto.length];
+  return s;
+}
+
+function carregarCredenciaisLocais() {
+  if (!fs.existsSync(ARQUIVO_CREDENCIAIS)) return {};
+  return JSON.parse(fs.readFileSync(ARQUIVO_CREDENCIAIS, 'utf8'));
+}
+
+function salvarCredenciaisLocais(credenciais) {
+  fs.writeFileSync(ARQUIVO_CREDENCIAIS, JSON.stringify(credenciais, null, 2));
+}
+
+// Cada conta de demonstração ganha sua própria senha aleatória, gerada na
+// primeira execução e reaproveitada depois (pra não trocar a cada rodada).
+const credenciaisLocais = carregarCredenciaisLocais();
+function senhaPara(email) {
+  if (!credenciaisLocais[email]) {
+    credenciaisLocais[email] = gerarSenha();
+  }
+  return credenciaisLocais[email];
+}
 
 async function buscarOuCriarUsuario({ nome, email, tipo, cpf, cnpj, endereco, telefone }) {
+  const senha = senhaPara(email);
   const existente = await pool.query('SELECT id_usuario FROM usuarios WHERE email = $1', [email]);
   if (existente.rows[0]) {
-    console.log(`– ${email} já existe, reaproveitando.`);
+    console.log(`– ${email} já existe, reaproveitando (senha não alterada).`);
     return existente.rows[0].id_usuario;
   }
 
-  const hash = await bcrypt.hash(SENHA_PADRAO, 10);
+  const hash = await bcrypt.hash(senha, 10);
   const { rows } = await pool.query(
     `INSERT INTO usuarios (nome, email, telefone, senha_hash, tipo, status_cadastro)
      VALUES ($1, $2, $3, $4, $5, 'aprovado') RETURNING id_usuario`,
@@ -228,12 +263,13 @@ async function seed() {
   await log(fernanda, 'cadastro_aprovado', 'fornecedor — aprovado pelo admin');
   await log(gabriel, 'cadastro_criado', 'cliente — status inicial: aprovado');
 
-  console.log('\nTudo pronto. Contas de teste (senha para todas): ' + SENHA_PADRAO);
-  console.log('  organizador: carlos.mendes@liveprod.com.br');
-  console.log('  fornecedor:  fernanda.lima@buffetpro.com.br');
-  console.log('  fornecedor:  marcos.teixeira@prolightsound.com.br');
-  console.log('  cliente:     gabriel.souza@email.com');
-  console.log('  cliente:     juliana.prado@email.com');
+  salvarCredenciaisLocais(credenciaisLocais);
+  console.log('\nTudo pronto. Senhas salvas (só localmente) em scripts/seed-credenciais.local.json:');
+  console.log('  organizador: carlos.mendes@liveprod.com.br — ' + credenciaisLocais['carlos.mendes@liveprod.com.br']);
+  console.log('  fornecedor:  fernanda.lima@buffetpro.com.br — ' + credenciaisLocais['fernanda.lima@buffetpro.com.br']);
+  console.log('  fornecedor:  marcos.teixeira@prolightsound.com.br — ' + credenciaisLocais['marcos.teixeira@prolightsound.com.br']);
+  console.log('  cliente:     gabriel.souza@email.com — ' + credenciaisLocais['gabriel.souza@email.com']);
+  console.log('  cliente:     juliana.prado@email.com — ' + credenciaisLocais['juliana.prado@email.com']);
 
   await pool.end();
 }

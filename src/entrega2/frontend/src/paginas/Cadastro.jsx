@@ -28,8 +28,8 @@ export function Cadastro() {
     setErro('')
     setMensagem('')
 
-    if (senha.length < 6) {
-      setErro('A senha deve ter pelo menos 6 caracteres.')
+    if (senha.length < 8 || !/[A-Za-z]/.test(senha) || !/[0-9]/.test(senha)) {
+      setErro('A senha deve ter pelo menos 8 caracteres, com letras e números.')
       return
     }
     if (senha !== confirmarSenha) {
@@ -216,7 +216,7 @@ export function Cadastro() {
                 name="senha"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
-                minLength={6}
+                minLength={8}
                 required
               />
             </div>
@@ -228,7 +228,7 @@ export function Cadastro() {
                 name="confirmar-senha"
                 value={confirmarSenha}
                 onChange={(e) => setConfirmarSenha(e.target.value)}
-                minLength={6}
+                minLength={8}
                 required
               />
             </div>

@@ -56,6 +56,16 @@ async function requisitar(caminho, options = {}) {
   const dados = texto ? JSON.parse(texto) : null
 
   if (!resposta.ok) {
+    // Sessão expirada/token inválido: se a chamada já tinha um token (ou
+    // seja, o usuário estava logado), desloga e manda pra tela de login em
+    // vez de deixar a tela só mostrando um erro técnico sem explicação.
+    if (resposta.status === 401 && token) {
+      const destino = obterUsuario()?.tipo === 'administrador' ? '/admin/login' : '/login'
+      limparSessao()
+      if (typeof window !== 'undefined') {
+        window.location.href = destino
+      }
+    }
     const mensagem = dados?.erro || `Erro ${resposta.status} ao falar com o servidor`
     const erro = new Error(mensagem)
     erro.status = resposta.status

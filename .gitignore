@@ -72,6 +72,7 @@ web_modules/
 
 # credenciais reais de contas (nunca commitar senhas)
 **/admins-credenciais.local.json
+**/*-credenciais.local.json
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
