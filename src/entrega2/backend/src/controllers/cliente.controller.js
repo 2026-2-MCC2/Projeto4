@@ -1,6 +1,6 @@
 const pool = require('../config/db');
 const { emTransacao } = require('../config/transacao');
-const { idValido, inteiro } = require('../utils/validar');
+const { idValido, inteiro, numero } = require('../utils/validar');
 const { registrarLog } = require('../utils/registrar-log');
 
 // RF — compra de ingresso (um lote de N ingressos do mesmo evento, de uma vez)
@@ -193,7 +193,168 @@ async function comprarRevenda(req, res) {
   }
 }
 
+// Propor um preço diferente do anunciado num ingresso de revenda de outro cliente
+async function criarProposta(req, res) {
+  const idRevenda = idValido(req.params.id);
+  const preco = numero(req.body.preco_proposto);
+  if (!idRevenda) return res.status(400).json({ erro: 'ID de revenda inválido' });
+  if (!preco || preco <= 0) {
+    return res.status(400).json({ erro: 'Informe um preço proposto maior que zero' });
+  }
+
+  const { rows } = await pool.query(
+    `SELECT r.id_revenda, c.id_cliente AS id_cliente_vendedor
+       FROM revendas r
+       JOIN compras c ON c.id_compra = r.id_compra
+      WHERE r.id_revenda = $1 AND r.status = 'disponivel'`,
+    [idRevenda]
+  );
+  const revenda = rows[0];
+  if (!revenda) {
+    return res.status(404).json({ erro: 'Revenda não encontrada ou indisponível' });
+  }
+  if (revenda.id_cliente_vendedor === req.idCliente) {
+    return res.status(400).json({ erro: 'Você não pode propor um preço no seu próprio anúncio' });
+  }
+
+  const { rows: propostaRows } = await pool.query(
+    `INSERT INTO propostas_revenda (id_revenda, id_cliente, preco_proposto)
+     VALUES ($1, $2, $3)
+     RETURNING id_proposta, id_revenda, id_cliente, preco_proposto, status, criado_em`,
+    [idRevenda, req.idCliente, preco]
+  );
+  await registrarLog(req.usuario.id, 'proposta_criada', `proposta #${propostaRows[0].id_proposta} — revenda #${idRevenda}`);
+  res.status(201).json(propostaRows[0]);
+}
+
+// Propostas que o cliente fez em anúncios de terceiros
+async function listarPropostasEnviadas(req, res) {
+  const { rows } = await pool.query(
+    `SELECT p.id_proposta, p.preco_proposto, p.status, p.criado_em,
+            r.id_revenda, r.preco_unitario,
+            e.id_evento, e.nome, e.data, e.local
+       FROM propostas_revenda p
+       JOIN revendas r ON r.id_revenda = p.id_revenda
+       JOIN compras c  ON c.id_compra = r.id_compra
+       JOIN eventos e  ON e.id_evento = c.id_evento
+      WHERE p.id_cliente = $1
+      ORDER BY p.criado_em DESC`,
+    [req.idCliente]
+  );
+  res.json(rows);
+}
+
+// Propostas que outros clientes fizeram nos anúncios do próprio cliente
+async function listarPropostasRecebidas(req, res) {
+  const { rows } = await pool.query(
+    `SELECT p.id_proposta, p.preco_proposto, p.status, p.criado_em,
+            r.id_revenda, r.preco_unitario,
+            e.id_evento, e.nome, e.data, e.local,
+            u.nome AS nome_proponente
+       FROM propostas_revenda p
+       JOIN revendas r  ON r.id_revenda = p.id_revenda
+       JOIN compras c   ON c.id_compra = r.id_compra
+       JOIN clientes cl ON cl.id_cliente = p.id_cliente
+       JOIN usuarios u  ON u.id_usuario = cl.id_usuario
+       JOIN eventos e   ON e.id_evento = c.id_evento
+      WHERE c.id_cliente = $1
+      ORDER BY p.criado_em DESC`,
+    [req.idCliente]
+  );
+  res.json(rows);
+}
+
+// Vendedor aceita ou recusa uma proposta recebida no seu anúncio
+async function responderProposta(req, res) {
+  const idProposta = idValido(req.params.id);
+  const decisao = req.body.decisao;
+  if (!idProposta) return res.status(400).json({ erro: 'ID de proposta inválido' });
+  if (!['aceita', 'recusada'].includes(decisao)) {
+    return res.status(400).json({ erro: 'Decisão deve ser "aceita" ou "recusada"' });
+  }
+
+  try {
+    const resultado = await emTransacao(async (client) => {
+      const { rows } = await client.query(
+        `SELECT p.id_proposta, p.preco_proposto, p.status AS status_proposta, p.id_cliente AS id_cliente_comprador,
+                r.id_revenda, r.status AS status_revenda,
+                c.id_compra, c.id_cliente AS id_cliente_vendedor, c.id_evento, c.quantidade
+           FROM propostas_revenda p
+           JOIN revendas r ON r.id_revenda = p.id_revenda
+           JOIN compras c  ON c.id_compra = r.id_compra
+          WHERE p.id_proposta = $1
+          FOR UPDATE`,
+        [idProposta]
+      );
+      const proposta = rows[0];
+      if (!proposta || proposta.id_cliente_vendedor !== req.idCliente) {
+        const erro = new Error('Proposta não encontrada ou não é sua');
+        erro.status = 404;
+        throw erro;
+      }
+      if (proposta.status_proposta !== 'pendente') {
+        const erro = new Error('Esta proposta já foi respondida');
+        erro.status = 409;
+        throw erro;
+      }
+
+      if (decisao === 'recusada') {
+        await client.query(`UPDATE propostas_revenda SET status = 'recusada' WHERE id_proposta = $1`, [idProposta]);
+        return { id_proposta: idProposta, status: 'recusada' };
+      }
+
+      if (proposta.status_revenda !== 'disponivel') {
+        const erro = new Error('Este anúncio não está mais disponível');
+        erro.status = 409;
+        throw erro;
+      }
+
+      const valorTotal = Math.round(proposta.preco_proposto * proposta.quantidade * 100) / 100;
+      const { rows: compraRows } = await client.query(
+        `INSERT INTO compras (id_cliente, id_evento, quantidade, valor_unitario, valor_total)
+         VALUES ($1, $2, $3, $4, $5)
+         RETURNING id_compra, id_evento, quantidade, valor_unitario, valor_total, status, criado_em`,
+        [proposta.id_cliente_comprador, proposta.id_evento, proposta.quantidade, proposta.preco_proposto, valorTotal]
+      );
+      await client.query(`UPDATE compras SET status = 'revendida' WHERE id_compra = $1`, [proposta.id_compra]);
+      await client.query(`UPDATE revendas SET status = 'vendida' WHERE id_revenda = $1`, [proposta.id_revenda]);
+      await client.query(`UPDATE propostas_revenda SET status = 'aceita' WHERE id_proposta = $1`, [idProposta]);
+      await client.query(
+        `UPDATE propostas_revenda SET status = 'recusada'
+          WHERE id_revenda = $1 AND id_proposta != $2 AND status = 'pendente'`,
+        [proposta.id_revenda, idProposta]
+      );
+      return { id_proposta: idProposta, status: 'aceita', compra: compraRows[0] };
+    });
+
+    await registrarLog(req.usuario.id, 'proposta_respondida', `proposta #${idProposta} — ${decisao}`);
+    res.json(resultado);
+  } catch (erro) {
+    if (erro.status) return res.status(erro.status).json({ erro: erro.message });
+    throw erro;
+  }
+}
+
+// O próprio comprador desiste de uma proposta ainda pendente
+async function cancelarProposta(req, res) {
+  const idProposta = idValido(req.params.id);
+  if (!idProposta) return res.status(400).json({ erro: 'ID de proposta inválido' });
+
+  const { rows } = await pool.query(
+    `UPDATE propostas_revenda SET status = 'cancelada'
+      WHERE id_proposta = $1 AND id_cliente = $2 AND status = 'pendente'
+      RETURNING id_proposta`,
+    [idProposta, req.idCliente]
+  );
+  if (!rows[0]) {
+    return res.status(404).json({ erro: 'Proposta não encontrada, não é sua, ou já foi respondida' });
+  }
+  res.status(204).send();
+}
+
 module.exports = {
   comprarIngresso, listarMeusIngressos, listarMinhasRevendas,
   criarRevenda, cancelarRevenda, comprarRevenda,
+  criarProposta, listarPropostasEnviadas, listarPropostasRecebidas,
+  responderProposta, cancelarProposta,
 };

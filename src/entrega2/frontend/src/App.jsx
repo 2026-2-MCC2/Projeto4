@@ -60,7 +60,7 @@ export function App() {
         <Route path="/cliente" element={<ClienteLayout />}>
           <Route index element={<ClienteInicio />} />
           <Route path="ingressos" element={<ClienteIngressos />} />
-          <Route path="ingressos/:id" element={<ClienteVerIngresso />} />
+          <Route path="ingressos/:tipo/:id" element={<ClienteVerIngresso />} />
           <Route path="compras" element={<ClienteCompras />} />
           <Route path="perfil" element={<ClientePerfil />} />
           <Route path="seus-ingressos" element={<ClienteSeusIngressos />} />

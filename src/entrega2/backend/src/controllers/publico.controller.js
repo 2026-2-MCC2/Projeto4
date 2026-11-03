@@ -43,12 +43,14 @@ async function buscarEvento(req, res) {
   res.json(rows[0]);
 }
 
+const CAMPOS_REVENDA_PUBLICA = `r.id_revenda, r.preco_unitario, r.criado_em,
+       c.id_compra, c.quantidade,
+       e.id_evento, e.nome, e.data, e.data_fim, e.local, e.categoria, e.imagem_url, e.descricao`;
+
 // Vitrine pública de revenda: ingressos que outros clientes colocaram à venda
 async function listarRevendas(req, res) {
   const { rows } = await pool.query(
-    `SELECT r.id_revenda, r.preco_unitario, r.criado_em,
-            c.id_compra, c.quantidade,
-            e.id_evento, e.nome, e.data, e.data_fim, e.local, e.categoria, e.imagem_url
+    `SELECT ${CAMPOS_REVENDA_PUBLICA}
        FROM revendas r
        JOIN compras c ON c.id_compra = r.id_compra
        JOIN eventos e ON e.id_evento = c.id_evento
@@ -58,4 +60,22 @@ async function listarRevendas(req, res) {
   res.json(rows);
 }
 
-module.exports = { listarEventos, buscarEvento, listarRevendas };
+async function buscarRevenda(req, res) {
+  const idRevenda = idValido(req.params.id);
+  if (!idRevenda) return res.status(400).json({ erro: 'ID de revenda inválido' });
+
+  const { rows } = await pool.query(
+    `SELECT ${CAMPOS_REVENDA_PUBLICA}
+       FROM revendas r
+       JOIN compras c ON c.id_compra = r.id_compra
+       JOIN eventos e ON e.id_evento = c.id_evento
+      WHERE r.id_revenda = $1 AND r.status = 'disponivel'`,
+    [idRevenda]
+  );
+  if (!rows[0]) {
+    return res.status(404).json({ erro: 'Revenda não encontrada ou indisponível' });
+  }
+  res.json(rows[0]);
+}
+
+module.exports = { listarEventos, buscarEvento, listarRevendas, buscarRevenda };

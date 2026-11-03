@@ -130,7 +130,7 @@ export function Eventos() {
         </section>
 
         <section>
-          <aside>
+          <aside className="eventos-filtros">
             <h2>Filtros</h2>
             <fieldset>
               <legend>Categoria</legend>

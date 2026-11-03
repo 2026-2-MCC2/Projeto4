@@ -72,6 +72,7 @@ export function AdminConfiguracoes() {
 
       <Abas abas={abasConfiguracoes} ativa={aba} aoTrocar={setAba} />
 
+      {aba === 'Gerais' && (
       <Painel>
         <CabecalhoPainel
           titulo="1. Preferências Gerais da Plataforma"
@@ -105,7 +106,9 @@ export function AdminConfiguracoes() {
           aoAlternar={setManutencao}
         />
       </Painel>
+      )}
 
+      {aba === 'Marca & Visual' && (
       <Painel>
         <CabecalhoPainel
           titulo="2. Personalização de Marca"
@@ -134,7 +137,9 @@ export function AdminConfiguracoes() {
           aoSelecionar={definirTemaAdmin}
         />
       </Painel>
+      )}
 
+      {aba === 'Integrações & APIs' && (
       <Painel>
         <CabecalhoPainel
           titulo="3. Integrações & Chaves de API"
@@ -156,7 +161,9 @@ export function AdminConfiguracoes() {
         <ListaWebhooks webhooks={webhooks} />
         <Botao>+ Adicionar Webhook</Botao>
       </Painel>
+      )}
 
+      {aba === 'E-mail (SMTP)' && (
       <Painel>
         <CabecalhoPainel
           titulo="4. E-mail Transacional (SMTP)"
@@ -182,7 +189,9 @@ export function AdminConfiguracoes() {
           <Botao>Enviar E-mail de Teste</Botao>
         </div>
       </Painel>
+      )}
 
+      {aba === 'Segurança & Acesso' && (
       <Painel>
         <CabecalhoPainel
           titulo="5. Segurança e Políticas de Acesso"
@@ -213,6 +222,7 @@ export function AdminConfiguracoes() {
           />
         </GradeCampos>
       </Painel>
+      )}
     </>
   )
 }

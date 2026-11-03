@@ -17,6 +17,10 @@
 
 /* ===================== BARRA LATERAL DO CLIENTE ===================== */
 .cliente-sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
     background: var(--white);
     border-right: 1px solid var(--border);
     padding: 1.5rem 1.25rem;
@@ -582,6 +586,9 @@
     }
 
     .cliente-sidebar {
+        position: static;
+        height: auto;
+        overflow-y: visible;
         border-right: none;
         border-bottom: 1px solid var(--border);
     }

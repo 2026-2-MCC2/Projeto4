@@ -24,3 +24,23 @@ export function cancelarRevenda(idRevenda) {
 export function comprarRevenda(idRevenda) {
   return api.post(`/api/cliente/revendas/${idRevenda}/comprar`)
 }
+
+export function criarProposta(idRevenda, precoProposto) {
+  return api.post(`/api/cliente/revendas/${idRevenda}/propostas`, { preco_proposto: precoProposto })
+}
+
+export function listarPropostasEnviadas() {
+  return api.get('/api/cliente/propostas/enviadas')
+}
+
+export function listarPropostasRecebidas() {
+  return api.get('/api/cliente/propostas/recebidas')
+}
+
+export function responderProposta(idProposta, decisao) {
+  return api.patch(`/api/cliente/propostas/${idProposta}`, { decisao })
+}
+
+export function cancelarProposta(idProposta) {
+  return api.patch(`/api/cliente/propostas/${idProposta}/cancelar`)
+}

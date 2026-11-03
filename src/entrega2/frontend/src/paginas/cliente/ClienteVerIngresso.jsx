@@ -1,14 +1,141 @@
-import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ClienteHeader } from '../../componentes/cliente/ClienteHeader'
-import { ingressos } from '../../dados/cliente'
+import { buscarEventoPublico, buscarRevendaPublica } from '../../api/publico'
+import { comprarIngresso, comprarRevenda, criarProposta } from '../../api/ingressos'
+
+function formatarPreco(valor) {
+  return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+}
+
+function formatarData(dataIso) {
+  if (!dataIso) return ''
+  return new Date(`${dataIso}T00:00:00`).toLocaleDateString('pt-BR', {
+    day: '2-digit', month: 'long', year: 'numeric',
+  })
+}
 
 export function ClienteVerIngresso() {
-  const { id } = useParams()
-  const ingresso = ingressos.find((item) => item.id === id) ?? ingressos[0]
+  const { tipo, id } = useParams()
+  const navegar = useNavigate()
+  const ehRevenda = tipo === 'revenda'
+
+  const [item, setItem] = useState(null)
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState('')
   const [quantidade, setQuantidade] = useState(1)
 
-  const total = ingresso.preco * quantidade
+  const [comprando, setComprando] = useState(false)
+  const [erroCompra, setErroCompra] = useState('')
+
+  const [formPropostaAberto, setFormPropostaAberto] = useState(false)
+  const [precoProposta, setPrecoProposta] = useState('')
+  const [enviandoProposta, setEnviandoProposta] = useState(false)
+  const [erroProposta, setErroProposta] = useState('')
+  const [propostaEnviada, setPropostaEnviada] = useState(false)
+
+  useEffect(() => {
+    let cancelado = false
+    setCarregando(true)
+    setErro('')
+
+    const busca = ehRevenda ? buscarRevendaPublica(id) : buscarEventoPublico(id)
+    busca
+      .then((dados) => {
+        if (cancelado) return
+        if (ehRevenda) {
+          setItem({
+            titulo: dados.nome,
+            local: dados.local,
+            data: dados.data,
+            preco: Number(dados.preco_unitario),
+            imagem: dados.imagem_url || `https://picsum.photos/seed/revenda-${dados.id_revenda}/1000/560`,
+            categoria: dados.categoria,
+            quantidadeLote: dados.quantidade,
+            disponiveis: dados.quantidade,
+          })
+          setQuantidade(dados.quantidade)
+        } else {
+          setItem({
+            titulo: dados.nome,
+            local: dados.local,
+            data: dados.data,
+            preco: Number(dados.preco_ingresso),
+            imagem: dados.imagem_url || `https://picsum.photos/seed/evento-${dados.id_evento}/1000/560`,
+            categoria: dados.categoria,
+            disponiveis: dados.ingressos_disponiveis,
+          })
+        }
+      })
+      .catch((erroRequisicao) => {
+        if (!cancelado) setErro(erroRequisicao.message)
+      })
+      .finally(() => {
+        if (!cancelado) setCarregando(false)
+      })
+
+    return () => { cancelado = true }
+  }, [tipo, id, ehRevenda])
+
+  async function comprarAgora() {
+    setComprando(true)
+    setErroCompra('')
+    try {
+      if (ehRevenda) {
+        await comprarRevenda(id)
+      } else {
+        await comprarIngresso(id, quantidade)
+      }
+      navegar('/cliente/seus-ingressos')
+    } catch (erroRequisicao) {
+      setErroCompra(erroRequisicao.message)
+    } finally {
+      setComprando(false)
+    }
+  }
+
+  async function enviarProposta(e) {
+    e.preventDefault()
+    const preco = Number(precoProposta)
+    if (!preco || preco <= 0) {
+      setErroProposta('Informe um valor válido')
+      return
+    }
+    setEnviandoProposta(true)
+    setErroProposta('')
+    try {
+      await criarProposta(id, preco)
+      setPropostaEnviada(true)
+      setFormPropostaAberto(false)
+    } catch (erroRequisicao) {
+      setErroProposta(erroRequisicao.message)
+    } finally {
+      setEnviandoProposta(false)
+    }
+  }
+
+  if (carregando) {
+    return (
+      <>
+        <ClienteHeader titulo="Detalhes do Ingresso" descricao="Carregando..." />
+        <main className="cliente-main"><p>Carregando ingresso...</p></main>
+      </>
+    )
+  }
+
+  if (erro || !item) {
+    return (
+      <>
+        <ClienteHeader titulo="Detalhes do Ingresso" descricao="Não foi possível carregar este ingresso." />
+        <main className="cliente-main">
+          <p role="alert" style={{ color: '#BE123C' }}>{erro || 'Ingresso não encontrado.'}</p>
+          <Link to="/cliente/ingressos" className="cliente-voltar">← Voltar para Ingressos</Link>
+        </main>
+      </>
+    )
+  }
+
+  const total = item.preco * quantidade
 
   return (
     <>
@@ -23,30 +150,16 @@ export function ClienteVerIngresso() {
         <div className="cliente-detalhe">
           <section className="cliente-detalhe-principal">
             <div className="cliente-detalhe-banner">
-              <img
-                src={`https://picsum.photos/seed/${ingresso.id}/1000/560`}
-                alt={ingresso.titulo}
-              />
-              <span className="cliente-ticket-card__badge">Show</span>
+              <img src={item.imagem} alt={item.titulo} />
+              <span className="cliente-ticket-card__badge">{ehRevenda ? 'Revenda' : 'Venda oficial'}</span>
             </div>
 
-            <h1>{ingresso.titulo}</h1>
+            <h1>{item.titulo}</h1>
 
             <p className="cliente-detalhe-meta">
-              <span>📅 {ingresso.dataExibicao}</span>
-              <span>📍 {ingresso.local}</span>
+              <span>📅 {formatarData(item.data)}</span>
+              <span>📍 {item.local}</span>
             </p>
-
-            <div className="cliente-ingresso-item__tags">
-              {ingresso.tags.map((tag) => (
-                <span
-                  key={tag.texto}
-                  className={`cliente-tag${tag.tipo ? ` cliente-tag--${tag.tipo}` : ''}`}
-                >
-                  {tag.texto}
-                </span>
-              ))}
-            </div>
 
             <p className="cliente-detalhe-descricao">
               Ingresso protegido pela custódia TrocaTicket. O valor só é liberado ao
@@ -54,12 +167,10 @@ export function ClienteVerIngresso() {
             </p>
 
             <div className="cliente-detalhe-info-grid">
-              <div><span>Data</span><strong>25 de Outubro de 2025</strong></div>
-              <div><span>Horário</span><strong>18:00</strong></div>
-              <div><span>Local</span><strong>{ingresso.local}</strong></div>
-              <div><span>Categoria</span><strong>Show / Festival</strong></div>
-              <div><span>Setor</span><strong>Pista Premium</strong></div>
-              <div><span>Tipo</span><strong>Ingresso individual</strong></div>
+              <div><span>Data</span><strong>{formatarData(item.data)}</strong></div>
+              <div><span>Local</span><strong>{item.local}</strong></div>
+              <div><span>Categoria</span><strong>{item.categoria || '—'}</strong></div>
+              <div><span>Tipo</span><strong>{ehRevenda ? `Lote de ${item.quantidadeLote} ingresso(s)` : 'Ingresso individual'}</strong></div>
             </div>
           </section>
 
@@ -67,48 +178,87 @@ export function ClienteVerIngresso() {
             <div className="cliente-compra-card">
               <div className="cliente-compra-card__preco">
                 <small>{quantidade > 1 ? `Total (${quantidade} ingressos)` : 'Total'}</small>
-                <strong>{total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+                <strong>{formatarPreco(total)}</strong>
               </div>
 
-              <div className="cliente-quantidade">
-                <span>Quantidade</span>
-                <div className="cliente-quantidade-stepper">
-                  <button
-                    type="button"
-                    disabled={quantidade <= 1}
-                    onClick={() => setQuantidade((q) => Math.max(1, q - 1))}
-                  >
-                    −
-                  </button>
-                  <span>{quantidade}</span>
-                  <button
-                    type="button"
-                    disabled={quantidade >= 8}
-                    onClick={() => setQuantidade((q) => Math.min(8, q + 1))}
-                  >
-                    +
-                  </button>
+              {!ehRevenda && (
+                <div className="cliente-quantidade">
+                  <span>Quantidade</span>
+                  <div className="cliente-quantidade-stepper">
+                    <button
+                      type="button"
+                      disabled={quantidade <= 1}
+                      onClick={() => setQuantidade((q) => Math.max(1, q - 1))}
+                    >
+                      −
+                    </button>
+                    <span>{quantidade}</span>
+                    <button
+                      type="button"
+                      disabled={quantidade >= Math.min(8, item.disponiveis || 8)}
+                      onClick={() => setQuantidade((q) => Math.min(item.disponiveis || 8, q + 1))}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
 
-              <button type="button" className="cliente-btn-comprar">Comprar agora</button>
-              <button type="button" className="cliente-btn-secundario-claro">Fazer contraproposta</button>
+              {erroCompra && (
+                <p role="alert" style={{ color: '#BE123C', fontSize: '0.85rem' }}>{erroCompra}</p>
+              )}
+
+              <button
+                type="button"
+                className="cliente-btn-comprar"
+                onClick={comprarAgora}
+                disabled={comprando}
+              >
+                {comprando ? 'Processando...' : 'Comprar agora'}
+              </button>
+
+              {ehRevenda && !propostaEnviada && (
+                <button
+                  type="button"
+                  className="cliente-btn-secundario-claro"
+                  onClick={() => setFormPropostaAberto((aberto) => !aberto)}
+                >
+                  Fazer contraproposta
+                </button>
+              )}
+
+              {ehRevenda && formPropostaAberto && (
+                <form className="cliente-field" onSubmit={enviarProposta} style={{ marginTop: '0.75rem' }}>
+                  <label htmlFor="preco-proposta">Seu valor proposto (por ingresso)</label>
+                  <input
+                    id="preco-proposta"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    placeholder={`Anunciado a ${formatarPreco(item.preco)}`}
+                    value={precoProposta}
+                    onChange={(e) => setPrecoProposta(e.target.value)}
+                    required
+                  />
+                  {erroProposta && (
+                    <p role="alert" style={{ color: '#BE123C', fontSize: '0.85rem' }}>{erroProposta}</p>
+                  )}
+                  <button type="submit" className="cliente-btn-comprar" disabled={enviandoProposta} style={{ marginTop: '0.5rem' }}>
+                    {enviandoProposta ? 'Enviando...' : 'Enviar proposta'}
+                  </button>
+                </form>
+              )}
+
+              {propostaEnviada && (
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                  ✓ Proposta enviada! O vendedor vai analisar e você pode acompanhar o status em
+                  {' '}<Link to="/cliente/suas-revendas">Suas Revendas</Link>.
+                </p>
+              )}
 
               <p className="cliente-compra-card__aviso">
                 🛡️ Pagamento retido em custódia até a validação do ingresso.
               </p>
-            </div>
-
-            <div className="cliente-vendedor-card">
-              <h2>Vendedor</h2>
-              <div className="cliente-vendedor-card__perfil">
-                <span className="admin-avatar">MF</span>
-                <div>
-                  <strong>Mariana Ferreira ✓</strong>
-                  <small>Vendedor verificado • 4.9 (37 trocas)</small>
-                </div>
-              </div>
-              <p>Membro desde 2023, sem nenhuma reclamação registrada nas últimas 50 negociações.</p>
             </div>
 
             <div className="cliente-passos">

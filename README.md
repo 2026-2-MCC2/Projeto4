@@ -27,11 +27,9 @@ Vide tutoriais do PI.
 </div>
 
 
-De um a dois parágrafos sobre o que é seu projeto e o que ele faz.
+O InterLink (TrocaTicket) é um marketplace de ingressos que conecta clientes, organizadores de eventos e fornecedores de serviços em um único fluxo seguro. Organizadores planejam e publicam seus eventos para venda, fornecedores cotam e fornecem os serviços necessários para a realização deles, e clientes compram ingressos oficiais diretamente na plataforma.
 <br><br>
-Meu projeto ajuda estudantes FECAP a configurarem seus githubs.
-<br><br>
-May the force be with you!
+Além da venda primária, o sistema permite que clientes revendam ingressos que não poderão mais usar, com pagamentos protegidos por custódia até a validação do acesso no evento, e negociem o preço anunciado por meio de contrapropostas. Toda a operação é supervisionada por um painel administrativo, que aprova cadastros, audita logs e monitora a saúde da plataforma.
 <br><br>
 
 ## Entregas
@@ -124,6 +122,24 @@ Há também 4 pastas que seguem da seguinte forma:
 
 ## 📋 Licença/License
 https://creativecommons.org/licenses/by-sa/4.0/
+
+## 🤖 Declaração de Uso de IA
+
+Conforme o **Guia para o Uso Responsável de Inteligência Artificial na FECAP** (Protocolo FECAP IA, versão 2.0, 29/07/2026), Art. 6º e 7º.
+
+| Campo | Preenchimento |
+|---|---|
+| **Ferramenta utilizada** | Claude Code (CLI/IDE da Anthropic) |
+| **Versão/modelo** | Claude Sonnet 5 (`claude-sonnet-5`) |
+| **Disciplina / Trabalho** | Desenvolvimento Web Full Stack — Entrega 2 (projeto InterLink/TrocaTicket) |
+| **Finalidade de uso** | Suporte técnico de depuração (debugging) em uma aplicação já desenvolvida pela equipe: diagnóstico de falhas de conexão entre frontend e backend (CORS, variáveis de ambiente de produção no Render), correção de roteamento client-side (SPA) em produção, e correção de bugs de interface (abas da tela de Configurações do Admin que não filtravam o conteúdo exibido, tabela sem rolagem horizontal cortando colunas, botão "Sair da Conta" com CSS vazado e preso no rodapé da página). |
+| **Prompts principais utilizados** | "o problema do fetch voltou a dar", "o problema está dando no link do render", "achei mais bugs", pedidos de diagnóstico e correção de erros específicos relatados pela autora durante testes manuais da aplicação (console do navegador, telas de login, configurações e menus laterais). |
+| **Trechos ou entregas afetadas** | `src/entrega2/backend/src/app.js` (diagnóstico); variável de ambiente `FRONTEND_URL` no serviço de backend no Render (ajuste de configuração, fora do versionamento); `src/entrega2/frontend/public/_redirects` (rewrite de rotas SPA); `src/entrega2/frontend/src/paginas/admin/AdminConfiguracoes.jsx` (exibição condicional por aba); `src/entrega2/frontend/src/styles/base.css`, `admin.css`, `cliente.css`, `organizador.css`, `fornecedor.css` (escopo do CSS vazado e menus laterais fixos). |
+
+Declaro que o uso acima descrito está em conformidade com o Guia para o Uso Responsável de Inteligência Artificial na FECAP e que o conteúdo final do projeto é de responsabilidade autoral da equipe, que revisou e validou todas as alterações técnicas antes de aplicá-las.
+
+**Equipe:** Alana Silva Rocha, Bruna Clara da Silva Morais, Geovanna V. M. R. Tamagusko, Julia de Andrade Medeiros
+**Data:** 03/11/2026
 
 ## 🎓 Referências
 

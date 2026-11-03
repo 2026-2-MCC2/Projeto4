@@ -478,7 +478,12 @@ main>section:has(>aside) {
     align-items: start;
 }
 
-aside {
+/* Escopado em .eventos-filtros (não em "aside" puro) porque o app tem vários
+   outros <aside> (menus laterais do admin/cliente/organizador/fornecedor,
+   resumo de compra) que não devem herdar esse visual de cartão de filtro —
+   isso já causou um bug real: o botão "Sair da Conta" virando uma pílula
+   laranja gigante por herdar "aside button" sem querer. */
+.eventos-filtros {
     background: var(--white);
     border: 1px solid var(--border);
     border-top: 3px solid var(--accent);
@@ -486,17 +491,17 @@ aside {
     padding: 1.5rem;
 }
 
-aside h2 {
+.eventos-filtros h2 {
     font-size: 1.1rem;
     margin-bottom: 1rem;
 }
 
-aside fieldset {
+.eventos-filtros fieldset {
     border: none;
     margin-bottom: 1.5rem;
 }
 
-aside legend {
+.eventos-filtros legend {
     font-weight: 700;
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -504,28 +509,28 @@ aside legend {
     margin-bottom: 0.75rem;
 }
 
-aside fieldset>div {
+.eventos-filtros fieldset>div {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
-aside input[type="checkbox"] {
+.eventos-filtros input[type="checkbox"] {
     accent-color: var(--accent);
     width: 16px;
     height: 16px;
     border-radius: 4px;
 }
 
-aside fieldset>label {
+.eventos-filtros fieldset>label {
     display: block;
     font-size: 0.85rem;
     margin-bottom: 0.4rem;
 }
 
-aside input[type="text"],
-aside input[type="date"] {
+.eventos-filtros input[type="text"],
+.eventos-filtros input[type="date"] {
     width: 100%;
     padding: 0.6rem 0.75rem;
     border: 1px solid var(--border);
@@ -533,7 +538,7 @@ aside input[type="date"] {
     font: inherit;
 }
 
-aside button {
+.eventos-filtros button {
     width: 100%;
     padding: 0.75rem;
     border: none;
@@ -545,7 +550,7 @@ aside button {
     transition: background 0.2s, transform 0.2s;
 }
 
-aside button:hover {
+.eventos-filtros button:hover {
     background: #D14D0A;
     transform: translateY(-1px);
 }

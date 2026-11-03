@@ -7,5 +7,6 @@ const router = express.Router();
 router.get('/eventos', publico.listarEventos);
 router.get('/eventos/:id', publico.buscarEvento);
 router.get('/revendas', publico.listarRevendas);
+router.get('/revendas/:id', publico.buscarRevenda);
 
 module.exports = router;

@@ -14,3 +14,7 @@ export function buscarEventoPublico(id) {
 export function listarRevendasPublicas(filtros) {
   return api.get('/api/publico/revendas', filtros)
 }
+
+export function buscarRevendaPublica(id) {
+  return api.get(`/api/publico/revendas/${id}`)
+}
