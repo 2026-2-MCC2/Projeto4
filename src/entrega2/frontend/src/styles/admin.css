@@ -46,8 +46,6 @@
 
 /* ===================== LAYOUT DO DASHBOARD (MENU + CONTEÚDO) ===================== */
 .admin-layout {
-    display: grid;
-    grid-template-columns: 260px 1fr;
     min-height: 100vh;
     color: var(--text);
     background: var(--bg);
@@ -223,6 +221,7 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
+    margin-left: 260px;
 }
 
 /* ===================== BARRA LATERAL ===================== */
@@ -231,9 +230,11 @@
    Aqui eu zero border/border-radius antes de definir os meus, senão
    os dois estilos se misturam. */
 .admin-sidebar {
-    position: sticky;
+    position: fixed;
     top: 0;
-    height: 100vh;
+    left: 0;
+    width: 260px;
+    max-height: 100vh;
     background: var(--white);
     border: none;
     border-right: 1px solid var(--border);
@@ -1723,8 +1724,8 @@
 
 /* ===================== RESPONSIVO (ADMIN) ===================== */
 @media (max-width: 900px) {
-    .admin-layout {
-        grid-template-columns: 1fr;
+    .admin-content {
+        margin-left: 0;
     }
 
     /* Em vez de empilhar a barra lateral inteira acima do conteúdo

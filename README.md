@@ -125,7 +125,7 @@ https://creativecommons.org/licenses/by-sa/4.0/
 
 ## 🤖 Declaração de Uso de IA
 
-Conforme o **Guia para o Uso Responsável de Inteligência Artificial na FECAP** (Protocolo FECAP IA, versão 2.0, 29/07/2026), Art. 6º e 7º.
+Conforme o [Guia para o Uso Responsável de Inteligência Artificial na FECAP](./documentos/Declara%C3%A7%C3%A3o-IA/Declaracao-IA.pdf) (Protocolo FECAP IA, versão 2.0, 29/07/2026), Art. 6º e 7º.
 
 | Campo | Preenchimento |
 |---|---|
