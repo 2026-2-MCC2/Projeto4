@@ -199,6 +199,30 @@ async function cancelarProposta(req, res) {
   res.json(rows[0]);
 }
 
+// Quantos ingressos já foram vendidos num evento em que o fornecedor tem
+// proposta aceita — só a quantidade, nunca quem comprou (RF — privacidade).
+async function contarIngressosVendidos(req, res) {
+  const idEvento = idValido(req.params.id);
+  if (!idEvento) return res.status(400).json({ erro: 'ID de evento inválido' });
+
+  const { rows: acesso } = await pool.query(
+    `SELECT 1 FROM propostas WHERE id_evento = $1 AND id_fornecedor = $2 AND status = 'aceita' LIMIT 1`,
+    [idEvento, req.idFornecedor]
+  );
+  if (!acesso[0]) {
+    return res.status(403).json({ erro: 'Você só pode consultar vendas de eventos em que tem proposta aceita' });
+  }
+
+  const { rows } = await pool.query(
+    `SELECT COALESCE(SUM(quantidade), 0) AS ingressos_vendidos
+       FROM compras
+      WHERE id_evento = $1 AND status = 'confirmada'`,
+    [idEvento]
+  );
+  res.json({ id_evento: idEvento, ingressos_vendidos: Number(rows[0].ingressos_vendidos) });
+}
+
 module.exports = {
   listarEventos, buscarEvento, enviarProposta, listarMinhasPropostas, editarProposta, cancelarProposta,
+  contarIngressosVendidos,
 };

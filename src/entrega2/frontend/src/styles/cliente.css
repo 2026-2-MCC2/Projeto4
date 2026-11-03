@@ -20,7 +20,7 @@
     top: 0;
     left: 0;
     width: 240px;
-    max-height: 100vh;
+    height: 100vh;
     overflow-y: auto;
     background: var(--white);
     border-right: 1px solid var(--border);
@@ -1586,5 +1586,116 @@ header .logo-destaque {
         flex-direction: column;
         align-items: flex-start;
     }
+}
+
+/* ===================== MODAL DE PAGAMENTO (CHECKOUT SIMULADO) ===================== */
+.cliente-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 200;
+}
+
+.cliente-modal {
+    width: min(420px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.75rem;
+}
+
+.cliente-modal__cabecalho {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.cliente-modal__cabecalho h2 {
+    font-size: 1.2rem;
+}
+
+.cliente-modal__fechar {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.cliente-modal__resumo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.cliente-modal__resumo strong {
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+.cliente-modal__total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+.cliente-modal form .cliente-field {
+    margin-bottom: 1rem;
+}
+
+.cliente-modal__linha {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.cliente-modal__aviso {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.cliente-modal__estado {
+    text-align: center;
+    padding: 1.5rem 0.5rem;
+}
+
+.cliente-modal__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: #DCFCE7;
+    color: #16A34A;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.cliente-modal__estado h2 {
+    margin-bottom: 0.5rem;
+}
+
+.cliente-modal__estado p {
+    color: var(--text-muted);
 }
 

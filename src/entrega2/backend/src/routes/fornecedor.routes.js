@@ -10,6 +10,7 @@ router.use(autenticar, permitir('fornecedor'), exigirFornecedor);
 
 router.get('/eventos', fornecedor.listarEventos);                  // RF09
 router.get('/eventos/:id', fornecedor.buscarEvento);               // RF09
+router.get('/eventos/:id/vendas', fornecedor.contarIngressosVendidos);
 
 router.post('/propostas', fornecedor.enviarProposta);              // RF10
 router.get('/propostas', fornecedor.listarMinhasPropostas);

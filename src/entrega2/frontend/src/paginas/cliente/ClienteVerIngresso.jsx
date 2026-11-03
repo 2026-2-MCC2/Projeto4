@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ClienteHeader } from '../../componentes/cliente/ClienteHeader'
+import { ModalPagamento } from '../../componentes/cliente/ModalPagamento'
 import { buscarEventoPublico, buscarRevendaPublica } from '../../api/publico'
 import { comprarIngresso, comprarRevenda, criarProposta } from '../../api/ingressos'
 
@@ -25,8 +26,7 @@ export function ClienteVerIngresso() {
   const [erro, setErro] = useState('')
   const [quantidade, setQuantidade] = useState(1)
 
-  const [comprando, setComprando] = useState(false)
-  const [erroCompra, setErroCompra] = useState('')
+  const [modalPagamentoAberto, setModalPagamentoAberto] = useState(false)
 
   const [formPropostaAberto, setFormPropostaAberto] = useState(false)
   const [precoProposta, setPrecoProposta] = useState('')
@@ -77,20 +77,11 @@ export function ClienteVerIngresso() {
     return () => { cancelado = true }
   }, [tipo, id, ehRevenda])
 
-  async function comprarAgora() {
-    setComprando(true)
-    setErroCompra('')
-    try {
-      if (ehRevenda) {
-        await comprarRevenda(id)
-      } else {
-        await comprarIngresso(id, quantidade)
-      }
-      navegar('/cliente/seus-ingressos')
-    } catch (erroRequisicao) {
-      setErroCompra(erroRequisicao.message)
-    } finally {
-      setComprando(false)
+  async function confirmarCompra() {
+    if (ehRevenda) {
+      await comprarRevenda(id)
+    } else {
+      await comprarIngresso(id, quantidade)
     }
   }
 
@@ -204,17 +195,12 @@ export function ClienteVerIngresso() {
                 </div>
               )}
 
-              {erroCompra && (
-                <p role="alert" style={{ color: '#BE123C', fontSize: '0.85rem' }}>{erroCompra}</p>
-              )}
-
               <button
                 type="button"
                 className="cliente-btn-comprar"
-                onClick={comprarAgora}
-                disabled={comprando}
+                onClick={() => setModalPagamentoAberto(true)}
               >
-                {comprando ? 'Processando...' : 'Comprar agora'}
+                Comprar agora
               </button>
 
               {ehRevenda && !propostaEnviada && (
@@ -272,6 +258,17 @@ export function ClienteVerIngresso() {
           </aside>
         </div>
       </main>
+
+      {modalPagamentoAberto && (
+        <ModalPagamento
+          titulo={item.titulo}
+          resumo={`${quantidade}x · ${formatarData(item.data)}`}
+          total={total}
+          aoConfirmar={confirmarCompra}
+          aoFechar={() => setModalPagamentoAberto(false)}
+          aoSucesso={() => navegar('/cliente/seus-ingressos')}
+        />
+      )}
     </>
   )
 }
