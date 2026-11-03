@@ -122,4 +122,45 @@ async function me(req, res) {
   res.json(rows[0]);
 }
 
-module.exports = { cadastrar, login, me };
+// Atualiza nome/telefone do usuário logado (qualquer tipo)
+async function atualizarPerfil(req, res) {
+  const nome = (req.body.nome || '').trim();
+  const telefone = (req.body.telefone || '').trim();
+  if (!nome) return res.status(400).json({ erro: 'Informe o nome' });
+
+  const { rows } = await pool.query(
+    `UPDATE usuarios SET nome = $1, telefone = $2 WHERE id_usuario = $3
+     RETURNING id_usuario, nome, email, telefone, tipo, status_cadastro`,
+    [nome, telefone || null, req.usuario.id]
+  );
+  await registrarLog(req.usuario.id, 'perfil_atualizado', nome);
+  res.json(rows[0]);
+}
+
+// Troca a senha do usuário logado, conferindo a senha atual antes
+async function atualizarSenha(req, res) {
+  const { senha_atual: senhaAtual, senha_nova: senhaNova } = req.body;
+  if (!senhaAtual || !senhaNova) {
+    return res.status(400).json({ erro: 'Informe a senha atual e a nova senha' });
+  }
+  if (senhaNova.length < 8 || !/[A-Za-z]/.test(senhaNova) || !/[0-9]/.test(senhaNova)) {
+    return res.status(400).json({
+      erro: 'A nova senha deve ter pelo menos 8 caracteres, com letras e números',
+    });
+  }
+
+  const { rows } = await pool.query(
+    'SELECT senha_hash FROM usuarios WHERE id_usuario = $1',
+    [req.usuario.id]
+  );
+  if (!rows[0] || !(await bcrypt.compare(senhaAtual, rows[0].senha_hash))) {
+    return res.status(401).json({ erro: 'Senha atual incorreta' });
+  }
+
+  const novaSenhaHash = await bcrypt.hash(senhaNova, 10);
+  await pool.query('UPDATE usuarios SET senha_hash = $1 WHERE id_usuario = $2', [novaSenhaHash, req.usuario.id]);
+  await registrarLog(req.usuario.id, 'senha_alterada', null);
+  res.status(204).send();
+}
+
+module.exports = { cadastrar, login, me, atualizarPerfil, atualizarSenha };

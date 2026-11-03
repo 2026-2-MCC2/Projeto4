@@ -188,6 +188,52 @@ async function alterarStatus(req, res) {
   res.json(evento);
 }
 
+// Categorias aceitas na vitrine pública (mesmas usadas no filtro da página /eventos do site)
+const CATEGORIAS_PUBLICACAO = ['show', 'festival', 'esporte', 'teatro', 'outros'];
+
+// Publica (ou tira de publicação) o evento na vitrine pública para os clientes comprarem.
+// Fica separado de atualizarEvento/validarEvento de propósito: não mexe nos campos do
+// planejamento (RF05-08), só nos campos de venda ao público.
+async function atualizarPublicacao(req, res) {
+  const publicado = req.body.publicado_para_venda === true;
+  const categoria = texto(req.body.categoria, 30);
+  const imagemUrl = vazio(req.body.imagem_url) ? null : texto(req.body.imagem_url, 255);
+  const precoIngresso = numero(req.body.preco_ingresso);
+  const ingressosTotal = inteiro(req.body.ingressos_total);
+
+  if (!CATEGORIAS_PUBLICACAO.includes(categoria)) {
+    return res.status(400).json({ erro: `Categoria deve ser uma de: ${CATEGORIAS_PUBLICACAO.join(', ')}` });
+  }
+  if (publicado) {
+    if (precoIngresso === null || precoIngresso <= 0) {
+      return res.status(400).json({ erro: 'Informe um preço de ingresso maior que zero' });
+    }
+    if (ingressosTotal === null || ingressosTotal <= 0) {
+      return res.status(400).json({ erro: 'Informe a quantidade total de ingressos (maior que zero)' });
+    }
+    if (ingressosTotal < req.evento.ingressos_vendidos) {
+      return res.status(409).json({
+        erro: `Já foram vendidos ${req.evento.ingressos_vendidos} ingresso(s); a quantidade total não pode ser menor que isso`,
+      });
+    }
+  }
+
+  const { rows } = await pool.query(
+    `UPDATE eventos
+        SET categoria = $1, imagem_url = $2, preco_ingresso = $3,
+            ingressos_total = $4, publicado_para_venda = $5
+      WHERE id_evento = $6
+      RETURNING ${CAMPOS_EVENTO}`,
+    [categoria, imagemUrl, precoIngresso, ingressosTotal, publicado, req.evento.id_evento]
+  );
+  await registrarLog(
+    req.usuario.id,
+    'evento_publicacao_alterada',
+    `#${rows[0].id_evento} -> ${publicado ? 'publicado' : 'despublicado'}`
+  );
+  res.json(rows[0]);
+}
+
 // Visão geral: todas as propostas recebidas em qualquer evento do organizador,
 // pra não precisar entrar evento por evento só pra ver o que está pendente de decisão.
 async function listarPropostasOrganizador(req, res) {
@@ -209,5 +255,5 @@ async function listarPropostasOrganizador(req, res) {
 
 module.exports = {
   criarEvento, listarEventos, buscarEvento, atualizarEvento, excluirEvento, alterarStatus,
-  listarPropostasOrganizador,
+  atualizarPublicacao, listarPropostasOrganizador,
 };

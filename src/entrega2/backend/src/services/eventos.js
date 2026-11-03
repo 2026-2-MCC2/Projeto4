@@ -1,7 +1,9 @@
 const pool = require('../config/db');
 
 const CAMPOS_EVENTO = `id_evento, id_organizador, nome, data, data_fim, local, descricao,
-                       publico_minimo, publico_maximo, margem_lucro, status`;
+                       publico_minimo, publico_maximo, margem_lucro, status,
+                       categoria, imagem_url, preco_ingresso, ingressos_total,
+                       ingressos_vendidos, publicado_para_venda`;
 
 // Busca o evento SE ele pertencer ao organizador logado (senão devolve undefined).
 // É isto que impede um organizador de mexer no evento de outro.

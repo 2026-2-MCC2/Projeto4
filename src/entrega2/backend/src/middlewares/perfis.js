@@ -33,4 +33,20 @@ async function exigirFornecedor(req, res, next) {
   next();
 }
 
-module.exports = { exigirOrganizador, exigirFornecedor };
+// Igual, mas para o CLIENTE (cria req.idCliente)
+async function exigirCliente(req, res, next) {
+  const { rows } = await pool.query(
+    `SELECT c.id_cliente
+       FROM clientes c
+       JOIN usuarios u ON u.id_usuario = c.id_usuario
+      WHERE c.id_usuario = $1 AND u.status_cadastro = 'aprovado'`,
+    [req.usuario.id]
+  );
+  if (!rows[0]) {
+    return res.status(403).json({ erro: 'Acesso permitido apenas a clientes aprovados' });
+  }
+  req.idCliente = rows[0].id_cliente;
+  next();
+}
+
+module.exports = { exigirOrganizador, exigirFornecedor, exigirCliente };

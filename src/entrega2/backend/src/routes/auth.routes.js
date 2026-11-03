@@ -1,6 +1,6 @@
 const express = require('express');
 const rateLimit = require('express-rate-limit');
-const { cadastrar, login, me } = require('../controllers/auth.controller');
+const { cadastrar, login, me, atualizarPerfil, atualizarSenha } = require('../controllers/auth.controller');
 const { autenticar } = require('../middlewares/auth');
 
 const router = express.Router();
@@ -24,5 +24,7 @@ const limiteCadastro = rateLimit({
 router.post('/cadastro', limiteCadastro, cadastrar); // RF01
 router.post('/login', limiteLogin, login);           // RF02
 router.get('/me', autenticar, me);                   // protegida: precisa de token
+router.patch('/perfil', autenticar, atualizarPerfil);
+router.patch('/senha', autenticar, atualizarSenha);
 
 module.exports = router;

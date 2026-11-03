@@ -28,6 +28,7 @@ router.get('/:id', eventos.buscarEvento);
 router.put('/:id', eventos.atualizarEvento);
 router.delete('/:id', eventos.excluirEvento);
 router.patch('/:id/status', eventos.alterarStatus);          // RF08
+router.patch('/:id/publicacao', eventos.atualizarPublicacao); // venda ao público (cliente)
 
 router.get('/:id/itens', itens.listarItens);                 // RF06
 router.post('/:id/itens', itens.criarItem);

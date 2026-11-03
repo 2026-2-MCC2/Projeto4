@@ -102,7 +102,7 @@ export function OrganizadorGerenciarEvento() {
       {aba === 'custos' && <AbaCustos evento={evento} />}
       {aba === 'propostas' && <AbaPropostas evento={evento} />}
       {aba === 'orcamento' && <AbaOrcamento evento={evento} />}
-      {aba === 'ticket' && <AbaTicket evento={evento} />}
+      {aba === 'ticket' && <AbaTicket evento={evento} aoAtualizar={carregarEvento} />}
     </section>
   )
 }

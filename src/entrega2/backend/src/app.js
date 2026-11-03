@@ -44,6 +44,8 @@ app.use('/api/eventos', require('./routes/eventos.routes'));         // Organiza
 app.use('/api/fornecedor', require('./routes/fornecedor.routes'));   // Fornecedor
 app.use('/api/relatorios', require('./routes/relatorios.routes'));   // Administrador (RF14)
 app.use('/api/tickets', require('./routes/tickets.routes'));         // Suporte (qualquer usuário logado)
+app.use('/api/publico', require('./routes/publico.routes'));         // Vitrine pública (sem login)
+app.use('/api/cliente', require('./routes/cliente.routes'));         // Cliente final
 
 // ATENÇÃO: estas duas ficam SEMPRE por último, depois de todas as rotas
 app.use((req, res) => {
