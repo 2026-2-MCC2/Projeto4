@@ -1,7 +1,11 @@
 import { useState } from 'react'
+import { useOutletContext } from 'react-router-dom'
 import { obterUsuario } from '../../api/auth'
+import { SeletorTema } from '../../componentes/comum/SeletorTema'
+import { temasPainel } from '../../utils/tema'
 
 export function FornecedorPerfil() {
+  const { tema, definirTema } = useOutletContext()
   const usuario = obterUsuario()
   const [empresa, setEmpresa] = useState(usuario?.empresa || '')
   const [responsavel, setResponsavel] = useState(usuario?.nome || '')
@@ -22,5 +26,8 @@ export function FornecedorPerfil() {
       <label>Telefone / WhatsApp<input type="tel" value={telefone} onChange={e => setTelefone(e.target.value)} placeholder="(11) 98765-4321" /></label>
       <button className="fornecedor-btn" type="submit">Salvar alterações</button>{mensagem && <p role="status">{mensagem}</p>}
     </form></section>
+    <section className="fornecedor-panel">
+      <SeletorTema temas={temasPainel} selecionado={tema} aoSelecionar={definirTema} nomeGrupo="tema-fornecedor" />
+    </section>
   </>
 }

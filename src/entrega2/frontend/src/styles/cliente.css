@@ -6,6 +6,53 @@
     min-height: 100vh;
 }
 
+/* Modos de cor: mesma paleta usada no Admin, via [data-tema] no .cliente-layout.
+   O resto do arquivo já usa var(--bg)/var(--accent)/etc., então troca sozinho. */
+.cliente-layout[data-tema="bilhete-dourado"] {
+    --bg: #FFF7ED;
+    --text: #431407;
+    --text-muted: #8A5B45;
+    --border: #FED7AA;
+    --accent: #C2410C;
+    --primary: #431407;
+    --primary-hover: #7C2D12;
+    --surface: #FFFFFF;
+}
+
+.cliente-layout[data-tema="palco-rubi"] {
+    --bg: #FFF1F2;
+    --text: #4C0519;
+    --text-muted: #885264;
+    --border: #FECDD3;
+    --accent: #BE123C;
+    --primary: #4C0519;
+    --primary-hover: #881337;
+    --surface: #FFFFFF;
+}
+
+.cliente-layout[data-tema="camarote-oceano"] {
+    --bg: #ECFEFF;
+    --text: #083344;
+    --text-muted: #4B7180;
+    --border: #A5F3FC;
+    --accent: #0E7490;
+    --primary: #083344;
+    --primary-hover: #164E63;
+    --surface: #FFFFFF;
+}
+
+.cliente-layout[data-tema="ultima-sessao"] {
+    --bg: #111923;
+    --text: #E6EEF6;
+    --text-muted: #A3B2C2;
+    --border: #344250;
+    --accent: #C2410C;
+    --primary: #263548;
+    --primary-hover: #354A60;
+    --surface: #1B2733;
+    color-scheme: dark;
+}
+
 .cliente-content {
     display: flex;
     flex-direction: column;
@@ -19,10 +66,10 @@
     position: fixed;
     top: 0;
     left: 0;
+    bottom: 0;
     width: 240px;
-    height: 100vh;
     overflow-y: auto;
-    background: var(--white);
+    background: var(--surface);
     border-right: 1px solid var(--border);
     padding: 1.5rem 1.25rem;
     display: flex;
@@ -175,7 +222,7 @@
     gap: 1.5rem;
     padding: 1.75rem 2rem 1.75rem;
     border-bottom: 1px solid var(--border);
-    background: var(--white);
+    background: var(--surface);
 }
 
 .cliente-topbar h1 {
@@ -265,7 +312,7 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 0.75rem 1rem;
@@ -460,7 +507,7 @@
 }
 
 .cliente-ticket-card {
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
     overflow: hidden;
@@ -624,7 +671,7 @@
     align-items: center;
     gap: 0.6rem;
     flex-wrap: wrap;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 0.9rem 1.1rem;
@@ -650,7 +697,7 @@
     padding: 0.45rem 0.9rem;
     border: 1px solid var(--border);
     border-radius: 999px;
-    background: var(--white);
+    background: var(--surface);
     color: var(--text-muted);
     font-size: 0.82rem;
     font-weight: 600;
@@ -713,7 +760,7 @@
     padding: 0.4rem 0.9rem;
     border: 1px solid var(--border);
     border-radius: 999px;
-    background: var(--white);
+    background: var(--surface);
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--text-muted);
@@ -729,7 +776,7 @@
     display: flex;
     align-items: center;
     gap: 1.1rem;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 1rem;
@@ -814,7 +861,7 @@
     height: 38px;
     border: 1px solid var(--border);
     border-radius: 8px;
-    background: var(--white);
+    background: var(--surface);
     color: var(--text-muted);
     cursor: pointer;
 }
@@ -956,7 +1003,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1rem;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 1.25rem;
@@ -983,7 +1030,7 @@
 }
 
 .cliente-compra-card {
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 1.25rem;
@@ -1050,7 +1097,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     color: var(--text);
     padding: 0.75rem;
@@ -1083,7 +1130,7 @@
 }
 
 .cliente-vendedor-card {
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 1.25rem;
@@ -1130,7 +1177,7 @@
 }
 
 .cliente-passos {
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 1.25rem;
@@ -1216,7 +1263,7 @@
     justify-content: center;
     gap: 0.75rem;
     text-align: center;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 3rem 1.5rem;
@@ -1246,7 +1293,7 @@
 
 
 .cliente-skeleton {
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 1rem;
@@ -1336,7 +1383,7 @@ header .logo-destaque {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 1.75rem;
@@ -1402,7 +1449,7 @@ header .logo-destaque {
     display: flex;
     align-items: center;
     gap: 1rem;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.1rem 1.25rem;
@@ -1479,7 +1526,7 @@ header .logo-destaque {
 }
 
 .cliente-stat-box {
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.25rem;
@@ -1506,7 +1553,7 @@ header .logo-destaque {
 
 /* configuracoes.html */
 .cliente-form-section {
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.5rem;
@@ -1604,7 +1651,7 @@ header .logo-destaque {
     width: min(420px, 100%);
     max-height: 90vh;
     overflow-y: auto;
-    background: var(--white);
+    background: var(--surface);
     border-radius: 16px;
     padding: 1.75rem;
 }

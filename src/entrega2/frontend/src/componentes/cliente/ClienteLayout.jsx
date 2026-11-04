@@ -1,4 +1,7 @@
+import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { obterUsuario } from '../../api/auth'
+import { lerTema, salvarTema } from '../../utils/tema'
 
 function Icon({ children, className = '' }) {
   return (
@@ -18,8 +21,16 @@ function Icon({ children, className = '' }) {
 }
 
 export function ClienteLayout() {
+  const usuario = obterUsuario()
+  const [tema, setTema] = useState(() => lerTema('cliente', usuario?.email))
+
+  function definirTema(temaId) {
+    setTema(temaId)
+    salvarTema('cliente', usuario?.email, temaId)
+  }
+
   return (
-    <div className="cliente-layout">
+    <div className="cliente-layout" data-tema={tema || undefined}>
       <aside className="cliente-sidebar">
         <div className="cliente-sidebar__brand">
           <span className="cliente-sidebar__brand-icon" aria-hidden="true">
@@ -87,7 +98,7 @@ export function ClienteLayout() {
       </aside>
 
       <div className="cliente-content">
-        <Outlet />
+        <Outlet context={{ tema, definirTema }} />
       </div>
     </div>
   )

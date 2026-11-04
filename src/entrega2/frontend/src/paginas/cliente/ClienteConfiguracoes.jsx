@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import { ClienteHeader } from '../../componentes/cliente/ClienteHeader'
+import { SeletorTema } from '../../componentes/comum/SeletorTema'
+import { temasPainel } from '../../utils/tema'
 
 export function ClienteConfiguracoes() {
+  const { tema, definirTema } = useOutletContext()
   const [salvo, setSalvo] = useState(false)
   const [dados, setDados] = useState({
     nome: 'Gabriel Souza',
@@ -56,6 +59,11 @@ export function ClienteConfiguracoes() {
               <input id="senha-nova" type="password" placeholder="Mínimo 8 caracteres" value={dados.senhaNova} onChange={(e) => alterar('senhaNova', e.target.value)} />
             </div>
           </div>
+        </div>
+
+        <div className="cliente-form-section">
+          <h2>Aparência</h2>
+          <SeletorTema temas={temasPainel} selecionado={tema} aoSelecionar={definirTema} nomeGrupo="tema-cliente" />
         </div>
 
         <div className="cliente-form-section">
