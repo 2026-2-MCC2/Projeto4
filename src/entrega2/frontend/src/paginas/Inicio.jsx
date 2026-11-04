@@ -53,7 +53,7 @@ export function Inicio() {
               Não poderá mais ir ao evento? Coloque seu ingresso para
               revenda.
             </p>
-            <Link to="/revenda"> Revender ingresso </Link>
+            <Link to="/login"> Revender ingresso </Link>
           </div>
         </section>
 

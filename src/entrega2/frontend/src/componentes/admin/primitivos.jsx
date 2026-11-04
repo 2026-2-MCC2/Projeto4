@@ -125,33 +125,3 @@ export function Dica({ children }) {
   return <small className="admin-hint">{children}</small>
 }
 
-export function AcaoRapida({ children, destaque = false, className = '', aoClicar }) {
-  const classes = [
-    'admin-quick-action',
-    destaque ? 'admin-quick-action--primary' : '',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ')
-
-  if (aoClicar) {
-    return (
-      <button type="button" className={classes} onClick={aoClicar}>
-        {children}
-      </button>
-    )
-  }
-
-  return (
-    <a
-      href="#"
-      className={classes}
-      onClick={(e) => {
-        e.preventDefault()
-        aoClicar?.()
-      }}
-    >
-      {children}
-    </a>
-  )
-}

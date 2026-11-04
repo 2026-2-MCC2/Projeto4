@@ -9,7 +9,7 @@ export function Cabecalho() {
       <nav>
         <Link to="/">Início</Link>
         <Link to="/eventos">Eventos</Link>
-        <Link to="/revenda">Revenda</Link>
+        <Link to="/login">Revenda</Link>
         <Link to="/login">Entrar</Link>
         <Link to="/cadastro">Criar conta</Link>
       </nav>
