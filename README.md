@@ -35,7 +35,7 @@ Além da venda primária, o sistema permite que clientes revendam ingressos que 
 ## Entregas
 
 - [Modelagem do Banco de Dados (Entrega 1)](./documentos/entrega1/Projetos%20em%20Banco%20de%20Dados/README.md)
-- [Projetos em Banco de Dados (Entrega 2)](./documentos/entrega2/Projetos%20em%20Banco%20de%20Dados/README.md).
+- [Projetos em Banco de Dados (Entrega 2)](./documentos/entrega2/Projetos%20em%20Banco%20de%20Dados/README.md)
 
 ## 🌐 Acesse o projeto
 
