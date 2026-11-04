@@ -3,21 +3,30 @@ import { Link, useOutletContext } from 'react-router-dom'
 import { ClienteHeader } from '../../componentes/cliente/ClienteHeader'
 import { SeletorTema } from '../../componentes/comum/SeletorTema'
 import { temasPainel } from '../../utils/tema'
+import { usuarioLogado } from '../../api/auth'
 
 export function ClienteConfiguracoes() {
   const { tema, definirTema } = useOutletContext()
+  const usuario = usuarioLogado()
   const [salvo, setSalvo] = useState(false)
   const [dados, setDados] = useState({
-    nome: 'Gabriel Souza',
-    email: 'gabriel@exemplo.com',
+    nome: usuario?.nome || '',
+    email: usuario?.email || '',
     pais: 'Brasil',
-    cidade: 'São Paulo',
+    cidade: '',
     senhaAtual: '',
     senhaNova: '',
   })
 
+  const [notificacoes, setNotificacoes] = useState({ ofertas: true, custodia: true, promocoes: true })
+
   function alterar(campo, valor) {
     setDados((atual) => ({ ...atual, [campo]: valor }))
+    setSalvo(false)
+  }
+
+  function alterarNotificacao(chave, valor) {
+    setNotificacoes((atual) => ({ ...atual, [chave]: valor }))
     setSalvo(false)
   }
 
@@ -27,6 +36,7 @@ export function ClienteConfiguracoes() {
         titulo="Configurações"
         descricao="Senha, pagamentos, privacidade e ajuda."
         voltarParaPerfil
+        nome={usuario?.nome}
       />
 
       <main className="cliente-main">
@@ -69,13 +79,17 @@ export function ClienteConfiguracoes() {
         <div className="cliente-form-section">
           <h2>Notificações</h2>
           {[
-            ['Novas ofertas de ingressos', 'Avisos quando um evento salvo tiver nova oferta'],
-            ['Atualizações de custódia', 'Avisos sobre liberação de pagamento e status da custódia'],
-            ['Novidades e promoções', 'Comunicações de marketing da TrocaTicket'],
-          ].map(([titulo, descricao]) => (
-            <label className="cliente-toggle-row" key={titulo}>
+            ['ofertas', 'Novas ofertas de ingressos', 'Avisos quando um evento salvo tiver nova oferta'],
+            ['custodia', 'Atualizações de custódia', 'Avisos sobre liberação de pagamento e status da custódia'],
+            ['promocoes', 'Novidades e promoções', 'Comunicações de marketing da TrocaTicket'],
+          ].map(([chave, titulo, descricao]) => (
+            <label className="cliente-toggle-row" key={chave}>
               <div><strong>{titulo}</strong><p>{descricao}</p></div>
-              <input type="checkbox" defaultChecked />
+              <input
+                type="checkbox"
+                checked={notificacoes[chave]}
+                onChange={(e) => alterarNotificacao(chave, e.target.checked)}
+              />
             </label>
           ))}
         </div>
@@ -83,6 +97,9 @@ export function ClienteConfiguracoes() {
         <button type="button" className="cliente-btn-comprar" onClick={() => setSalvo(true)}>
           {salvo ? 'Alterações salvas ✓' : 'Salvar Alterações'}
         </button>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '0.5rem' }}>
+          Exibição apenas: ainda não existe uma rota no backend para salvar essas preferências.
+        </p>
         <Link to="/cliente/perfil" className="cliente-voltar">← Voltar para Perfil</Link>
       </main>
     </>

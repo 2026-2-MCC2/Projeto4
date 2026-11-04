@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ClienteHeader } from '../../componentes/cliente/ClienteHeader'
 import { listarEventosPublicos, listarRevendasPublicas } from '../../api/publico'
+import { usuarioLogado } from '../../api/auth'
 
 function formatarPreco(valor) {
   return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
@@ -15,6 +16,7 @@ function formatarData(dataIso) {
 }
 
 export function ClienteIngressos() {
+  const usuario = usuarioLogado()
   const [categoria, setCategoria] = useState('todos')
   const [ordenar, setOrdenar] = useState('menor-preco')
   const [itens, setItens] = useState([])
@@ -88,6 +90,7 @@ export function ClienteIngressos() {
       <ClienteHeader
         titulo="Ingressos"
         descricao="Explore os ingressos disponíveis para compra ou troca."
+        nome={usuario?.nome}
       />
 
       <main className="cliente-main">

@@ -4,6 +4,7 @@ import { ClienteHeader } from '../../componentes/cliente/ClienteHeader'
 import { ModalPagamento } from '../../componentes/cliente/ModalPagamento'
 import { buscarEventoPublico, buscarRevendaPublica } from '../../api/publico'
 import { comprarIngresso, comprarRevenda, criarProposta } from '../../api/ingressos'
+import { usuarioLogado } from '../../api/auth'
 
 function formatarPreco(valor) {
   return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
@@ -17,6 +18,7 @@ function formatarData(dataIso) {
 }
 
 export function ClienteVerIngresso() {
+  const usuario = usuarioLogado()
   const { tipo, id } = useParams()
   const navegar = useNavigate()
   const ehRevenda = tipo === 'revenda'
@@ -109,7 +111,7 @@ export function ClienteVerIngresso() {
   if (carregando) {
     return (
       <>
-        <ClienteHeader titulo="Detalhes do Ingresso" descricao="Carregando..." />
+        <ClienteHeader titulo="Detalhes do Ingresso" descricao="Carregando..." nome={usuario?.nome} />
         <main className="cliente-main"><p>Carregando ingresso...</p></main>
       </>
     )
@@ -118,7 +120,7 @@ export function ClienteVerIngresso() {
   if (erro || !item) {
     return (
       <>
-        <ClienteHeader titulo="Detalhes do Ingresso" descricao="Não foi possível carregar este ingresso." />
+        <ClienteHeader titulo="Detalhes do Ingresso" descricao="Não foi possível carregar este ingresso." nome={usuario?.nome} />
         <main className="cliente-main">
           <p role="alert" style={{ color: '#BE123C' }}>{erro || 'Ingresso não encontrado.'}</p>
           <Link to="/cliente/ingressos" className="cliente-voltar">← Voltar para Ingressos</Link>
@@ -134,6 +136,7 @@ export function ClienteVerIngresso() {
       <ClienteHeader
         titulo="Detalhes do Ingresso"
         descricao="Confira as informações completas antes de comprar ou negociar."
+        nome={usuario?.nome}
       />
 
       <main className="cliente-main">

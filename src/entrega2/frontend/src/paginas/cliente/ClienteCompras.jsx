@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ClienteHeader } from '../../componentes/cliente/ClienteHeader'
 import { listarEventosPublicos, listarRevendasPublicas } from '../../api/publico'
+import { usuarioLogado } from '../../api/auth'
 
 function formatarPreco(valor) {
   return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
@@ -11,6 +12,7 @@ const CATEGORIAS = ['todos', 'show', 'esporte', 'teatro', 'festival', 'standup']
 const ROTULO_CATEGORIA = { todos: 'Todos', show: 'Show', esporte: 'Esporte', teatro: 'Teatro', festival: 'Festival', standup: 'Stand-up' }
 
 export function ClienteCompras() {
+  const usuario = usuarioLogado()
   const [categoria, setCategoria] = useState('todos')
   const [itens, setItens] = useState([])
   const [carregando, setCarregando] = useState(true)
@@ -52,6 +54,7 @@ export function ClienteCompras() {
       <ClienteHeader
         titulo="Compras"
         descricao="Ofertas de ingressos prontas para compra com custódia garantida."
+        nome={usuario?.nome}
       />
 
       <main className="cliente-main">
