@@ -61,7 +61,14 @@ export function App() {
         <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
         <Route path="/eventos" element={<Eventos />} />
 
-        <Route path="/cliente" element={<ClienteLayout />}>
+        <Route
+          path="/cliente"
+          element={
+            <RequireAuth tipo="cliente" destino="/login">
+              <ClienteLayout />
+            </RequireAuth>
+          }
+        >
           <Route index element={<ClienteInicio />} />
           <Route path="ingressos" element={<ClienteIngressos />} />
           <Route path="ingressos/:tipo/:id" element={<ClienteVerIngresso />} />

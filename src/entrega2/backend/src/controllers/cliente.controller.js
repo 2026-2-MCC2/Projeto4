@@ -91,6 +91,10 @@ async function listarMinhasRevendas(req, res) {
   res.json(rows);
 }
 
+// Teto anti-cambismo: revenda (ou proposta aceita) não pode passar de 10%
+// acima do que o cliente realmente pagou pelo ingresso.
+const LIMITE_MARKUP_REVENDA = 1.10;
+
 // Anunciar uma compra própria para revenda
 async function criarRevenda(req, res) {
   const idCompra = idValido(req.body.id_compra);
@@ -101,11 +105,18 @@ async function criarRevenda(req, res) {
   }
 
   const { rows: compras } = await pool.query(
-    `SELECT id_compra FROM compras WHERE id_compra = $1 AND id_cliente = $2 AND status = 'confirmada'`,
+    `SELECT id_compra, valor_unitario FROM compras WHERE id_compra = $1 AND id_cliente = $2 AND status = 'confirmada'`,
     [idCompra, req.idCliente]
   );
   if (!compras[0]) {
     return res.status(404).json({ erro: 'Compra não encontrada, não é sua, ou já foi revendida' });
+  }
+
+  const precoMaximo = Math.round(compras[0].valor_unitario * LIMITE_MARKUP_REVENDA * 100) / 100;
+  if (preco > precoMaximo) {
+    return res.status(400).json({
+      erro: `O preço de revenda não pode passar de 10% acima do valor pago (máximo: R$ ${precoMaximo.toFixed(2)})`,
+    });
   }
 
   const { rows: ativas } = await pool.query(
@@ -203,7 +214,7 @@ async function criarProposta(req, res) {
   }
 
   const { rows } = await pool.query(
-    `SELECT r.id_revenda, c.id_cliente AS id_cliente_vendedor
+    `SELECT r.id_revenda, c.id_cliente AS id_cliente_vendedor, c.valor_unitario
        FROM revendas r
        JOIN compras c ON c.id_compra = r.id_compra
       WHERE r.id_revenda = $1 AND r.status = 'disponivel'`,
@@ -215,6 +226,13 @@ async function criarProposta(req, res) {
   }
   if (revenda.id_cliente_vendedor === req.idCliente) {
     return res.status(400).json({ erro: 'Você não pode propor um preço no seu próprio anúncio' });
+  }
+
+  const precoMaximoProposta = Math.round(revenda.valor_unitario * LIMITE_MARKUP_REVENDA * 100) / 100;
+  if (preco > precoMaximoProposta) {
+    return res.status(400).json({
+      erro: `A proposta não pode passar de 10% acima do valor original do ingresso (máximo: R$ ${precoMaximoProposta.toFixed(2)})`,
+    });
   }
 
   const { rows: propostaRows } = await pool.query(

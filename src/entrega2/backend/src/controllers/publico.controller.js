@@ -44,7 +44,7 @@ async function buscarEvento(req, res) {
 }
 
 const CAMPOS_REVENDA_PUBLICA = `r.id_revenda, r.preco_unitario, r.criado_em,
-       c.id_compra, c.quantidade,
+       c.id_compra, c.quantidade, c.valor_unitario AS preco_original,
        e.id_evento, e.nome, e.data, e.data_fim, e.local, e.categoria, e.imagem_url, e.descricao`;
 
 // Vitrine pública de revenda: ingressos que outros clientes colocaram à venda

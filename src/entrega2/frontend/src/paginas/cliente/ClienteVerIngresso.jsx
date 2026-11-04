@@ -53,6 +53,7 @@ export function ClienteVerIngresso() {
             categoria: dados.categoria,
             quantidadeLote: dados.quantidade,
             disponiveis: dados.quantidade,
+            precoMaximoProposta: Math.round(Number(dados.preco_original) * 1.10 * 100) / 100,
           })
           setQuantidade(dados.quantidade)
         } else {
@@ -220,12 +221,14 @@ export function ClienteVerIngresso() {
                     id="preco-proposta"
                     type="number"
                     min="0.01"
+                    max={item.precoMaximoProposta}
                     step="0.01"
                     placeholder={`Anunciado a ${formatarPreco(item.preco)}`}
                     value={precoProposta}
                     onChange={(e) => setPrecoProposta(e.target.value)}
                     required
                   />
+                  <small>Máximo permitido: {formatarPreco(item.precoMaximoProposta)} (10% acima do valor original — regra antiágio)</small>
                   {erroProposta && (
                     <p role="alert" style={{ color: '#BE123C', fontSize: '0.85rem' }}>{erroProposta}</p>
                   )}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ClienteHeader } from '../../componentes/cliente/ClienteHeader'
 import { usuarioLogado } from '../../api/auth'
 import {
@@ -37,6 +37,11 @@ export function ClienteSuasRevendas() {
   const [precoAnuncio, setPrecoAnuncio] = useState('')
   const [anunciando, setAnunciando] = useState(false)
   const [erroAnuncio, setErroAnuncio] = useState('')
+
+  const precoMaximoAnuncio = useMemo(() => {
+    const compra = comprasElegiveis.find((c) => String(c.id_compra) === compraEscolhida)
+    return compra ? Math.round(compra.valor_unitario * 1.10 * 100) / 100 : null
+  }, [comprasElegiveis, compraEscolhida])
 
   async function carregarTudo() {
     setCarregando(true)
@@ -187,11 +192,15 @@ export function ClienteSuasRevendas() {
                   id="preco-anuncio"
                   type="number"
                   min="0.01"
+                  max={precoMaximoAnuncio || undefined}
                   step="0.01"
                   value={precoAnuncio}
                   onChange={(e) => setPrecoAnuncio(e.target.value)}
                   required
                 />
+                {precoMaximoAnuncio != null && (
+                  <small>Máximo permitido: {formatarPreco(precoMaximoAnuncio)} (10% acima do que você pagou — regra antiágio)</small>
+                )}
               </div>
             </div>
             {erroAnuncio && <p role="alert" style={{ color: '#BE123C' }}>{erroAnuncio}</p>}
