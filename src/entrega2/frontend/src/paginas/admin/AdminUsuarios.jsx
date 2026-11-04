@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { api } from '../../api/cliente'
 import { CabecalhoPagina } from '../../componentes/admin/layout'
 import { Avatar, Botao, MiniEstatisticas, Painel, Tag } from '../../componentes/admin/primitivos'
@@ -32,9 +33,10 @@ const TOM_STATUS = {
 
 
 export function AdminUsuarios() {
+  const [searchParams] = useSearchParams()
   const [statusFiltro, setStatusFiltro] = useState('pendente')
   const [papelFiltro, setPapelFiltro] = useState('')
-  const [busca, setBusca] = useState('')
+  const [busca, setBusca] = useState(searchParams.get('q') || '')
   const [cadastros, setCadastros] = useState([])
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState('')

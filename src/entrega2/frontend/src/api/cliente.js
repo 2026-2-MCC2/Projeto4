@@ -3,29 +3,59 @@
 // e sempre devolve o JSON já pronto, ou lança um Error com a mensagem do backend.
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
-const CHAVE_TOKEN = 'trocaticket-token'
-const CHAVE_USUARIO = 'trocaticket-usuario'
+const CHAVE_SESSOES = 'trocaticket-sessoes'
 
-export function salvarSessao(token, usuario) {
-  localStorage.setItem(CHAVE_TOKEN, token)
-  localStorage.setItem(CHAVE_USUARIO, JSON.stringify(usuario))
+// Uma sessão por papel (cliente/organizador/fornecedor/administrador), não
+// uma só pro navegador inteiro. Sem isso, logar como admin numa aba derruba
+// a sessão do organizador em outra aba (localStorage é compartilhado entre
+// abas da mesma origem) — cada aba usa o papel da sua própria URL pra saber
+// qual sessão ler/gravar, então dá pra ficar logado em vários papéis ao
+// mesmo tempo, cada um na sua aba.
+function papelDaRota() {
+  if (typeof window === 'undefined') return null
+  const caminho = window.location.pathname
+  if (caminho.startsWith('/admin')) return 'administrador'
+  if (caminho.startsWith('/organizador')) return 'organizador'
+  if (caminho.startsWith('/fornecedor')) return 'fornecedor'
+  if (caminho.startsWith('/cliente')) return 'cliente'
+  return null
 }
 
-export function limparSessao() {
-  localStorage.removeItem(CHAVE_TOKEN)
-  localStorage.removeItem(CHAVE_USUARIO)
-}
-
-export function obterToken() {
-  return localStorage.getItem(CHAVE_TOKEN)
-}
-
-export function obterUsuario() {
+function lerSessoes() {
   try {
-    return JSON.parse(localStorage.getItem(CHAVE_USUARIO) || 'null')
+    return JSON.parse(localStorage.getItem(CHAVE_SESSOES) || '{}')
   } catch {
-    return null
+    return {}
   }
+}
+
+function gravarSessoes(sessoes) {
+  localStorage.setItem(CHAVE_SESSOES, JSON.stringify(sessoes))
+}
+
+// O papel de quem acabou de logar vem da própria resposta do login, não da
+// rota atual (por exemplo, "/login" não tem papel nenhum na URL).
+export function salvarSessao(token, usuario) {
+  const sessoes = lerSessoes()
+  sessoes[usuario.tipo] = { token, usuario }
+  gravarSessoes(sessoes)
+}
+
+export function limparSessao(papel = papelDaRota()) {
+  if (!papel) return
+  const sessoes = lerSessoes()
+  delete sessoes[papel]
+  gravarSessoes(sessoes)
+}
+
+export function obterToken(papel = papelDaRota()) {
+  if (!papel) return null
+  return lerSessoes()[papel]?.token || null
+}
+
+export function obterUsuario(papel = papelDaRota()) {
+  if (!papel) return null
+  return lerSessoes()[papel]?.usuario || null
 }
 
 // Monta a query string a partir de um objeto, ignorando valores vazios.

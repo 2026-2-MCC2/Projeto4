@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export function ClienteHeader({ titulo, descricao, voltarParaPerfil = false, nome = 'Gabriel S.' }) {
+  const [notificacoesAbertas, setNotificacoesAbertas] = useState(false)
+
   return (
     <header className="cliente-topbar">
       <div>
@@ -14,10 +17,24 @@ export function ClienteHeader({ titulo, descricao, voltarParaPerfil = false, nom
       </div>
 
       <div className="cliente-topbar__actions">
-        <button type="button" className="cliente-icon-btn" aria-label="Notificações">
-          🔔
-          <span className="cliente-badge-dot" />
-        </button>
+        <div className="cliente-notificacoes">
+          <button
+            type="button"
+            className="cliente-icon-btn"
+            aria-label="Notificações"
+            aria-expanded={notificacoesAbertas}
+            onClick={() => setNotificacoesAbertas((aberto) => !aberto)}
+          >
+            🔔
+          </button>
+
+          {notificacoesAbertas && (
+            <div className="cliente-notificacoes__painel" role="menu">
+              <strong>Notificações</strong>
+              <p>Você não tem notificações no momento.</p>
+            </div>
+          )}
+        </div>
 
         <div className="cliente-topbar__user">
           <span className="admin-avatar">GS</span>

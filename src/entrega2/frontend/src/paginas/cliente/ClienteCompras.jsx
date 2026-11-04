@@ -1,16 +1,52 @@
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ClienteHeader } from '../../componentes/cliente/ClienteHeader'
+import { listarEventosPublicos, listarRevendasPublicas } from '../../api/publico'
 
-const ofertas = [
-  ['Festival de Verão 2025', 'Pista Premium • Setor Norte • Vendedor verificado', 'R$ 280,00', 'festival-verao-2025'],
-  ['Final do Campeonato Nacional', 'Cadeira Inferior • Setor Leste • Vendedor verificado', 'R$ 350,00', 'campeonato-nacional'],
-  ['Noite de Comédia Especial', 'Plateia A • Fileira F • Vendedor verificado', 'R$ 90,00', 'comedia-especial'],
-  ['Rock The Mountain 2025', 'Passaporte 2 dias • Área geral • Vendedor verificado', 'R$ 180,00', 'rock-the-mountain'],
-  ['Coldplay World Tour Brasil', 'Pista Geral • Portão B • Vendedor verificado', 'R$ 620,00', 'coldplay-brasil'],
-  ['Lollapalooza Brasil - Sábado', 'Pista • Dia 1 • Vendedor verificado', 'R$ 520,00', 'lollapalooza-brasil'],
-]
+function formatarPreco(valor) {
+  return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+}
+
+const CATEGORIAS = ['todos', 'show', 'esporte', 'teatro', 'festival', 'standup']
+const ROTULO_CATEGORIA = { todos: 'Todos', show: 'Show', esporte: 'Esporte', teatro: 'Teatro', festival: 'Festival', standup: 'Stand-up' }
 
 export function ClienteCompras() {
+  const [categoria, setCategoria] = useState('todos')
+  const [itens, setItens] = useState([])
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState('')
+
+  useEffect(() => {
+    let ativo = true
+    Promise.all([listarEventosPublicos(), listarRevendasPublicas()])
+      .then(([eventos, revendas]) => {
+        if (!ativo) return
+        const itensEventos = eventos.map((e) => ({
+          tipo: 'evento', id: e.id_evento, titulo: e.nome,
+          detalhe: `${e.local} • Venda oficial`,
+          preco: Number(e.preco_ingresso),
+          categoria: (e.categoria || '').toLowerCase(),
+          imagem: e.imagem_url || `https://picsum.photos/seed/evento-${e.id_evento}/160/160`,
+        }))
+        const itensRevendas = revendas.map((r) => ({
+          tipo: 'revenda', id: r.id_revenda, titulo: r.nome,
+          detalhe: `${r.local} • Revenda entre clientes`,
+          preco: Number(r.preco_unitario),
+          categoria: (r.categoria || '').toLowerCase(),
+          imagem: r.imagem_url || `https://picsum.photos/seed/revenda-${r.id_revenda}/160/160`,
+        }))
+        setItens([...itensEventos, ...itensRevendas])
+      })
+      .catch((erroRequisicao) => { if (ativo) setErro(erroRequisicao.message) })
+      .finally(() => { if (ativo) setCarregando(false) })
+    return () => { ativo = false }
+  }, [])
+
+  const filtrados = useMemo(
+    () => (categoria === 'todos' ? itens : itens.filter((item) => item.categoria === categoria)),
+    [itens, categoria]
+  )
+
   return (
     <>
       <ClienteHeader
@@ -21,9 +57,14 @@ export function ClienteCompras() {
       <main className="cliente-main">
         <div className="cliente-filtros-bar">
           <span className="cliente-filtros-bar__label">☷ Filtros</span>
-          {['Todos', 'Show', 'Esporte', 'Teatro', 'Festival', 'Stand-up'].map((item, index) => (
-            <button key={item} type="button" className={`cliente-filtro-pill ${index === 0 ? 'is-active' : ''}`}>
-              {item}
+          {CATEGORIAS.map((item) => (
+            <button
+              key={item}
+              type="button"
+              className={`cliente-filtro-pill ${categoria === item ? 'is-active' : ''}`}
+              onClick={() => setCategoria(item)}
+            >
+              {ROTULO_CATEGORIA[item]}
             </button>
           ))}
         </div>
@@ -31,28 +72,40 @@ export function ClienteCompras() {
         <div className="cliente-lista-head">
           <div>
             <h2>Ofertas para você</h2>
-            <p>Salve os eventos que quiser acompanhar</p>
+            <p>Eventos oficiais e revendas verificadas com custódia TrocaTicket</p>
           </div>
-          <span className="cliente-lista-contador">6 ofertas</span>
+          <span className="cliente-lista-contador">{filtrados.length} oferta{filtrados.length !== 1 ? 's' : ''}</span>
         </div>
 
+        {erro && (
+          <div className="cliente-estado" role="alert">
+            <p style={{ color: '#BE123C' }}>{erro}</p>
+          </div>
+        )}
+
         <div className="cliente-ingresso-lista">
-          {ofertas.map(([titulo, detalhe, preco, id]) => (
-            <article className="cliente-ingresso-item" key={id}>
-              <img className="cliente-ingresso-item__imagem" src={`https://picsum.photos/seed/${id}/160/160`} alt={titulo} />
-              <div className="cliente-ingresso-item__info">
-                <h3>{titulo}</h3>
-                <p>{detalhe}</p>
-              </div>
-              <div className="cliente-ingresso-item__preco">
-                <strong>{preco}</strong>
-                <small>por ingresso</small>
-              </div>
-              <div className="cliente-ingresso-item__acoes">
-                <Link to={`/cliente/ingressos/${id}`} className="cliente-btn-comprar">Comprar</Link>
-              </div>
-            </article>
-          ))}
+          {carregando ? (
+            <div className="cliente-estado"><p>Carregando ofertas...</p></div>
+          ) : filtrados.length === 0 ? (
+            <div className="cliente-estado"><p>Nenhuma oferta encontrada para esse filtro.</p></div>
+          ) : (
+            filtrados.map((item) => (
+              <article className="cliente-ingresso-item" key={`${item.tipo}-${item.id}`}>
+                <img className="cliente-ingresso-item__imagem" src={item.imagem} alt={item.titulo} />
+                <div className="cliente-ingresso-item__info">
+                  <h3>{item.titulo}</h3>
+                  <p>{item.detalhe}</p>
+                </div>
+                <div className="cliente-ingresso-item__preco">
+                  <strong>{formatarPreco(item.preco)}</strong>
+                  <small>por ingresso</small>
+                </div>
+                <div className="cliente-ingresso-item__acoes">
+                  <Link to={`/cliente/ingressos/${item.tipo}/${item.id}`} className="cliente-btn-comprar">Comprar</Link>
+                </div>
+              </article>
+            ))
+          )}
         </div>
       </main>
     </>

@@ -11,6 +11,7 @@ export function Login() {
   const [senha, setSenha] = useState('')
   const [erro, setErro] = useState('')
   const [carregando, setCarregando] = useState(false)
+  const [mostrarAjudaSenha, setMostrarAjudaSenha] = useState(false)
 
   async function fazerLogin(e) {
     e.preventDefault()
@@ -97,10 +98,22 @@ export function Login() {
           </form>
 
           <p>
-            <a href="#">
+            <button
+              type="button"
+              onClick={() => setMostrarAjudaSenha((atual) => !atual)}
+              style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', textDecoration: 'underline', cursor: 'pointer', font: 'inherit' }}
+            >
               Esqueci minha senha
-            </a>
+            </button>
           </p>
+
+          {mostrarAjudaSenha && (
+            <p role="status">
+              Por enquanto a recuperação de senha é feita pelo suporte: envie um e-mail para{' '}
+              <a href="mailto:suporte@trocaticket.com.br">suporte@trocaticket.com.br</a> com o
+              e-mail da sua conta.
+            </p>
+          )}
 
           <p>
             Ainda não possui uma conta?

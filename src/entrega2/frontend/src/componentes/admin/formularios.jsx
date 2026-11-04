@@ -64,14 +64,34 @@ export function Interruptor({ rotulo, descricao, ligado, aoAlternar, compacto = 
 }
 
 export function LinhaAtivo({ src, alt, nome, detalhe, acao = 'Substituir' }) {
+  const idArquivo = useId()
+  const [previa, setPrevia] = useState(null)
+  const [nomeArquivo, setNomeArquivo] = useState(nome)
+
+  function aoEscolherArquivo(e) {
+    const arquivo = e.target.files?.[0]
+    if (!arquivo) return
+    setPrevia(URL.createObjectURL(arquivo))
+    setNomeArquivo(arquivo.name)
+  }
+
   return (
     <div className="admin-asset-row">
-      <img src={src} alt={alt} />
+      <img src={previa || src} alt={alt} />
       <div>
-        <strong>{nome}</strong>
-        <small>{detalhe}</small>
+        <strong>{nomeArquivo}</strong>
+        <small>{previa ? 'Pré-visualização local (nada foi enviado ao servidor)' : detalhe}</small>
       </div>
-      <Botao>{acao}</Botao>
+      <input
+        id={idArquivo}
+        type="file"
+        accept="image/*"
+        onChange={aoEscolherArquivo}
+        style={{ display: 'none' }}
+      />
+      <Botao onClick={() => document.getElementById(idArquivo)?.click()}>
+        {acao}
+      </Botao>
     </div>
   )
 }
@@ -127,14 +147,36 @@ export function SelecaoTema({ temas, selecionado, aoSelecionar }) {
   )
 }
 
+function gerarSufixoChave() {
+  return Math.random().toString(36).slice(2, 14)
+}
+
 export function LinhaChaveApi({ rotulo, chave }) {
+  const [valor, setValor] = useState(chave)
+  const [copiado, setCopiado] = useState(false)
+
+  async function copiar() {
+    try {
+      await navigator.clipboard.writeText(valor)
+      setCopiado(true)
+      setTimeout(() => setCopiado(false), 1500)
+    } catch {
+      // clipboard indisponível (ex: contexto não seguro) — ignora silenciosamente
+    }
+  }
+
+  function regenerar() {
+    const prefixo = valor.split('_').slice(0, 2).join('_')
+    setValor(`${prefixo}_${gerarSufixoChave()}••••••••••••`)
+  }
+
   return (
     <div className="admin-field">
       <label>{rotulo}</label>
       <div className="admin-key-row">
-        <code>{chave}</code>
-        <Botao>Copiar</Botao>
-        <Botao>Regenerar</Botao>
+        <code>{valor}</code>
+        <Botao onClick={copiar}>{copiado ? 'Copiado ✓' : 'Copiar'}</Botao>
+        <Botao onClick={regenerar}>Regenerar</Botao>
       </div>
     </div>
   )

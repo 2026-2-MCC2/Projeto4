@@ -29,8 +29,8 @@ export function Rodape() {
       </div>
       <div>
         <h3>Ajuda</h3>
-        <a href="#">Termos de uso </a>
-        <a href="#"> Política de privacidade </a>
+        <Link to="/termos-de-uso">Termos de uso</Link>
+        <Link to="/politica-de-privacidade">Política de privacidade</Link>
       </div>
       <p> &copy; 2026 TrocaTicket. Todos os direitos reservados.</p>
       <Creditos />

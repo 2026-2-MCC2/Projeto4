@@ -232,6 +232,14 @@ function BarraLateral({ aberto, aoFechar }) {
 
 function BarraTopo({ botaoMenuRef, menuAberto, aoAlternarMenu }) {
   const usuario = obterUsuario()
+  const navegar = useNavigate()
+
+  function buscar(e) {
+    e.preventDefault()
+    const termo = e.target.elements.busca.value.trim()
+    navegar(termo ? `/admin/usuarios?q=${encodeURIComponent(termo)}` : '/admin/usuarios')
+  }
+
   return (
     <div className="admin-topbar">
       <button
@@ -245,11 +253,14 @@ function BarraTopo({ botaoMenuRef, menuAberto, aoAlternarMenu }) {
       >
         {menuAberto ? '✕' : '☰'}
       </button>
-      <input
-        type="search"
-        placeholder="Buscar usuários, logs, permissões ou eventos..."
-        aria-label="Busca global do painel"
-      />
+      <form onSubmit={buscar} role="search" style={{ flex: 1 }}>
+        <input
+          type="search"
+          name="busca"
+          placeholder="Buscar usuários por nome, e-mail ou documento..."
+          aria-label="Buscar usuários"
+        />
+      </form>
       <div className="admin-topbar__status">
         <span className="admin-status-dot" />
         Sistemas Operacionais 99.9%

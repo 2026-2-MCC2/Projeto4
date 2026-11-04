@@ -10,6 +10,8 @@ import { Cadastro } from './paginas/Cadastro'
 import { Eventos } from './paginas/Eventos'
 import { Inicio } from './paginas/Inicio'
 import { Login } from './paginas/Login'
+import { TermosDeUso } from './paginas/TermosDeUso'
+import { PoliticaPrivacidade } from './paginas/PoliticaPrivacidade'
 
 import { AdminConfiguracoes } from './paginas/admin/AdminConfiguracoes'
 import { AdminDashboard } from './paginas/admin/AdminDashboard'
@@ -55,6 +57,8 @@ export function App() {
         <Route path="/" element={<Inicio />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/termos-de-uso" element={<TermosDeUso />} />
+        <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
         <Route path="/eventos" element={<Eventos />} />
 
         <Route path="/cliente" element={<ClienteLayout />}>
