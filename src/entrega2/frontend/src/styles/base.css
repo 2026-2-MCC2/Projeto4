@@ -51,7 +51,11 @@ textarea:focus-visible,
 }
 
 /* ===================== CABEÇALHO ===================== */
-header {
+/* Escopado em .cabecalho-publico (não em "header"/"nav" puros) porque
+   .cliente-topbar, .org-menu etc. também usam <header>/<nav> — um "header{}"
+   genérico com height:72px fixo vazava pra lá e cortava título+descrição de
+   duas linhas, fazendo o conteúdo sobrepor o que vinha depois na página. */
+.cabecalho-publico {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,23 +65,23 @@ header {
     border-bottom: 1px solid var(--border);
 }
 
-header img {
+.cabecalho-publico img {
     height: 60px;
     width: auto;
 }
 
-nav {
+.cabecalho-publico nav {
     display: flex;
     align-items: center;
     gap: 1.5rem;
 }
 
-nav a {
+.cabecalho-publico nav a {
     font-size: 0.9rem;
     color: var(--accent);
 }
 
-header nav a:last-child {
+.cabecalho-publico nav a:last-child {
     background: var(--primary);
     color: var(--white);
     padding: 0.6rem 1.1rem;
@@ -85,22 +89,22 @@ header nav a:last-child {
     font-weight: 600;
 }
 
-header:not(:has(nav)) {
+.cabecalho-publico:not(:has(nav)) {
     justify-content: center;
 }
 
 /* Cabeçalho escuro apenas na página inicial (identificada pela seção hero) */
-header:has(+ main > section > a) {
+.cabecalho-publico:has(+ main > section > a) {
     background: var(--primary);
     border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Remove o link "Revenda" do menu em todas as páginas (área ainda não migrada) */
-header nav a:nth-child(3) {
+.cabecalho-publico nav a:nth-child(3) {
     display: none;
 }
 
-header:has(+ main > section > a) nav a:last-child {
+.cabecalho-publico:has(+ main > section > a) nav a:last-child {
     background: var(--accent);
     color: var(--white);
 }
@@ -857,14 +861,14 @@ footer div a:hover {
 
 /* ===================== RESPONSIVO (TELAS PEQUENAS) ===================== */
 @media (max-width: 640px) {
-    header {
+    .cabecalho-publico {
         flex-direction: column;
         height: auto;
         padding: 1rem;
         gap: 0.75rem;
     }
 
-    nav {
+    .cabecalho-publico nav {
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.75rem 1rem;
@@ -904,7 +908,7 @@ footer div a:hover {
 }
 
 
-header nav a.cabecalho-voltar:last-child {
+.cabecalho-publico nav a.cabecalho-voltar:last-child {
     background: none;
     color: var(--text-muted);
     padding: 0;
@@ -913,7 +917,7 @@ header nav a.cabecalho-voltar:last-child {
     text-transform: none;
 }
 
-header nav a.cabecalho-voltar:hover {
+.cabecalho-publico nav a.cabecalho-voltar:hover {
     color: var(--text);
 }
 

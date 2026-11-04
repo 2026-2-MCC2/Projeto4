@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export function Cabecalho() {
   return (
-    <header>
+    <header className="cabecalho-publico">
       <Link to="/" aria-label="Página Inicial">
         <img src="/images/logo_navbar_web.png" alt="TrocaTicket" />
       </Link>
@@ -19,7 +19,7 @@ export function Cabecalho() {
 
 export function CabecalhoSimples() {
   return (
-    <header>
+    <header className="cabecalho-publico">
       <Link to="/">
         <img src="/images/logo_navbar_web.png" alt="TrocaTicket" />
       </Link>
