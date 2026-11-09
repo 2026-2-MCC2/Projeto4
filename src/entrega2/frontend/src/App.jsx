@@ -39,7 +39,6 @@ import { FornecedorEventos } from './paginas/fornecedor/FornecedorEventos'
 import { FornecedorPropostas } from './paginas/fornecedor/FornecedorPropostas'
 import { FornecedorMeusEventos } from './paginas/fornecedor/FornecedorMeusEventos'
 import { FornecedorPerfil } from './paginas/fornecedor/FornecedorPerfil'
-import { FornecedorCadastroServico } from './paginas/fornecedor/FornecedorCadastroServico'
 
 import { OrganizadorLayout } from './componentes/organizador/OrganizadorLayout'
 import { OrganizadorInicio } from './paginas/organizador/OrganizadorInicio'
@@ -112,7 +111,6 @@ export function App() {
         <Route path="propostas" element={<FornecedorPropostas />} />
         <Route path="eventos" element={<FornecedorMeusEventos />} />
         <Route path="perfil" element={<FornecedorPerfil />} />
-        <Route path="servicos/novo" element={<FornecedorCadastroServico />} />
         <Route path="*" element={<Navigate to="/fornecedor" replace />} /> </Route>
 
 

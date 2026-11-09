@@ -7,7 +7,6 @@ const links = [
   { to: '/fornecedor/propostas', label: 'Minhas propostas' },
   { to: '/fornecedor/eventos', label: 'Meus eventos' },
   { to: '/fornecedor/perfil', label: 'Meu perfil' },
-  { to: '/fornecedor/servicos/novo', label: 'Cadastrar serviço' },
 ]
 
 export function FornecedorMenu() {
