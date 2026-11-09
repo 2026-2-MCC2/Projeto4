@@ -1,0 +1,28 @@
+import { Link } from 'react-router-dom'
+
+export function Cabecalho() {
+  return (
+    <header className="cabecalho-publico">
+      <Link to="/" aria-label="Página Inicial">
+        <img src="/images/logo_navbar_web.png" alt="TrocaTicket" />
+      </Link>
+      <nav>
+        <Link to="/">Início</Link>
+        <Link to="/eventos">Eventos</Link>
+        <Link to="/login">Revenda</Link>
+        <Link to="/login">Entrar</Link>
+        <Link to="/cadastro">Criar conta</Link>
+      </nav>
+    </header>
+  )
+}
+
+export function CabecalhoSimples() {
+  return (
+    <header className="cabecalho-publico">
+      <Link to="/">
+        <img src="/images/logo_navbar_web.png" alt="TrocaTicket" />
+      </Link>
+    </header>
+  )
+}

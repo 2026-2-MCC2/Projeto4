@@ -1,0 +1,121 @@
+@baseUrl = https://interlink-api-4w9h.onrender.com
+# @baseUrl = http://localhost:3000
+
+### 1. Cadastro de CLIENTE (deve dar 201 e "aprovado")
+POST {{baseUrl}}/api/auth/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Gabriel Souza",
+  "email": "gabriel.souza@email.com",
+  "senha": "Cliente123!",
+  "tipo": "cliente",
+  "cpf": "123.456.789-01"
+}
+
+### 2. Cadastro de ORGANIZADOR (deve dar 201 e "pendente")
+POST {{baseUrl}}/api/auth/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Carlos Mendes",
+  "email": "carlos.mendes@liveprod.com.br",
+  "senha": "Organizador123!",
+  "tipo": "organizador",
+  "cnpj": "12.345.678/0001-90",
+  "endereco": "Av. Paulista, 1000"
+}
+
+### 3. E-mail repetido (deve dar 409)
+POST {{baseUrl}}/api/auth/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Gabriel Cópia",
+  "email": "gabriel.souza@email.com",
+  "senha": "Cliente123!",
+  "tipo": "cliente",
+  "cpf": "999.999.999-99"
+}
+
+### 4. Dados inválidos (deve dar 400)
+POST {{baseUrl}}/api/auth/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Sem senha",
+  "email": "teste@email.com",
+  "tipo": "cliente"
+}
+
+### 5. Login do CLIENTE aprovado (deve dar 200 + token)
+# @name loginCliente
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "gabriel.souza@email.com",
+  "senha": "Cliente123!"
+}
+
+
+### 6. Login do ORGANIZADOR pendente (deve dar 403)
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "carlos.mendes@liveprod.com.br",
+  "senha": "Organizador123!"
+}
+
+### 7. Senha errada (deve dar 401)
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "gabriel.souza@email.com",
+  "senha": "senhaerrada"
+}
+
+### 8. Meus dados COM token (deve dar 200)
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{loginCliente.response.body.token}}
+
+### 9. SEM token (deve dar 401)
+GET {{baseUrl}}/api/auth/me
+
+### 10. Token FALSO (deve dar 401)
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer token.falso.123
+
+### 11. Login do ADMIN (deve dar 200 + token)
+# @name loginAdmin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@trocaticket.com.br",
+  "senha": "Admin123!"
+}
+
+### 12. RF03 – Admin lista pendentes (deve dar 200 com o Carlos)
+GET {{baseUrl}}/api/admin/cadastros
+Authorization: Bearer {{loginAdmin.response.body.token}}
+
+### 13. RF03 – CLIENTE tenta listar (deve dar 403)
+GET {{baseUrl}}/api/admin/cadastros
+Authorization: Bearer {{loginCliente.response.body.token}}
+
+### 14. RF04 – Decisão inválida (deve dar 400)
+PATCH {{baseUrl}}/api/admin/cadastros/2
+Authorization: Bearer {{loginAdmin.response.body.token}}
+Content-Type: application/json
+
+{ "decisao": "talvez" }
+
+### 15. RF04 – Admin APROVA o Carlos (deve dar 200)
+PATCH {{baseUrl}}/api/admin/cadastros/2
+Authorization: Bearer {{loginAdmin.response.body.token}}
+Content-Type: application/json
+
+{ "decisao": "aprovado" }
