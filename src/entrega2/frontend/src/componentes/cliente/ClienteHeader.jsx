@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { iniciaisDoNome } from '../../utils/formatar'
+import { usuarioLogado } from '../../api/auth'
 
-export function ClienteHeader({ titulo, descricao, voltarParaPerfil = false, nome = 'Visitante' }) {
+export function ClienteHeader({ titulo, descricao, voltarParaPerfil = false, nome }) {
   const [notificacoesAbertas, setNotificacoesAbertas] = useState(false)
+  // Usa o nome recebido pela página; se não vier, pega o do usuário logado
+  const nomeExibido = nome || usuarioLogado()?.nome || 'Visitante'
 
   return (
     <header className="cliente-topbar">
@@ -38,9 +41,9 @@ export function ClienteHeader({ titulo, descricao, voltarParaPerfil = false, nom
         </div>
 
         <div className="cliente-topbar__user">
-          <span className="admin-avatar">{iniciaisDoNome(nome)}</span>
+          <span className="admin-avatar">{iniciaisDoNome(nomeExibido)}</span>
           <div>
-            <strong>{nome}</strong>
+             <strong>{nomeExibido}</strong>
             <small><span className="cliente-dot-ok" /> Conta Verificada</small>
           </div>
         </div>
