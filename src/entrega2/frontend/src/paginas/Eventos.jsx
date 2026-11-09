@@ -1,46 +1,37 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Cabecalho } from '../componentes/publico/Cabecalho'
 import { Rodape } from '../componentes/publico/Rodape'
+import { listarEventosPublicos } from '../api/publico'
+import { moeda } from '../utils/formatar'
 
-const eventos = [
-  {
-    imagem: '/images/eventos/evento-3.jpg',
-    categoria: 'ESPORTE',
-    nome: 'Evento Esportivo',
-    data: '05 de novembro de 2026',
-    dataISO: '2026-11-05',
-    local: 'São Paulo - SP',
-    preco: 'R$ 60,00',
-  },
-  {
-    imagem: '/images/eventos/evento-1.jpg',
-    categoria: 'SHOW',
-    nome: 'Nome do Evento',
-    data: '15 de outubro de 2026',
-    dataISO: '2026-10-15',
-    local: 'São Paulo - SP',
-    preco: 'R$ 80,00',
-  },
-  {
-    imagem: '/images/eventos/evento-2.jpg',
-    categoria: 'FESTIVAL',
-    nome: 'Festival TrocaTicket',
-    data: '22 de outubro de 2026',
-    dataISO: '2026-10-22',
-    local: 'São Paulo - SP',
-    preco: 'R$ 120,00',
-  },
-  {
-    imagem: '/images/eventos/evento-4.jpg',
-    categoria: 'TEATRO',
-    nome: 'Espetáculo de Teatro',
-    data: '12 de novembro de 2026',
-    dataISO: '2026-11-12',
-    local: 'São Paulo - SP',
-    preco: 'R$ 45,00',
-  },
+// Imagens locais usadas quando o organizador não cadastrou imagem_url
+const IMAGENS_PADRAO = [
+  '/images/eventos/evento-1.jpg',
+  '/images/eventos/evento-2.jpg',
+  '/images/eventos/evento-3.jpg',
+  '/images/eventos/evento-4.jpg',
 ]
+
+function formatarDataExtenso(dataISO) {
+  if (!dataISO) return ''
+  return new Date(`${dataISO}T00:00:00`).toLocaleDateString('pt-BR', {
+    day: '2-digit', month: 'long', year: 'numeric',
+  })
+}
+
+function adaptarEvento(evento) {
+  return {
+    id: evento.id_evento,
+    imagem: evento.imagem_url || IMAGENS_PADRAO[evento.id_evento % IMAGENS_PADRAO.length],
+    categoria: (evento.categoria || 'OUTROS').toUpperCase(),
+    nome: evento.nome,
+    data: formatarDataExtenso(evento.data),
+    dataISO: evento.data,
+    local: evento.local || '',
+    preco: moeda(evento.preco_ingresso),
+  }
+}
 
 const CATEGORIAS = [
   { id: 'shows', label: 'Shows', categoria: 'SHOW' },
@@ -69,6 +60,19 @@ export function Eventos() {
   const [cidade, setCidade] = useState('')
   const [dataMinima, setDataMinima] = useState('')
   const [ordenacao, setOrdenacao] = useState('relevancia')
+
+  const [eventos, setEventos] = useState([])
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState('')
+
+  useEffect(() => {
+    let ativo = true
+    listarEventosPublicos()
+      .then((dados) => { if (ativo) setEventos(dados.map(adaptarEvento)) })
+      .catch((e) => { if (ativo) setErro(e.message) })
+      .finally(() => { if (ativo) setCarregando(false) })
+    return () => { ativo = false }
+  }, [])
 
   function alternarCategoria(id) {
     setCategoriasSelecionadas((atual) =>
@@ -105,7 +109,7 @@ export function Eventos() {
     }
 
     return resultado
-  }, [busca, categoriasSelecionadas, cidade, dataMinima, ordenacao])
+    }, [eventos, busca, categoriasSelecionadas, cidade, dataMinima, ordenacao])
 
   return (
     <>
@@ -192,13 +196,17 @@ export function Eventos() {
               </select>
             </div>
 
-            {eventosFiltrados.length === 0 && (
+            {carregando && <p> Carregando eventos... </p>}
+
+            {erro && <p role="alert"> Não foi possível carregar os eventos: {erro} </p>}
+
+            {!carregando && !erro && eventosFiltrados.length === 0 && (
               <p> Nenhum evento encontrado com esses filtros. </p>
             )}
 
             {eventosFiltrados.map((evento) => (
-              <article key={evento.nome}>
-                <img src={evento.imagem} alt="Imagem do evento" />
+              <article key={evento.id}>
+                <img src={evento.imagem} alt={evento.nome} />
                 <div>
                   <p> {evento.categoria}</p>
                   <h3> {evento.nome} </h3>
