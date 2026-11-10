@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+
+import { useNavigate } from 'react-router-dom'
+import { CabecalhoSimples } from '../../componentes/publico/Cabecalho'
+
 import { entrar } from '../../api/auth'
 import { FormularioLoginAdmin } from '../../componentes/admin/formularios'
 
@@ -27,11 +30,7 @@ export function AdminLogin() {
 
   return (
     <>
-      <header>
-        <Link to="/">
-          <img src="/images/logo_navbar_web.png" alt="TrocaTicket" />
-        </Link>
-      </header>
+      <CabecalhoSimples />
 
       <main>
         <section className="admin-card">
